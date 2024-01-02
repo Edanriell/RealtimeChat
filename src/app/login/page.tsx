@@ -1,10 +1,26 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+
 "use client";
 
-import { FC } from "react";
+import Button from "@/components/ui/Button";
+import { FC, useState } from "react";
+import { signIn } from "next-auth/react";
+import { toast } from "react-hot-toast";
 
-interface pageProps {}
+const Page: FC = () => {
+	const [isLoading, setIsLoading] = useState<boolean>(false);
 
-const page: FC<pageProps> = ({}) => {
+	async function loginWithGoogle() {
+		setIsLoading(true);
+		try {
+			await signIn("google");
+		} catch (error) {
+			toast.error("Something went wrong with your login.");
+		} finally {
+			setIsLoading(false);
+		}
+	}
+
 	return (
 		<>
 			<div className="flex items-center justify-center min-h-full px-4 py-12 sm:px-6 lg:px-8">
@@ -60,4 +76,4 @@ const page: FC<pageProps> = ({}) => {
 	);
 };
 
-export default page;
+export default Page;

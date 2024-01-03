@@ -19,7 +19,7 @@ const Page: FC = () => {
 		} finally {
 			setIsLoading(false);
 		}
-	}
+	}s
 
 	return (
 		<>

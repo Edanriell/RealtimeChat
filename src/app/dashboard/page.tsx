@@ -13,3 +13,4 @@ const page: FC<pageProps> = async ({}) => {
 export default page;
 
 // openssl genrsa 2048 cmd
+// 1:30:01

@@ -15,19 +15,20 @@ const Page: FC = () => {
 		try {
 			await signIn("google");
 		} catch (error) {
+			// display error message to user
 			toast.error("Something went wrong with your login.");
 		} finally {
-			setIsLoading(falsee);
+			setIsLoading(false);
 		}
 	}
 
 	return (
 		<>
-			<div className="flex items-center justify-center min-h-full px-4 py-12 sm:px-6 lg:px-8">
-				<div className="flex flex-col items-center w-full max-w-md space-y-8">
+			<div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+				<div className="w-full flex flex-col items-center max-w-md space-y-8">
 					<div className="flex flex-col items-center gap-8">
 						logo
-						<h2 className="mt-6 text-3xl font-bold tracking-tight text-center text-gray-900">
+						<h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
 							Sign in to your account
 						</h2>
 					</div>
@@ -35,12 +36,12 @@ const Page: FC = () => {
 					<Button
 						isLoading={isLoading}
 						type="button"
-						className="w-full max-w-sm mx-auto"
+						className="max-w-sm mx-auto w-full"
 						onClick={loginWithGoogle}
 					>
 						{isLoading ? null : (
 							<svg
-								className="w-4 h-4 mr-2"
+								className="mr-2 h-4 w-4"
 								aria-hidden="true"
 								focusable="false"
 								data-prefix="fab"

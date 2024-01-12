@@ -141,4 +141,3 @@ const Layout = async ({ children }: LayoutProps) => {
 };
 
 export default Layout;
-

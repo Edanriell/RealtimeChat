@@ -1,7 +1,8 @@
-import { db } from "@/lib/db";
+"use client";
 
-export default async function Home() {
-	await db.set("hello", "hello");
+import Button from "@/components/ui/Button";
+import { signOut } from "next-auth/react";
 
-	return <div className="text-red-500">Hello world</div>
+export default function Home() {
+	return <button onClick={() => signOut()}>Sign out</button>;
 }

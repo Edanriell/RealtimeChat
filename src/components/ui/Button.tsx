@@ -31,7 +31,7 @@ export interface ButtonProps
 	isLoading?: boolean;
 }
 
-const Button: FC<ButtonProps & MotionProps> = ({
+const Button: FC<MotionProps & ButtonProps> = ({
 	className,
 	children,
 	variant,

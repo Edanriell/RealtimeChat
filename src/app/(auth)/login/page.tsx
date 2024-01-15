@@ -9,17 +9,38 @@ import Image from "next/image";
 const Page: FC = () => {
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 
-	async function loginWithGoogle() {
+	const loginWithGoogle = async () => {
 		setIsLoading(true);
 		try {
 			await signIn("google");
 		} catch (error) {
-			// display error message to user
-			toast.error("Something went wrong with your login.");
+			toast.error("Something went wrong. Try again later.");
 		} finally {
 			setIsLoading(false);
 		}
-	}
+	};
+
+	const loginWithX = async () => {
+		setIsLoading(true);
+		try {
+			await signIn("twitter");
+		} catch (error) {
+			toast.error("Something went wrong. Try again later.");
+		} finally {
+			setIsLoading(false);
+		}
+	};
+
+	const loginWithGithub = async () => {
+		setIsLoading(true);
+		try {
+			await signIn("github");
+		} catch (error) {
+			toast.error("Something went wrong. Try again later.");
+		} finally {
+			setIsLoading(false);
+		}
+	};
 
 	return (
 		<>
@@ -79,7 +100,7 @@ const Page: FC = () => {
 							isLoading={isLoading}
 							type="button"
 							className="w-[260px]"
-							onClick={loginWithGoogle}
+							onClick={loginWithX}
 						>
 							{isLoading ? null : (
 								<svg
@@ -104,7 +125,7 @@ const Page: FC = () => {
 							isLoading={isLoading}
 							type="button"
 							className="w-[260px]"
-							onClick={loginWithGoogle}
+							onClick={loginWithGithub}
 						>
 							{isLoading ? null : (
 								<svg

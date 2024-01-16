@@ -6,51 +6,52 @@ import TwitterProvider from "next-auth/providers/twitter";
 import GitHubProvider from "next-auth/providers/github";
 import { fetchRedis } from "@/helpers/redis";
 
-// Refactor functions 
-function getGoogleCredentials() {
-	const clientId = process.env.GOOGLE_CLIENT_ID;
-	const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
+// Should be place in entities/session
+type CredentialConfig = {
+	clientIdEnv: string;
+	clientSecretEnv: string;
+};
+
+enum AuthType {
+	Google = "GOOGLE",
+	X = "TWITTER",
+	GitHub = "GITHUB",
+}
+
+const credentialConfigs: Record<AuthType, CredentialConfig> = {
+	[AuthType.Google]: {
+		clientIdEnv: "GOOGLE_CLIENT_ID",
+		clientSecretEnv: "GOOGLE_CLIENT_SECRET",
+	},
+	[AuthType.X]: {
+		clientIdEnv: "TWITTER_CLIENT_ID",
+		clientSecretEnv: "TWITTER_CLIENT_SECRET",
+	},
+	[AuthType.GitHub]: {
+		clientIdEnv: "GITHUB_CLIENT_ID",
+		clientSecretEnv: "GITHUB_CLIENT_SECRET",
+	},
+};
+// Should be place in entities/session
+
+// Should be place in entities/session
+function getCredentials(authType: AuthType) {
+	const { clientIdEnv, clientSecretEnv } = credentialConfigs[authType];
+
+	const clientId = process.env[clientIdEnv];
+	const clientSecret = process.env[clientSecretEnv];
 
 	if (!clientId || clientId.length === 0) {
-		throw new Error("Missing GOOGLE_CLIENT_ID");
+		throw new Error(`Missing ${clientIdEnv}`);
 	}
 
 	if (!clientSecret || clientSecret.length === 0) {
-		throw new Error("Missing GOOGLE_CLIENT_SECRET");
+		throw new Error(`Missing ${clientSecretEnv}`);
 	}
 
 	return { clientId, clientSecret };
 }
-
-function getXCredentials() {
-	const clientId = process.env.X_CLIENT_ID;
-	const clientSecret = process.env.X_CLIENT_SECRET;
-
-	if (!clientId || clientId.length === 0) {
-		throw new Error("Missing X_CLIENT_ID");
-	}
-
-	if (!clientSecret || clientSecret.length === 0) {
-		throw new Error("Missing X_CLIENT_SECRET");
-	}
-
-	return { clientId, clientSecret };
-}
-
-function getGithubCredentials() {
-	const clientId = process.env.GITHUB_CLIENT_ID;
-	const clientSecret = process.env.GITHUB_CLIENT_SECRET;
-
-	if (!clientId || clientId.length === 0) {
-		throw new Error("Missing GITHUB_CLIENT_ID");
-	}
-
-	if (!clientSecret || clientSecret.length === 0) {
-		throw new Error("Missing GITHUB_CLIENT_SECRET");
-	}
-
-	return { clientId, clientSecret };
-}
+// Should be place in entities/session
 
 export const authOptions: NextAuthOptions = {
 	adapter: UpstashRedisAdapter(db),
@@ -62,17 +63,17 @@ export const authOptions: NextAuthOptions = {
 	},
 	providers: [
 		GoogleProvider({
-			clientId: getGoogleCredentials().clientId,
-			clientSecret: getGoogleCredentials().clientSecret,
+			clientId: getCredentials(AuthType.Google).clientId,
+			clientSecret: getCredentials(AuthType.Google).clientSecret,
 		}),
 		TwitterProvider({
-			clientId: getXCredentials().clientId,
-			clientSecret: getXCredentials().clientSecret,
+			clientId: getCredentials(AuthType.X).clientId,
+			clientSecret: getCredentials(AuthType.X).clientSecret,
 			version: "2.0",
 		}),
 		GitHubProvider({
-			clientId: getGithubCredentials().clientId,
-			clientSecret: getGithubCredentials().clientSecret,
+			clientId: getCredentials(AuthType.GitHub).clientId,
+			clientSecret: getCredentials(AuthType.GitHub).clientSecret,
 		}),
 	],
 	callbacks: {

@@ -6,41 +6,30 @@ import { signIn } from "next-auth/react";
 import { toast } from "react-hot-toast";
 import Image from "next/image";
 
+// Should be place in entities/session
+enum AuthType {
+	Google = "GOOGLE",
+	X = "TWITTER",
+	GitHub = "GITHUB",
+}
+// Should be place in entities/session
+
 const Page: FC = () => {
+	// We need any global state manager
+	// Should be place in entities/session
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 
-	const loginWithGoogle = async () => {
+	const loginWith = async (authType: AuthType) => {
 		setIsLoading(true);
 		try {
-			await signIn("google");
+			await signIn(authType.toLowerCase());
 		} catch (error) {
 			toast.error("Something went wrong. Try again later.");
 		} finally {
 			setIsLoading(false);
 		}
 	};
-
-	const loginWithX = async () => {
-		setIsLoading(true);
-		try {
-			await signIn("twitter");
-		} catch (error) {
-			toast.error("Something went wrong. Try again later.");
-		} finally {
-			setIsLoading(false);
-		}
-	};
-
-	const loginWithGithub = async () => {
-		setIsLoading(true);
-		try {
-			await signIn("github");
-		} catch (error) {
-			toast.error("Something went wrong. Try again later.");
-		} finally {
-			setIsLoading(false);
-		}
-	};
+	// Should be place in entities/session
 
 	return (
 		<>
@@ -62,7 +51,7 @@ const Page: FC = () => {
 							isLoading={isLoading}
 							type="button"
 							className="w-[260px]"
-							onClick={loginWithGoogle}
+							onClick={() => loginWith(AuthType.Google)}
 						>
 							{isLoading ? null : (
 								<svg
@@ -100,7 +89,7 @@ const Page: FC = () => {
 							isLoading={isLoading}
 							type="button"
 							className="w-[260px]"
-							onClick={loginWithX}
+							onClick={() => loginWith(AuthType.X)}
 						>
 							{isLoading ? null : (
 								<svg
@@ -125,7 +114,7 @@ const Page: FC = () => {
 							isLoading={isLoading}
 							type="button"
 							className="w-[260px]"
-							onClick={loginWithGithub}
+							onClick={() => loginWith(AuthType.GitHub)}
 						>
 							{isLoading ? null : (
 								<svg

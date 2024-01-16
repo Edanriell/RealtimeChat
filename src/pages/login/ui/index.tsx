@@ -14,7 +14,7 @@ enum AuthType {
 }
 // Should be place in entities/session
 
-const Page: FC = () => {
+export const LoginPage: FC = () => {
 	// We need any global state manager
 	// Should be place in entities/session
 	const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -144,4 +144,3 @@ const Page: FC = () => {
 	);
 };
 
-export default Page;

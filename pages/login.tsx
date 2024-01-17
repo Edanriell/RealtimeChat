@@ -1,3 +1,3 @@
-export { LoginPage as default } from "../src/pages/login";
+export { LoginPage as default } from "@/pages/login";
 
 // BAD PATH

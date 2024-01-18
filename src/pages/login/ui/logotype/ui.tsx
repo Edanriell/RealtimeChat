@@ -10,6 +10,11 @@ export const Logotype: FC<MotionProps> = () => {
 	const [starScope2, starAnimate2] = useAnimate();
 	const [starScope3, starAnimate3] = useAnimate();
 	const [starScope4, starAnimate4] = useAnimate();
+	const [creamLightScope0, creamLightAnimate0] = useAnimate();
+	const [creamLightScope1, creamLightAnimate1] = useAnimate();
+	const [purpleLightScope0, purpleLightAnimate0] = useAnimate();
+	const [purpleLightScope1, purpleLightAnimate1] = useAnimate();
+	const [purpleLightScope2, purpleLightAnimate2] = useAnimate();
 
 	useEffect(() => {
 		starAnimate0(
@@ -72,6 +77,56 @@ export const Logotype: FC<MotionProps> = () => {
 			],
 			{ repeat: Infinity, repeatType: "reverse" },
 		);
+		creamLightAnimate0(
+			[
+				[
+					creamLightScope0.current,
+					{ scale: 1.6, opacity: 1 },
+					{ duration: 1.4, type: "spring" },
+				],
+			],
+			{ repeat: Infinity, repeatType: "reverse" },
+		);
+		creamLightAnimate1(
+			[
+				[
+					creamLightScope1.current,
+					{ scale: 1.2, opacity: 1 },
+					{ duration: 2, type: "spring" },
+				],
+			],
+			{ repeat: Infinity, repeatType: "reverse" },
+		);
+		purpleLightAnimate0(
+			[
+				[
+					purpleLightScope0.current,
+					{ scale: 1.6, opacity: 1 },
+					{ duration: 1.2, type: "spring" },
+				],
+			],
+			{ repeat: Infinity, repeatType: "reverse" },
+		);
+		purpleLightAnimate1(
+			[
+				[
+					purpleLightScope1.current,
+					{ scale: 1.4, opacity: 1 },
+					{ duration: 1.4, type: "spring" },
+				],
+			],
+			{ repeat: Infinity, repeatType: "reverse" },
+		);
+		purpleLightAnimate2(
+			[
+				[
+					purpleLightScope2.current,
+					{ scale: 1.8, opacity: 1 },
+					{ duration: 0.8, type: "spring" },
+				],
+			],
+			{ repeat: Infinity, repeatType: "reverse" },
+		);
 	});
 
 	return (
@@ -88,7 +143,7 @@ export const Logotype: FC<MotionProps> = () => {
 				alt="Star image"
 				src="/images/chatx-star.png"
 				className={
-					"absolute top-[50%] left-[50%] z-20 translate-x-[-50%] translate-y-[-50%]"
+					"absolute top-[50%] left-[50%] z-0 translate-x-[-50%] translate-y-[-50%]"
 				}
 				width={40}
 				height={40}
@@ -98,7 +153,7 @@ export const Logotype: FC<MotionProps> = () => {
 				alt="Star image"
 				src="/images/chatx-star.png"
 				className={
-					"absolute top-[50%] left-[50%] z-20 translate-x-[-50%] translate-y-[-50%]"
+					"absolute top-[50%] left-[50%] z-0 translate-x-[-50%] translate-y-[-50%]"
 				}
 				width={15}
 				height={15}
@@ -108,7 +163,7 @@ export const Logotype: FC<MotionProps> = () => {
 				alt="Star image"
 				src="/images/chatx-star.png"
 				className={
-					"absolute top-[50%] left-[50%] z-20 translate-x-[-50%] translate-y-[-50%]"
+					"absolute top-[50%] left-[50%] z-0 translate-x-[-50%] translate-y-[-50%]"
 				}
 				width={25}
 				height={25}
@@ -118,7 +173,7 @@ export const Logotype: FC<MotionProps> = () => {
 				alt="Star image"
 				src="/images/chatx-star.png"
 				className={
-					"absolute top-[50%] left-[50%] z-20 translate-x-[-50%] translate-y-[-50%]"
+					"absolute top-[50%] left-[50%] z-0 translate-x-[-50%] translate-y-[-50%]"
 				}
 				width={30}
 				height={30}
@@ -128,8 +183,48 @@ export const Logotype: FC<MotionProps> = () => {
 				alt="Star image"
 				src="/images/chatx-star.png"
 				className={
-					"absolute top-[50%] left-[50%] z-20 translate-x-[-50%] translate-y-[-50%]"
+					"absolute top-[50%] left-[50%] z-0 translate-x-[-50%] translate-y-[-50%]"
 				}
+				width={10}
+				height={10}
+			/>
+			<Image
+				ref={creamLightScope0}
+				alt="Star image"
+				src="/images/chatx-cream-light.png"
+				className={"absolute top-[26%] left-[-6%] z-20 opacity-0"}
+				width={6}
+				height={6}
+			/>
+			<Image
+				ref={creamLightScope1}
+				alt="Star image"
+				src="/images/chatx-cream-light.png"
+				className={"absolute top-[40%] left-[100%] z-20 opacity-0"}
+				width={8}
+				height={8}
+			/>
+			<Image
+				ref={purpleLightScope0}
+				alt="Star image"
+				src="/images/chatx-purple-light.png"
+				className={"absolute top-[60%] left-[4%] z-20 opacity-0"}
+				width={8}
+				height={8}
+			/>
+			<Image
+				ref={purpleLightScope1}
+				alt="Star image"
+				src="/images/chatx-purple-light.png"
+				className={"absolute top-[-20%] left-[60%] z-20 opacity-0"}
+				width={12}
+				height={12}
+			/>
+			<Image
+				ref={purpleLightScope2}
+				alt="Star image"
+				src="/images/chatx-purple-light.png"
+				className={"absolute top-[0%] left-[95%] z-20 opacity-0"}
 				width={10}
 				height={10}
 			/>

@@ -12,32 +12,32 @@ export const Logotype: FC<MotionProps> = () => {
 	const purpleLightRef2 = useRef<any>();
 
 	useAnimationFrame((t) => {
-		const x = (1 + Math.sin(t / 1000)) * 10;
-		const y = (1 + Math.sin(t / 1000)) * -10;
+		const x = (1 + Math.cos(t / 3500)) * 10;
+		const y = (1 + Math.sin(t / 2250)) * -5;
 		creamLightRef0.current.style.transform = `translateY(${y}px) translateX(${x}px)`;
 	});
 
 	useAnimationFrame((t) => {
-		const x = (1 + Math.cos(t / 1000)) * -10;
-		const y = (1 + Math.sin(t / 1000)) * -15;
+		const x = (1 + Math.sin(t / 4500)) * -10;
+		const y = (1 + Math.cos(t / 3000)) * 5;
 		creamLightRef1.current.style.transform = `translateY(${y}px) translateX(${x}px)`;
 	});
 
 	useAnimationFrame((t) => {
-		const x = (1 + Math.sin(t / 1000)) * -14;
-		const y = (1 + Math.cos(t / 1000)) * 10;
+		const x = (1 + Math.sin(t / 1500)) * -10;
+		const y = (1 + Math.cos(t / 1000)) * 5;
 		purpleLightRef0.current.style.transform = `translateY(${y}px) translateX(${x}px)`;
 	});
 
 	useAnimationFrame((t) => {
-		const x = (1 + Math.cos(t / 1000)) * 15;
-		const y = (1 + Math.sin(t / 1000)) * 15;
+		const x = (1 + Math.sin(t / 7500)) * -10;
+		const y = (1 + Math.cos(t / 4500)) * 10;
 		purpleLightRef1.current.style.transform = `translateY(${y}px) translateX(${x}px)`;
 	});
 
 	useAnimationFrame((t) => {
-		const x = (1 + Math.sin(t / 1000)) * -5;
-		const y = (1 + Math.sin(t / 1000)) * 5;
+		const x = (1 + Math.sin(t / 2500)) * -10;
+		const y = (1 + Math.cos(t / 4500)) * 10;
 		purpleLightRef2.current.style.transform = `translateY(${y}px) translateX(${x}px)`;
 	});
 
@@ -52,7 +52,7 @@ export const Logotype: FC<MotionProps> = () => {
 			[
 				[
 					starScope0.current,
-					{ x: -140, y: -140 },
+					{ x: -120, y: -130 },
 					{ duration: 1.85, type: "spring" },
 				],
 				[starScope0.current, { rotate: 360 }, { duration: 10 }],
@@ -64,7 +64,7 @@ export const Logotype: FC<MotionProps> = () => {
 			[
 				[
 					starScope1.current,
-					{ x: 100, y: 20 },
+					{ x: 80, y: 20 },
 					{ duration: 2, type: "spring" },
 				],
 				[starScope1.current, { rotate: 360 }, { duration: 10 }],
@@ -76,7 +76,7 @@ export const Logotype: FC<MotionProps> = () => {
 			[
 				[
 					starScope2.current,
-					{ x: -140, y: -20 },
+					{ x: -125, y: -20 },
 					{ duration: 1.95, type: "spring" },
 				],
 				[starScope2.current, { rotate: -360 }, { duration: 10 }],
@@ -88,7 +88,7 @@ export const Logotype: FC<MotionProps> = () => {
 			[
 				[
 					starScope3.current,
-					{ x: 120, y: -100 },
+					{ x: 100, y: -70 },
 					{ duration: 2, type: "spring" },
 				],
 				[starScope3.current, { rotate: -360 }, { duration: 10 }],
@@ -124,7 +124,7 @@ export const Logotype: FC<MotionProps> = () => {
 				alt="Star image"
 				src="/images/chatx-star.png"
 				className={
-					"absolute top-[50%] left-[50%] z-0 translate-x-[-50%] translate-y-[-50%]"
+					"absolute top-[45%] left-[50%] z-0 translate-x-[-50%] translate-y-[-50%]"
 				}
 				width={40}
 				height={40}
@@ -154,7 +154,7 @@ export const Logotype: FC<MotionProps> = () => {
 				alt="Star image"
 				src="/images/chatx-star.png"
 				className={
-					"absolute top-[50%] left-[50%] z-0 translate-x-[-50%] translate-y-[-50%]"
+					"absolute top-[45%] left-[50%] z-0 translate-x-[-50%] translate-y-[-50%]"
 				}
 				width={30}
 				height={30}
@@ -173,7 +173,7 @@ export const Logotype: FC<MotionProps> = () => {
 				ref={creamLightRef0}
 				alt="Star image"
 				src="/images/chatx-cream-light.png"
-				className={"absolute top-[26%] left-[-6%] z-20"}
+				className={"absolute top-[26%] left-[-3%] z-20"}
 				width={6}
 				height={6}
 			/>

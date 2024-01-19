@@ -1,20 +1,51 @@
 "use client";
 
-import { FC, useEffect } from "react";
-import { MotionProps, useAnimate } from "framer-motion";
+import { FC, useEffect, useRef } from "react";
+import { MotionProps, useAnimate, useAnimationFrame } from "framer-motion";
 import Image from "next/image";
 
 export const Logotype: FC<MotionProps> = () => {
+	const creamLightRef0 = useRef<any>();
+	const creamLightRef1 = useRef<any>();
+	const purpleLightRef0 = useRef<any>();
+	const purpleLightRef1 = useRef<any>();
+	const purpleLightRef2 = useRef<any>();
+
+	useAnimationFrame((t) => {
+		const x = (1 + Math.sin(t / 1000)) * 10;
+		const y = (1 + Math.sin(t / 1000)) * -10;
+		creamLightRef0.current.style.transform = `translateY(${y}px) translateX(${x}px)`;
+	});
+
+	useAnimationFrame((t) => {
+		const x = (1 + Math.cos(t / 1000)) * -10;
+		const y = (1 + Math.sin(t / 1000)) * -15;
+		creamLightRef1.current.style.transform = `translateY(${y}px) translateX(${x}px)`;
+	});
+
+	useAnimationFrame((t) => {
+		const x = (1 + Math.sin(t / 1000)) * -14;
+		const y = (1 + Math.cos(t / 1000)) * 10;
+		purpleLightRef0.current.style.transform = `translateY(${y}px) translateX(${x}px)`;
+	});
+
+	useAnimationFrame((t) => {
+		const x = (1 + Math.cos(t / 1000)) * 15;
+		const y = (1 + Math.sin(t / 1000)) * 15;
+		purpleLightRef1.current.style.transform = `translateY(${y}px) translateX(${x}px)`;
+	});
+
+	useAnimationFrame((t) => {
+		const x = (1 + Math.sin(t / 1000)) * -5;
+		const y = (1 + Math.sin(t / 1000)) * 5;
+		purpleLightRef2.current.style.transform = `translateY(${y}px) translateX(${x}px)`;
+	});
+
 	const [starScope0, starAnimate0] = useAnimate();
 	const [starScope1, starAnimate1] = useAnimate();
 	const [starScope2, starAnimate2] = useAnimate();
 	const [starScope3, starAnimate3] = useAnimate();
 	const [starScope4, starAnimate4] = useAnimate();
-	const [creamLightScope0, creamLightAnimate0] = useAnimate();
-	const [creamLightScope1, creamLightAnimate1] = useAnimate();
-	const [purpleLightScope0, purpleLightAnimate0] = useAnimate();
-	const [purpleLightScope1, purpleLightAnimate1] = useAnimate();
-	const [purpleLightScope2, purpleLightAnimate2] = useAnimate();
 
 	useEffect(() => {
 		starAnimate0(
@@ -74,56 +105,6 @@ export const Logotype: FC<MotionProps> = () => {
 				],
 				[starScope4.current, { rotate: 360 }, { duration: 10 }],
 				[starScope4.current, { rotate: -360 }, { duration: 10 }],
-			],
-			{ repeat: Infinity, repeatType: "reverse" },
-		);
-		creamLightAnimate0(
-			[
-				[
-					creamLightScope0.current,
-					{ scale: 1.6, opacity: 1 },
-					{ duration: 1.4, type: "spring" },
-				],
-			],
-			{ repeat: Infinity, repeatType: "reverse" },
-		);
-		creamLightAnimate1(
-			[
-				[
-					creamLightScope1.current,
-					{ scale: 1.2, opacity: 1 },
-					{ duration: 2, type: "spring" },
-				],
-			],
-			{ repeat: Infinity, repeatType: "reverse" },
-		);
-		purpleLightAnimate0(
-			[
-				[
-					purpleLightScope0.current,
-					{ scale: 1.6, opacity: 1 },
-					{ duration: 1.2, type: "spring" },
-				],
-			],
-			{ repeat: Infinity, repeatType: "reverse" },
-		);
-		purpleLightAnimate1(
-			[
-				[
-					purpleLightScope1.current,
-					{ scale: 1.4, opacity: 1 },
-					{ duration: 1.4, type: "spring" },
-				],
-			],
-			{ repeat: Infinity, repeatType: "reverse" },
-		);
-		purpleLightAnimate2(
-			[
-				[
-					purpleLightScope2.current,
-					{ scale: 1.8, opacity: 1 },
-					{ duration: 0.8, type: "spring" },
-				],
 			],
 			{ repeat: Infinity, repeatType: "reverse" },
 		);
@@ -189,42 +170,42 @@ export const Logotype: FC<MotionProps> = () => {
 				height={10}
 			/>
 			<Image
-				ref={creamLightScope0}
+				ref={creamLightRef0}
 				alt="Star image"
 				src="/images/chatx-cream-light.png"
-				className={"absolute top-[26%] left-[-6%] z-20 opacity-0"}
+				className={"absolute top-[26%] left-[-6%] z-20"}
 				width={6}
 				height={6}
 			/>
 			<Image
-				ref={creamLightScope1}
+				ref={creamLightRef1}
 				alt="Star image"
 				src="/images/chatx-cream-light.png"
-				className={"absolute top-[40%] left-[100%] z-20 opacity-0"}
+				className={"absolute top-[40%] left-[100%] z-20"}
 				width={8}
 				height={8}
 			/>
 			<Image
-				ref={purpleLightScope0}
+				ref={purpleLightRef0}
 				alt="Star image"
 				src="/images/chatx-purple-light.png"
-				className={"absolute top-[60%] left-[4%] z-20 opacity-0"}
+				className={"absolute top-[60%] left-[4%] z-20"}
 				width={8}
 				height={8}
 			/>
 			<Image
-				ref={purpleLightScope1}
+				ref={purpleLightRef1}
 				alt="Star image"
 				src="/images/chatx-purple-light.png"
-				className={"absolute top-[-20%] left-[60%] z-20 opacity-0"}
+				className={"absolute top-[-20%] left-[60%] z-20"}
 				width={12}
 				height={12}
 			/>
 			<Image
-				ref={purpleLightScope2}
+				ref={purpleLightRef2}
 				alt="Star image"
 				src="/images/chatx-purple-light.png"
-				className={"absolute top-[0%] left-[95%] z-20 opacity-0"}
+				className={"absolute top-[0%] left-[95%] z-20"}
 				width={10}
 				height={10}
 			/>

@@ -10,7 +10,7 @@ import { fetchRedis } from "@/helpers/redis";
 type CredentialConfig = {
 	clientIdEnv: string;
 	clientSecretEnv: string;
-};
+}; 
 
 enum AuthType {
 	Google = "GOOGLE",

@@ -1,3 +1,5 @@
+"use client";
+
 import { cn } from "@/lib/utils";
 import { cva, VariantProps } from "class-variance-authority";
 import { Loader2 } from "lucide-react";
@@ -42,7 +44,7 @@ const Button: FC<MotionProps & ButtonProps> = ({
 	return (
 		<motion.button
 			whileHover={{ scale: 1.05, backgroundColor: "#E2E8f0" }}
-			whileTap={{ scale: 0.95, backgroundColor: "#E2E8f0"}}
+			whileTap={{ scale: 0.95, backgroundColor: "#E2E8f0" }}
 			transition={{ type: "spring", stiffness: 400, damping: 10 }}
 			className={cn(buttonVariants({ variant, size, className }))}
 			disabled={isLoading}

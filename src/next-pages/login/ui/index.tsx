@@ -4,34 +4,37 @@ import { FC, useState } from "react";
 import { signIn } from "next-auth/react";
 import { toast } from "react-hot-toast";
 
+import { AuthType } from "@/entities/session/model";
 import Button from "@/components/ui/Button";
 import { SocialIcon, IconType } from "./social-icon";
 import { Logotype } from "./logotype";
 
-// Should be place in entities/session
-enum AuthType {
-	Google = "GOOGLE",
-	X = "TWITTER",
-	GitHub = "GITHUB",
-}
-// Should be place in entities/session
-
 export const LoginPage: FC = () => {
-	// We need any global state manager
-	// Should be place in entities/session
-	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const initialState = {
+		Google: false,
+		Twitter: false,
+		GitHub: false,
+	};
 
-	const loginWith = async (authType: AuthType) => {
-		setIsLoading(true);
+	const [isLoading, setIsLoading] =
+		useState<{ [key in AuthType]: boolean }>(initialState);
+
+	const handleLoginClick = async (authType: AuthType) => {
+		setIsLoading((prevLoadingState) => ({
+			...prevLoadingState,
+			[authType]: true,
+		}));
 		try {
 			await signIn(authType.toLowerCase());
 		} catch (error) {
 			toast.error("Something went wrong. Try again later.");
 		} finally {
-			setIsLoading(false);
+			setIsLoading((prevLoadingState) => ({
+				...prevLoadingState,
+				[authType]: false,
+			}));
 		}
 	};
-	// Should be place in entities/session
 
 	return (
 		<>
@@ -45,28 +48,28 @@ export const LoginPage: FC = () => {
 					</div>
 					<div className="flex flex-col gap-3 items-center justify-center">
 						<Button
-							isLoading={isLoading}
+							isLoading={isLoading[AuthType.Google]}
 							type="button"
 							className="w-[260px]"
-							onClick={() => loginWith(AuthType.Google)}
+							onClick={() => handleLoginClick(AuthType.Google)}
 						>
 							{isLoading ? null : <SocialIcon iconType={IconType.Google} />}
 							<p className="text-black">Google</p>
 						</Button>
 						<Button
-							isLoading={isLoading}
+							isLoading={isLoading[AuthType.X]}
 							type="button"
 							className="w-[260px]"
-							onClick={() => loginWith(AuthType.X)}
+							onClick={() => handleLoginClick(AuthType.X)}
 						>
 							{isLoading ? null : <SocialIcon iconType={IconType.X} />}
 							<p className="text-black">X</p>
 						</Button>
 						<Button
-							isLoading={isLoading}
+							isLoading={isLoading[AuthType.GitHub]}
 							type="button"
 							className="w-[260px]"
-							onClick={() => loginWith(AuthType.GitHub)}
+							onClick={() => handleLoginClick(AuthType.GitHub)}
 						>
 							{isLoading ? null : <SocialIcon iconType={IconType.GitHub} />}
 							<p className="text-black">GitHub</p>

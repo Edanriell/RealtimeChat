@@ -34,7 +34,8 @@
 		"react-loading-skeleton": "^3.3.1",
 		"react-textarea-autosize": "^8.5.3",
 		"tailwind-merge": "^2.2.0",
-		"zod": "^3.22.4"
+		"zod": "^3.22.4",
+		"zustand": "^4.5.0"
 	},
 	"devDependencies": {
 		"@types/compose-function": "^0.0.33",

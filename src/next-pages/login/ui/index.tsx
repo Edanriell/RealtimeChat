@@ -5,7 +5,8 @@ import { signIn } from "next-auth/react";
 import { toast } from "react-hot-toast";
 
 import { AuthType } from "@/entities/session/model";
-import Button from "@/components/ui/Button";
+import { Button } from "@/shared/ui";
+
 import { SocialIcon, IconType } from "./social-icon";
 import { Logotype } from "./logotype";
 
@@ -53,7 +54,9 @@ export const LoginPage: FC = () => {
 							className="w-[260px]"
 							onClick={() => handleLoginClick(AuthType.Google)}
 						>
-							{isLoading ? null : <SocialIcon iconType={IconType.Google} />}
+							{isLoading[AuthType.Google] ? null : (
+								<SocialIcon iconType={IconType.Google} />
+							)}
 							<p className="text-black">Google</p>
 						</Button>
 						<Button
@@ -62,7 +65,9 @@ export const LoginPage: FC = () => {
 							className="w-[260px]"
 							onClick={() => handleLoginClick(AuthType.X)}
 						>
-							{isLoading ? null : <SocialIcon iconType={IconType.X} />}
+							{isLoading[AuthType.X] ? null : (
+								<SocialIcon iconType={IconType.X} />
+							)}
 							<p className="text-black">X</p>
 						</Button>
 						<Button
@@ -71,7 +76,9 @@ export const LoginPage: FC = () => {
 							className="w-[260px]"
 							onClick={() => handleLoginClick(AuthType.GitHub)}
 						>
-							{isLoading ? null : <SocialIcon iconType={IconType.GitHub} />}
+							{isLoading[AuthType.GitHub] ? null : (
+								<SocialIcon iconType={IconType.GitHub} />
+							)}
 							<p className="text-black">GitHub</p>
 						</Button>
 					</div>

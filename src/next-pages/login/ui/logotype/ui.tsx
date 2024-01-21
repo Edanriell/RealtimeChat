@@ -62,11 +62,7 @@ export const Logotype: FC<MotionProps> = () => {
 		);
 		starAnimate1(
 			[
-				[
-					starScope1.current,
-					{ x: 80, y: 20 },
-					{ duration: 2, type: "spring" },
-				],
+				[starScope1.current, { x: 80, y: 20 }, { duration: 2, type: "spring" }],
 				[starScope1.current, { rotate: 360 }, { duration: 10 }],
 				[starScope1.current, { rotate: -360 }, { duration: 10 }],
 			],
@@ -171,7 +167,7 @@ export const Logotype: FC<MotionProps> = () => {
 			/>
 			<Image
 				ref={creamLightRef0}
-				alt="Star image"
+				alt="Cream light image"
 				src="/images/chatx-cream-light.png"
 				className={"absolute top-[26%] left-[-3%] z-20"}
 				width={6}
@@ -179,7 +175,7 @@ export const Logotype: FC<MotionProps> = () => {
 			/>
 			<Image
 				ref={creamLightRef1}
-				alt="Star image"
+				alt="Cream light image"
 				src="/images/chatx-cream-light.png"
 				className={"absolute top-[40%] left-[100%] z-20"}
 				width={8}
@@ -187,7 +183,7 @@ export const Logotype: FC<MotionProps> = () => {
 			/>
 			<Image
 				ref={purpleLightRef0}
-				alt="Star image"
+				alt="Purple light image"
 				src="/images/chatx-purple-light.png"
 				className={"absolute top-[60%] left-[4%] z-20"}
 				width={8}
@@ -195,7 +191,7 @@ export const Logotype: FC<MotionProps> = () => {
 			/>
 			<Image
 				ref={purpleLightRef1}
-				alt="Star image"
+				alt="Purple light image"
 				src="/images/chatx-purple-light.png"
 				className={"absolute top-[-20%] left-[60%] z-20"}
 				width={12}
@@ -203,7 +199,7 @@ export const Logotype: FC<MotionProps> = () => {
 			/>
 			<Image
 				ref={purpleLightRef2}
-				alt="Star image"
+				alt="Purple light image"
 				src="/images/chatx-purple-light.png"
 				className={"absolute top-[0%] left-[95%] z-20"}
 				width={10}

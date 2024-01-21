@@ -3,7 +3,7 @@
 import { FC } from "react";
 
 export enum IconType {
-	Google,
+	Google = "Google",
 	X = "X",
 	GitHub = "GitHub",
 }

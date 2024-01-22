@@ -5,6 +5,11 @@ import { BaseLayout } from "@/widgets/layouts";
 
 import "./_styles/globals.css";
 
+export const metadata = {
+	title: "ChatX | Sign in",
+	description: "Sign in page",
+};
+
 function RootLayout({ children }: { children: ReactNode }) {
 	return (
 		<html lang="en">

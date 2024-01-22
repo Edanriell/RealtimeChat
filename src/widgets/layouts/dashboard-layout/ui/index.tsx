@@ -18,11 +18,6 @@ type DashboardLayoutProps = {
 	children: ReactNode;
 };
 
-export const metadata = {
-	title: "FriendZone | Dashboard",
-	description: "Your dashboard",
-};
-
 const sidebarOptions: SidebarOption[] = [
 	{
 		id: 1,
@@ -47,6 +42,8 @@ export const DashboardLayout: FC<DashboardLayoutProps> = async ({
 			`user:${session.user.id}:incoming_friend_requests`,
 		)) as User[]
 	).length;
+
+	// Entity session related
 
 	return (
 		<div className="w-full flex h-screen">

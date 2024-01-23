@@ -1,7 +1,7 @@
 "use client";
 
-import { FC } from "react";
-import { motion } from "framer-motion";
+import { FC, useState, useEffect } from "react";
+import { motion, useAnimate } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -13,6 +13,40 @@ import SignOutButton from "@/components/SignOutButton";
 import { SidebarOption } from "@/types/typings";
 
 import { Logotype } from "../logotype";
+import { P } from "@upstash/redis/zmscore-fa7fc9c8";
+
+function useMenuAnimation(isHovered: boolean | null) {
+	const [scope, animate] = useAnimate();
+
+	useEffect(() => {
+		if (isHovered === null) return;
+		const menuAnimations: any = isHovered
+			? [
+					// [scope.current, { y: "0px", opacity: 1 }, { duration: 0.25 }],
+					[
+						scope.current,
+						{ y: [0, -40] },
+						{ type: "spring" },
+						{ duration: 0.25 },
+					],
+					// [scope.current, { y: "-40px", opacity: 1 }, { duration: 0.25 }],
+				]
+			: [
+					[
+						scope.current,
+						{ y: [-40, -80] },
+						{ type: "spring" },
+						{ duration: 0.25 },
+					],
+					// [scope.current, { y: "-40px", opacity: 1 }, { duration: 0.25 }],
+					// [scope.current, { y: "-80px", opacity: 1 }, { duration: 0.25 }],
+				];
+
+		animate([...menuAnimations]);
+	}, [isHovered]);
+
+	return scope;
+}
 
 type SidebarProps = {
 	friends: any;
@@ -34,6 +68,32 @@ export const Sidebar: FC<SidebarProps> = ({
 	session,
 	unseenRequest,
 }) => {
+	const [isHovered, setIsHovered] = useState<boolean | null>(null);
+
+	// const boxVariants = {
+	// 	hovered: {
+	// 		y: "-10px",
+	// 	},
+	// 	notHovered: {
+	// 		y: "-30px",
+	// 	},
+	// 	test: {
+	// 		y: "-50px",
+	// 	},
+	// 	vosel: {
+	// 		y: ["-40px", "-10px"],
+	// 		duration: 2,
+	// 	},
+	// 	visel: {
+	// 		y: ["-20px", "-60px"],
+	// 	},
+	// 	nahuj: {
+	// 		y: "-30px",
+	// 	},
+	// };
+
+	const scope = useMenuAnimation(isHovered);
+
 	return (
 		<motion.div
 			initial={{ width: 100 }}
@@ -110,12 +170,28 @@ export const Sidebar: FC<SidebarProps> = ({
 						<SignOutButton className="h-full aspect-square" />
 					</li>
 				</ul>
-				<motion.button
-					initial={{ background: "#000", fill: "#000" }}
-					whileHover={{ fill: "#800080", radius: 100 }}
-					transition={{ duration: 0.25 }}
-					className={"w-[100px] h-[40px] bg-black"}
-				></motion.button>
+				<motion.div
+					className={
+						"relative w-[100px] h-[40px] bg-black rounded-lg text-white"
+					}
+					onMouseEnter={() => setIsHovered(true)}
+					onMouseLeave={() => setIsHovered(false)}
+					// onMouseOver={() => {
+					// 	setIsHovered("3");
+					// }}
+				>
+					<motion.button className={"w-[100px] h-[40px] bg-black rounded-lg"}>
+						<motion.p className={"relative text-white z-20"}>Test</motion.p>
+					</motion.button>
+					<motion.div
+						ref={scope}
+						// variants={boxVariants}
+						// animate={isHovered ? "notHovered" : "hovered"}
+						className={
+							"absolute left-[30%] w-[40px] h-[40px] bg-slate-500 rounded-[100%] z-10"
+						}
+					></motion.div>
+				</motion.div>
 			</nav>
 		</motion.div>
 	);

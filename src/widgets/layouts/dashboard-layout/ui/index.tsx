@@ -1,18 +1,17 @@
 import { Icon, Icons } from "@/components/Icons";
 import SignOutButton from "@/components/SignOutButton";
-import { authOptions } from "@/lib/auth";
-import { getServerSession } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { FC, ReactNode } from "react";
 import FriendRequestSidebarOptions from "@/components/FriendRequestSidebarOptions";
-import { fetchRedis } from "@/helpers/redis";
-import { getFriendsByUserId } from "@/helpers/get-friends-by-user-id";
 import SidebarChatList from "@/components/SidebarChatList";
 import MobileChatLayout from "@/components/MobileChatLayout";
 import { SidebarOption } from "@/types/typings";
 import { Logotype } from "./logotype";
+
+import { sessionModel } from "@/entities/session";
+import { friendModel } from "@/entities/friend";
 
 type DashboardLayoutProps = {
 	children: ReactNode;
@@ -30,20 +29,16 @@ const sidebarOptions: SidebarOption[] = [
 export const DashboardLayout: FC<DashboardLayoutProps> = async ({
 	children,
 }) => {
-	const session = await getServerSession(authOptions);
+	const session = await sessionModel.getSession();
 	if (!session) notFound();
 
-	const friends = await getFriendsByUserId(session.user.id);
-	console.log("friends", friends);
+	const friends = await friendModel.getFriendsByUserId(session.user.id);
 
-	const unseenRequestCount = (
-		(await fetchRedis(
-			"smembers",
-			`user:${session.user.id}:incoming_friend_requests`,
-		)) as User[]
+	const unseenRequest = await (
+		friendModel.unseenFriendsRequests(
+			session.user.id,
+		) as unknown as sessionModel.User[]
 	).length;
-
-	// Entity session related
 
 	return (
 		<div className="w-full flex h-screen">
@@ -52,7 +47,7 @@ export const DashboardLayout: FC<DashboardLayoutProps> = async ({
 					friends={friends}
 					session={session}
 					sidebarOptions={sidebarOptions}
-					unseenRequestCount={unseenRequestCount}
+					unseenRequestCount={unseenRequest}
 				/>
 			</div>
 			<div className="hidden md:flex h-full w-full max-w-xs grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6">
@@ -94,7 +89,7 @@ export const DashboardLayout: FC<DashboardLayoutProps> = async ({
 								<li>
 									<FriendRequestSidebarOptions
 										sessionId={session.user.id}
-										initialUnseenRequestCount={unseenRequestCount}
+										initialUnseenRequestCount={unseenRequest}
 									/>
 								</li>
 							</ul>

@@ -1,18 +1,20 @@
-import type { Session, User } from "next-auth";
-import type { JWT } from "next-auth/jwt";
+// // Decomposed
 
-type UserId = string;
+// import type { Session, User } from "next-auth";
+// import type { JWT } from "next-auth/jwt";
 
-declare module "next-auth/jwt" {
-	interface JWT {
-		id: UserId;
-	}
-}
+// type UserId = string;
 
-declare module "next-auth" {
-	interface Session {
-		user: User & {
-			id: UserId;
-		};
-	}
-}
+// declare module "next-auth/jwt" {
+// 	interface JWT {
+// 		id: UserId;
+// 	}
+// }
+
+// declare module "next-auth" {
+// 	interface Session {
+// 		user: User & {
+// 			id: UserId;
+// 		};
+// 	}
+// }

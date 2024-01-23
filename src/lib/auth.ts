@@ -62,18 +62,31 @@ export const authOptions: NextAuthOptions = {
 		signIn: "/login",
 	},
 	providers: [
+		// GoogleProvider({
+		// 	clientId: getCredentials(AuthType.Google).clientId,
+		// 	clientSecret: getCredentials(AuthType.Google).clientSecret,
+		// }),
+		// TwitterProvider({
+		// 	clientId: getCredentials(AuthType.X).clientId,
+		// 	clientSecret: getCredentials(AuthType.X).clientSecret,
+		// 	version: "2.0",
+		// }),
+		// GitHubProvider({
+		// 	clientId: getCredentials(AuthType.GitHub).clientId,
+		// 	clientSecret: getCredentials(AuthType.GitHub).clientSecret,
+		// }),
 		GoogleProvider({
-			clientId: getCredentials(AuthType.Google).clientId,
-			clientSecret: getCredentials(AuthType.Google).clientSecret,
+			clientId: process.env.GOOGLE_CLIENT_ID!,
+			clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
 		}),
 		TwitterProvider({
-			clientId: getCredentials(AuthType.X).clientId,
-			clientSecret: getCredentials(AuthType.X).clientSecret,
+			clientId: process.env.TWITTER_CLIENT_ID!,
+			clientSecret: process.env.TWITTER_CLIENT_SECRET!,
 			version: "2.0",
 		}),
 		GitHubProvider({
-			clientId: getCredentials(AuthType.GitHub).clientId,
-			clientSecret: getCredentials(AuthType.GitHub).clientSecret,
+			clientId: process.env.GITHUB_CLIENT_ID!,
+			clientSecret: process.env.GITHUB_CLIENT_SECRET!,
 		}),
 	],
 	callbacks: {

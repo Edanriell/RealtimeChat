@@ -13,7 +13,6 @@ import SignOutButton from "@/components/SignOutButton";
 import { SidebarOption } from "@/types/typings";
 
 import { Logotype } from "../logotype";
-import { P } from "@upstash/redis/zmscore-fa7fc9c8";
 
 function useMenuAnimation(isHovered: boolean | null) {
 	const [scope, animate] = useAnimate();
@@ -25,8 +24,8 @@ function useMenuAnimation(isHovered: boolean | null) {
 					// [scope.current, { y: "0px", opacity: 1 }, { duration: 0.25 }],
 					[
 						scope.current,
-						{ y: [0, -40] },
-						{ type: "spring" },
+						{ y: [0, -100] },
+						{ type: "inertia", velocity: 180 },
 						{ duration: 0.25 },
 					],
 					// [scope.current, { y: "-40px", opacity: 1 }, { duration: 0.25 }],
@@ -34,8 +33,8 @@ function useMenuAnimation(isHovered: boolean | null) {
 			: [
 					[
 						scope.current,
-						{ y: [-40, -80] },
-						{ type: "spring" },
+						{ y: [-80, -200] },
+						{ type: "inertia", velocity: 180 },
 						{ duration: 0.25 },
 					],
 					// [scope.current, { y: "-40px", opacity: 1 }, { duration: 0.25 }],
@@ -43,7 +42,7 @@ function useMenuAnimation(isHovered: boolean | null) {
 				];
 
 		animate([...menuAnimations]);
-	}, [isHovered]);
+	}, [animate, isHovered, scope]);
 
 	return scope;
 }
@@ -69,28 +68,6 @@ export const Sidebar: FC<SidebarProps> = ({
 	unseenRequest,
 }) => {
 	const [isHovered, setIsHovered] = useState<boolean | null>(null);
-
-	// const boxVariants = {
-	// 	hovered: {
-	// 		y: "-10px",
-	// 	},
-	// 	notHovered: {
-	// 		y: "-30px",
-	// 	},
-	// 	test: {
-	// 		y: "-50px",
-	// 	},
-	// 	vosel: {
-	// 		y: ["-40px", "-10px"],
-	// 		duration: 2,
-	// 	},
-	// 	visel: {
-	// 		y: ["-20px", "-60px"],
-	// 	},
-	// 	nahuj: {
-	// 		y: "-30px",
-	// 	},
-	// };
 
 	const scope = useMenuAnimation(isHovered);
 
@@ -172,23 +149,20 @@ export const Sidebar: FC<SidebarProps> = ({
 				</ul>
 				<motion.div
 					className={
-						"relative w-[100px] h-[40px] bg-black rounded-lg text-white"
+						"relative w-[160px] h-[40px] overflow-hidden bg-black rounded-[20px] text-white"
 					}
 					onMouseEnter={() => setIsHovered(true)}
 					onMouseLeave={() => setIsHovered(false)}
-					// onMouseOver={() => {
-					// 	setIsHovered("3");
-					// }}
 				>
-					<motion.button className={"w-[100px] h-[40px] bg-black rounded-lg"}>
+					<motion.button
+						className={"w-[160px] h-[40px] bg-black rounded-[20px]"}
+					>
 						<motion.p className={"relative text-white z-20"}>Test</motion.p>
 					</motion.button>
 					<motion.div
 						ref={scope}
-						// variants={boxVariants}
-						// animate={isHovered ? "notHovered" : "hovered"}
 						className={
-							"absolute left-[30%] w-[40px] h-[40px] bg-slate-500 rounded-[100%] z-10"
+							"absolute left-[-5%] w-[180px] h-[160px] bg-slate-500 rounded-[100%] z-10"
 						}
 					></motion.div>
 				</motion.div>

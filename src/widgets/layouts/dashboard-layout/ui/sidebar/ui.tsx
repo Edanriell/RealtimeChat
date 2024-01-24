@@ -149,7 +149,7 @@ export const Sidebar: FC<SidebarProps> = ({
 				</ul>
 				<motion.div
 					className={
-						"relative w-[160px] h-[40px] overflow-hidden bg-black rounded-[20px] text-white"
+						"relative w-[160px] h-[40px] bg-black rounded-[20px] text-white"
 					}
 					onMouseEnter={() => setIsHovered(true)}
 					onMouseLeave={() => setIsHovered(false)}

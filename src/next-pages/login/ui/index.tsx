@@ -51,7 +51,7 @@ export const LoginPage: FC = () => {
 						<Button
 							isLoading={isLoading[AuthType.Google]}
 							type="button"
-							className="w-[260px]"
+							className="w-[180px] h-[40px]"
 							onClick={() => handleLoginClick(AuthType.Google)}
 						>
 							{isLoading[AuthType.Google] ? null : (
@@ -62,7 +62,7 @@ export const LoginPage: FC = () => {
 						<Button
 							isLoading={isLoading[AuthType.X]}
 							type="button"
-							className="w-[260px]"
+							className="w-[180px] h-[40px]"
 							onClick={() => handleLoginClick(AuthType.X)}
 						>
 							{isLoading[AuthType.X] ? null : (
@@ -73,7 +73,7 @@ export const LoginPage: FC = () => {
 						<Button
 							isLoading={isLoading[AuthType.GitHub]}
 							type="button"
-							className="w-[260px]"
+							className="w-[180px] h-[40px]"
 							onClick={() => handleLoginClick(AuthType.GitHub)}
 						>
 							{isLoading[AuthType.GitHub] ? null : (

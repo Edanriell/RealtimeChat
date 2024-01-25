@@ -1,7 +1,7 @@
 "use client";
 
-import { FC, useState, useEffect } from "react";
-import { motion, useAnimate } from "framer-motion";
+import { FC } from "react";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -9,43 +9,11 @@ import SidebarChatList from "@/components/SidebarChatList";
 import { Icon, Icons } from "@/components/Icons";
 import FriendRequestSidebarOptions from "@/components/FriendRequestSidebarOptions";
 import SignOutButton from "@/components/SignOutButton";
+import { Button } from "@/shared/ui";
 
 import { SidebarOption } from "@/types/typings";
 
 import { Logotype } from "../logotype";
-
-function useMenuAnimation(isHovered: boolean | null) {
-	const [scope, animate] = useAnimate();
-
-	useEffect(() => {
-		if (isHovered === null) return;
-		const menuAnimations: any = isHovered
-			? [
-					// [scope.current, { y: "0px", opacity: 1 }, { duration: 0.25 }],
-					[
-						scope.current,
-						{ y: [0, -100] },
-						{ type: "inertia", velocity: 180 },
-						{ duration: 0.25 },
-					],
-					// [scope.current, { y: "-40px", opacity: 1 }, { duration: 0.25 }],
-				]
-			: [
-					[
-						scope.current,
-						{ y: [-80, -200] },
-						{ type: "inertia", velocity: 180 },
-						{ duration: 0.25 },
-					],
-					// [scope.current, { y: "-40px", opacity: 1 }, { duration: 0.25 }],
-					// [scope.current, { y: "-80px", opacity: 1 }, { duration: 0.25 }],
-				];
-
-		animate([...menuAnimations]);
-	}, [animate, isHovered, scope]);
-
-	return scope;
-}
 
 type SidebarProps = {
 	friends: any;
@@ -67,10 +35,6 @@ export const Sidebar: FC<SidebarProps> = ({
 	session,
 	unseenRequest,
 }) => {
-	const [isHovered, setIsHovered] = useState<boolean | null>(null);
-
-	const scope = useMenuAnimation(isHovered);
-
 	return (
 		<motion.div
 			initial={{ width: 100 }}
@@ -82,11 +46,11 @@ export const Sidebar: FC<SidebarProps> = ({
 				"bg-white px-6 items-center"
 			}
 		>
-			<Link href="/dashboard" className="flex h-16 shrink-0 items-center">
+			<Link href="/dashboard" className={"flex shrink-0 items-center mt-[60px] mb-[40px]"}>
 				<Logotype />
 			</Link>
 			{friends.length > 0 ? (
-				<div className="text-xs font-semibold leading-6 text-gray-400">
+				<div className="text-md font-medium leading-6 text-gray-400">
 					Your chats
 				</div>
 			) : null}
@@ -147,25 +111,13 @@ export const Sidebar: FC<SidebarProps> = ({
 						<SignOutButton className="h-full aspect-square" />
 					</li>
 				</ul>
-				<motion.div
-					className={
-						"relative w-[160px] h-[40px] bg-black rounded-[20px] text-white"
-					}
-					onMouseEnter={() => setIsHovered(true)}
-					onMouseLeave={() => setIsHovered(false)}
+				<Button
+					variant={"animated"}
+					type="button"
+					className="w-[160px] h-[40px]"
 				>
-					<motion.button
-						className={"w-[160px] h-[40px] bg-black rounded-[20px]"}
-					>
-						<motion.p className={"relative text-white z-20"}>Test</motion.p>
-					</motion.button>
-					<motion.div
-						ref={scope}
-						className={
-							"absolute left-[-5%] w-[180px] h-[160px] bg-slate-500 rounded-[100%] z-10"
-						}
-					></motion.div>
-				</motion.div>
+					<p className="relative text-white z-20">TestButton</p>
+				</Button>
 			</nav>
 		</motion.div>
 	);

@@ -1,8 +1,10 @@
-import { Icon } from "@/components/Icons";
+// import { Icon } from "@/components/Icons";
 
-interface SidebarOption {
-	id: number;
-	name: string;
-	href: string;
-	Icon: Icon;
-}
+// interface SidebarOption {
+// 	id: number;
+// 	name: string;
+// 	href: string;
+// 	Icon: Icon;
+// }
+
+// Trash, removed

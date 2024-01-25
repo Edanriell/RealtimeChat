@@ -1,24 +1,26 @@
 "use server";
 
-import { Icon, Icons } from "@/components/Icons";
-import SignOutButton from "@/components/SignOutButton";
-import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { FC, ReactNode } from "react";
-import FriendRequestSidebarOptions from "@/components/FriendRequestSidebarOptions";
-import SidebarChatList from "@/components/SidebarChatList";
-import MobileChatLayout from "@/components/MobileChatLayout";
-import { SidebarOption } from "@/types/typings";
-import { Logotype } from "./logotype";
 
 import { sessionModel } from "@/entities/session";
 import { friendModel } from "@/entities/friend";
+
+// Refactor
+import { Icon } from "@/components/Icons";
+import MobileChatLayout from "@/components/MobileChatLayout";
 
 import { Sidebar } from "./sidebar";
 
 type DashboardLayoutProps = {
 	children: ReactNode;
+};
+
+type SidebarOption = {
+	id: number;
+	name: string;
+	href: string;
+	Icon: Icon;
 };
 
 const sidebarOptions: SidebarOption[] = [

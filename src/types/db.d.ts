@@ -1,4 +1,4 @@
-// Decomposed
+// pulled out to entities
 
 interface User {
 	name: string;

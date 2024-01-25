@@ -19,3 +19,5 @@ export const getFriendsByUserId = async (userId: string) => {
 
 	return friends;
 };
+
+// Pulled out to entities/friends

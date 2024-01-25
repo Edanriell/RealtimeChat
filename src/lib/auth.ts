@@ -127,3 +127,5 @@ export const authOptions: NextAuthOptions = {
 		},
 	},
 };
+
+// decomposed to entities/session

@@ -46,7 +46,10 @@ export const Sidebar: FC<SidebarProps> = ({
 				"bg-white px-6 items-center"
 			}
 		>
-			<Link href="/dashboard" className={"flex shrink-0 items-center mt-[60px] mb-[40px]"}>
+			<Link
+				href="/dashboard"
+				className={"flex shrink-0 items-center mt-[60px] mb-[40px]"}
+			>
 				<Logotype />
 			</Link>
 			{friends.length > 0 ? (
@@ -111,13 +114,6 @@ export const Sidebar: FC<SidebarProps> = ({
 						<SignOutButton className="h-full aspect-square" />
 					</li>
 				</ul>
-				<Button
-					variant={"animated"}
-					type="button"
-					className="w-[160px] h-[40px]"
-				>
-					<p className="relative text-white z-20">TestButton</p>
-				</Button>
 			</nav>
 		</motion.div>
 	);

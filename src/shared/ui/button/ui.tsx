@@ -29,7 +29,7 @@ export const buttonVariants = cva(
 			variant: {
 				default: "bg-slate-50 text-black",
 				ghost: "bg-transparent hover:text-slate-900 hover:bg-slate-200",
-				animated: "relative overflow-hidden bg-black",
+				animated: "relative overflow-hidden bg-[#5a14de]",
 			},
 			size: {
 				default: "h-10 py-2 px-4",
@@ -79,7 +79,7 @@ export const Button: FC<MotionProps & ButtonProps> = ({
 					ref={scope}
 					className={
 						"pointer-events-none absolute left-[-10%] top-[100%] " +
-						"w-[200px] h-[160px] bg-slate-500 rounded-[100%] z-10"
+						"w-[200px] h-[160px] bg-[#761beb] rounded-[100%] z-10"
 					}
 				></div>
 			</motion.button>

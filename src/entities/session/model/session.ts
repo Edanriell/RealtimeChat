@@ -6,24 +6,13 @@ import GitHubProvider from "next-auth/providers/github";
 import { getServerSession } from "next-auth";
 
 import { fetchRedis } from "@/shared/api";
-import { db } from "@/shared/config";
+import { db, getCredentials } from "@/shared/config";
 
-type CredentialConfig = {
-	clientIdEnv: string;
-	clientSecretEnv: string;
-};
-
-enum AuthType {
+export enum AuthType {
 	Google = "GOOGLE",
 	X = "TWITTER",
 	GitHub = "GITHUB",
 }
-
-// export enum AuthType {
-// 	Google = "Google",
-// 	X = "Twitter",
-// 	GitHub = "GitHub",
-// }
 
 export type User = {
 	name: string;
@@ -31,40 +20,6 @@ export type User = {
 	image: string;
 	id: string;
 };
-
-// Fucked up need to refactor
-const credentialConfigs: Record<AuthType, CredentialConfig> = {
-	[AuthType.Google]: {
-		clientIdEnv: "GOOGLE_CLIENT_ID",
-		clientSecretEnv: "GOOGLE_CLIENT_SECRET",
-	},
-	[AuthType.X]: {
-		clientIdEnv: "TWITTER_CLIENT_ID",
-		clientSecretEnv: "TWITTER_CLIENT_SECRET",
-	},
-	[AuthType.GitHub]: {
-		clientIdEnv: "GITHUB_CLIENT_ID",
-		clientSecretEnv: "GITHUB_CLIENT_SECRET",
-	},
-};
-
-// Fucked up need to refactors
-function getCredentials(authType: AuthType) {
-	const { clientIdEnv, clientSecretEnv } = credentialConfigs[authType];
-
-	const clientId = process.env[clientIdEnv];
-	const clientSecret = process.env[clientSecretEnv];
-
-	if (!clientId || clientId.length === 0) {
-		throw new Error(`Missing ${clientIdEnv}`);
-	}
-
-	if (!clientSecret || clientSecret.length === 0) {
-		throw new Error(`Missing ${clientSecretEnv}`);
-	}
-
-	return { clientId, clientSecret };
-}
 
 export const authOptions: NextAuthOptions = {
 	adapter: UpstashRedisAdapter(db),
@@ -76,17 +31,17 @@ export const authOptions: NextAuthOptions = {
 	},
 	providers: [
 		GoogleProvider({
-			clientId: process.env.GOOGLE_CLIENT_ID!,
-			clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+			clientId:  getCredentials(AuthType.Google).clientId!,
+			clientSecret: getCredentials(AuthType.Google).clientSecret!,
 		}),
 		TwitterProvider({
-			clientId: process.env.TWITTER_CLIENT_ID!,
-			clientSecret: process.env.TWITTER_CLIENT_SECRET!,
+			clientId: getCredentials(AuthType.X).clientId!,
+			clientSecret: getCredentials(AuthType.X).clientSecret!,
 			version: "2.0",
 		}),
 		GitHubProvider({
-			clientId: process.env.GITHUB_CLIENT_ID!,
-			clientSecret: process.env.GITHUB_CLIENT_SECRET!,
+			clientId: getCredentials(AuthType.GitHub).clientId!,
+			clientSecret: getCredentials(AuthType.GitHub).clientSecret!,
 		}),
 	],
 	callbacks: {

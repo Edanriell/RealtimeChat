@@ -11,9 +11,12 @@ import FriendRequestSidebarOptions from "@/components/FriendRequestSidebarOption
 import SignOutButton from "@/components/SignOutButton";
 import { Button } from "@/shared/ui";
 
-import { SidebarOption } from "@/types/typings";
-
-import { Logotype } from "../logotype";
+type SidebarOption = {
+	id: number;
+	name: string;
+	href: string;
+	Icon: Icon;
+};
 
 type SidebarProps = {
 	friends: any;
@@ -50,7 +53,12 @@ export const Sidebar: FC<SidebarProps> = ({
 				href="/dashboard"
 				className={"flex shrink-0 items-center mt-[60px] mb-[40px]"}
 			>
-				<Logotype />
+				<Image
+					src="/images/chatx-logo-bubble.png"
+					alt="ChatX company logotype"
+					width={60}
+					height={60}
+				/>
 			</Link>
 			{friends.length > 0 ? (
 				<div className="text-md font-medium leading-6 text-gray-400">

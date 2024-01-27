@@ -12,9 +12,9 @@ import { Logotype } from "./logotype";
 
 export const LoginPage: FC = () => {
 	const initialState = {
-		Google: false,
-		Twitter: false,
-		GitHub: false,
+		GOOGLE: false,
+		TWITTER: false,
+		GITHUB: false,
 	};
 
 	const [isLoading, setIsLoading] =

@@ -13,11 +13,17 @@ type CredentialConfig = {
 	clientSecretEnv: string;
 };
 
-export enum AuthType {
-	Google = "Google",
-	X = "Twitter",
-	GitHub = "GitHub",
+enum AuthType {
+	Google = "GOOGLE",
+	X = "TWITTER",
+	GitHub = "GITHUB",
 }
+
+// export enum AuthType {
+// 	Google = "Google",
+// 	X = "Twitter",
+// 	GitHub = "GitHub",
+// }
 
 export type User = {
 	name: string;
@@ -26,6 +32,7 @@ export type User = {
 	id: string;
 };
 
+// Fucked up need to refactor
 const credentialConfigs: Record<AuthType, CredentialConfig> = {
 	[AuthType.Google]: {
 		clientIdEnv: "GOOGLE_CLIENT_ID",
@@ -41,6 +48,7 @@ const credentialConfigs: Record<AuthType, CredentialConfig> = {
 	},
 };
 
+// Fucked up need to refactors
 function getCredentials(authType: AuthType) {
 	const { clientIdEnv, clientSecretEnv } = credentialConfigs[authType];
 

@@ -35,15 +35,16 @@ const sidebarOptions: SidebarOption[] = [
 export const DashboardLayout: FC<DashboardLayoutProps> = async ({
 	children,
 }) => {
-	const session = await sessionModel.getSession();
+	const { getSession } = sessionModel;
+	const { getFriendsByUserId, unseenFriendsRequests } = friendModel;
+
+	const session = await getSession();
 	if (!session) notFound();
 
-	const friends = await friendModel.getFriendsByUserId(session.user.id);
+	const friends = await getFriendsByUserId(session.user.id);
 
 	const unseenRequest = await (
-		friendModel.unseenFriendsRequests(
-			session.user.id,
-		) as unknown as sessionModel.User[]
+		unseenFriendsRequests(session.user.id) as unknown as sessionModel.User[]
 	).length;
 
 	return (

@@ -1,25 +1,25 @@
 "use client";
 
-import { ButtonHTMLAttributes, FC, useState, useEffect } from "react";
+import { ButtonHTMLAttributes, useState, useEffect } from "react";
 import { cva, VariantProps } from "class-variance-authority";
 import { Loader2 } from "lucide-react";
 import { motion, MotionProps, useAnimate } from "framer-motion";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/shared/lib";
 
-const useMenuAnimation = (isHovered: boolean | null) => {
-	const [scope, animate] = useAnimate();
+const useButtonAnimation = (isHovered: boolean | null) => {
+	const [buttonScope, animateButton] = useAnimate();
 
 	useEffect(() => {
 		if (isHovered === null) return;
 		const menuAnimations: any = isHovered
-			? [[scope.current, { y: [0, -100] }, { duration: 0.5 }]]
-			: [[scope.current, { y: [-100, -200] }, { duration: 0.5 }]];
+			? [[buttonScope.current, { y: [0, -100] }, { duration: 0.5 }]]
+			: [[buttonScope.current, { y: [-100, -200] }, { duration: 0.5 }]];
 
-		animate([...menuAnimations]);
-	}, [animate, isHovered, scope]);
+		animateButton([...menuAnimations]);
+	}, [animateButton, isHovered, buttonScope]);
 
-	return scope;
+	return buttonScope;
 };
 
 export const buttonVariants = cva(
@@ -50,19 +50,38 @@ export interface ButtonProps
 	isLoading?: boolean;
 }
 
-export const Button: FC<MotionProps & ButtonProps> = ({
-	className,
-	children,
-	variant,
-	isLoading,
-	size,
-	...props
-}) => {
-	const [isHovered, setIsHovered] = useState<boolean | null>(null);
+export const Button = {
+	Default: ({
+		className,
+		children,
+		variant,
+		isLoading,
+		size,
+		...props
+	}: MotionProps & ButtonProps) => (
+		<motion.button
+			whileHover={{ scale: 1.05, backgroundColor: "#E2E8f0" }}
+			whileTap={{ scale: 0.95, backgroundColor: "#E2E8f0" }}
+			transition={{ type: "spring", stiffness: 400, damping: 10 }}
+			className={cn(buttonVariants({ variant, size, className }))}
+			disabled={isLoading}
+			{...props}
+		>
+			{isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+			{children}
+		</motion.button>
+	),
+	Animated: ({
+		className,
+		children,
+		variant,
+		isLoading,
+		size,
+		...props
+	}: MotionProps & ButtonProps) => {
+		const [isHovered, setIsHovered] = useState<boolean | null>(null);
 
-	const scope = useMenuAnimation(isHovered);
-
-	if (variant === "animated") {
+		const buttonScope = useButtonAnimation(isHovered);
 		return (
 			<motion.button
 				onMouseEnter={() => setIsHovered(true)}
@@ -76,7 +95,7 @@ export const Button: FC<MotionProps & ButtonProps> = ({
 				{isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
 				{children}
 				<div
-					ref={scope}
+					ref={buttonScope}
 					className={
 						"pointer-events-none absolute left-[-10%] top-[100%] " +
 						"w-[200px] h-[160px] bg-[#761beb] rounded-[100%] z-10"
@@ -84,19 +103,5 @@ export const Button: FC<MotionProps & ButtonProps> = ({
 				></div>
 			</motion.button>
 		);
-	} else {
-		return (
-			<motion.button
-				whileHover={{ scale: 1.05, backgroundColor: "#E2E8f0" }}
-				whileTap={{ scale: 0.95, backgroundColor: "#E2E8f0" }}
-				transition={{ type: "spring", stiffness: 400, damping: 10 }}
-				className={cn(buttonVariants({ variant, size, className }))}
-				disabled={isLoading}
-				{...props}
-			>
-				{isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
-				{children}
-			</motion.button>
-		);
-	}
+	},
 };

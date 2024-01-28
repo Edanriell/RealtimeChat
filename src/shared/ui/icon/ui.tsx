@@ -16,6 +16,3 @@ export const Icons = {
 };
 
 export type Icon = keyof typeof Icons;
-
-// DECOMPOSED TO SHARED/ICON 
-// REMOVE FILE

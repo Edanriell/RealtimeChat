@@ -37,6 +37,8 @@ export const LoginPage: FC = () => {
 		}
 	};
 
+	const DefaultButton = Button["Default"];
+
 	return (
 		<>
 			<div className="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 h-[100vh] bg-gradient-radial-purple-darker">
@@ -48,7 +50,7 @@ export const LoginPage: FC = () => {
 						</h2>
 					</div>
 					<div className="flex flex-col gap-3 items-center justify-center">
-						<Button
+						<DefaultButton
 							isLoading={isLoading[AuthType.Google]}
 							type="button"
 							className="w-[180px] h-[40px]"
@@ -58,8 +60,8 @@ export const LoginPage: FC = () => {
 								<SocialIcon iconType={IconType.Google} />
 							)}
 							<p className="text-black">Google</p>
-						</Button>
-						<Button
+						</DefaultButton>
+						<DefaultButton
 							isLoading={isLoading[AuthType.X]}
 							type="button"
 							className="w-[180px] h-[40px]"
@@ -69,8 +71,8 @@ export const LoginPage: FC = () => {
 								<SocialIcon iconType={IconType.X} />
 							)}
 							<p className="text-black">X</p>
-						</Button>
-						<Button
+						</DefaultButton>
+						<DefaultButton
 							isLoading={isLoading[AuthType.GitHub]}
 							type="button"
 							className="w-[180px] h-[40px]"
@@ -80,7 +82,7 @@ export const LoginPage: FC = () => {
 								<SocialIcon iconType={IconType.GitHub} />
 							)}
 							<p className="text-black">GitHub</p>
-						</Button>
+						</DefaultButton>
 					</div>
 				</div>
 			</div>

@@ -78,6 +78,8 @@ const SidebarChatList: FC<SidebarChatListProps> = ({ friends, sessionId }) => {
 		}
 	}, [pathname]);
 
+	const AnimatedButton = Button["Animated"];
+
 	return (
 		<ul
 			role="list"
@@ -97,19 +99,21 @@ const SidebarChatList: FC<SidebarChatListProps> = ({ friends, sessionId }) => {
 							)}`}
 							className="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex items-center gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
 						>
-							<Button
+							<AnimatedButton
 								variant={"animated"}
 								type="button"
 								className="w-[160px] h-[40px]"
 							>
 								{/* <p className="relative text-white z-20">TestButton</p> */}
-								<p className="relative text-white z-20 mr-[10px]">{friend.name}</p>
+								<p className="relative text-white z-20 mr-[10px]">
+									{friend.name}
+								</p>
 								{unseenMessagesCount > 0 ? (
 									<div className="bg-slate-50 font-medium text-xs text-black w-4 h-4 rounded-full flex justify-center items-center z-20">
 										{unseenMessagesCount}
 									</div>
 								) : null}
-							</Button>
+							</AnimatedButton>
 						</a>
 					</li>
 				);

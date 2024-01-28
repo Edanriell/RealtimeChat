@@ -23,13 +23,13 @@ const useButtonAnimation = (isHovered: boolean | null) => {
 };
 
 export const buttonVariants = cva(
-	"active:scale-95 inline-flex items-center justify-center rounded-[406px] text-sm font-medium transition-color focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none",
+	"inline-flex items-center justify-center rounded-[406px] text-sm font-medium",
 	{
 		variants: {
 			variant: {
-				default: "bg-slate-50 text-black",
+				default: "bg-slate-50 text-black focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none",
 				ghost: "bg-transparent hover:text-slate-900 hover:bg-slate-200",
-				animated: "relative overflow-hidden bg-[#5a14de]",
+				animated: "relative overflow-hidden bg-[#5a14de] focus:outline-none focus:ring-2 focus:ring-[#761beb] focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none",
 			},
 			size: {
 				default: "h-10 py-2 px-4",
@@ -98,7 +98,8 @@ export const Button = {
 					ref={buttonScope}
 					className={
 						"pointer-events-none absolute left-[-10%] top-[100%] " +
-						"w-[200px] h-[160px] bg-[#761beb] rounded-[100%] z-10"
+						"w-[200px] h-[160px] bg-[#761beb] rounded-[100%] z-10 " +
+						"select-none"
 					}
 				></div>
 			</motion.button>

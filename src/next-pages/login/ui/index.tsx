@@ -5,9 +5,8 @@ import { signIn } from "next-auth/react";
 import { toast } from "react-hot-toast";
 
 import { AuthType } from "@/entities/session/model";
-import { Button } from "@/shared/ui";
+import { Button, Icon } from "@/shared/ui";
 
-import { SocialIcon, IconType } from "./social-icon";
 import { Logotype } from "./logotype";
 
 export const LoginPage: FC = () => {
@@ -39,6 +38,10 @@ export const LoginPage: FC = () => {
 
 	const DefaultButton = Button["Default"];
 
+	const GoogleIcon = Icon["Google"];
+	const XIcon = Icon["X"];
+	const GitHubIcon = Icon["GitHub"];
+
 	return (
 		<>
 			<div className="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 h-[100vh] bg-gradient-radial-purple-darker">
@@ -56,9 +59,7 @@ export const LoginPage: FC = () => {
 							className="w-[180px] h-[40px]"
 							onClick={() => handleLoginClick(AuthType.Google)}
 						>
-							{isLoading[AuthType.Google] ? null : (
-								<SocialIcon iconType={IconType.Google} />
-							)}
+							{isLoading[AuthType.Google] ? null : <GoogleIcon />}
 							<p className="text-black">Google</p>
 						</DefaultButton>
 						<DefaultButton
@@ -67,9 +68,7 @@ export const LoginPage: FC = () => {
 							className="w-[180px] h-[40px]"
 							onClick={() => handleLoginClick(AuthType.X)}
 						>
-							{isLoading[AuthType.X] ? null : (
-								<SocialIcon iconType={IconType.X} />
-							)}
+							{isLoading[AuthType.X] ? null : <XIcon />}
 							<p className="text-black">X</p>
 						</DefaultButton>
 						<DefaultButton
@@ -78,9 +77,7 @@ export const LoginPage: FC = () => {
 							className="w-[180px] h-[40px]"
 							onClick={() => handleLoginClick(AuthType.GitHub)}
 						>
-							{isLoading[AuthType.GitHub] ? null : (
-								<SocialIcon iconType={IconType.GitHub} />
-							)}
+							{isLoading[AuthType.GitHub] ? null : <GitHubIcon />}
 							<p className="text-black">GitHub</p>
 						</DefaultButton>
 					</div>

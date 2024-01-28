@@ -5,18 +5,11 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 
+import { Icon } from "@/shared/ui";
+
 import SidebarChatList from "@/components/SidebarChatList";
-import { Icon, Icons } from "@/components/Icons";
 import FriendRequestSidebarOptions from "@/components/FriendRequestSidebarOptions";
 import SignOutButton from "@/components/SignOutButton";
-import { Button } from "@/shared/ui";
-
-type SidebarOption = {
-	id: number;
-	name: string;
-	href: string;
-	Icon: Icon;
-};
 
 type SidebarProps = {
 	friends: any;
@@ -24,20 +17,13 @@ type SidebarProps = {
 	unseenRequest: any;
 };
 
-const sidebarOptions: SidebarOption[] = [
-	{
-		id: 1,
-		name: "Add friend",
-		href: "/dashboard/add",
-		Icon: "UserPlus",
-	},
-];
-
 export const Sidebar: FC<SidebarProps> = ({
 	friends,
 	session,
 	unseenRequest,
 }) => {
+	const UserPlusIcon = Icon["UserPlus"];
+
 	return (
 		<motion.div
 			initial={{ width: 100 }}
@@ -75,23 +61,17 @@ export const Sidebar: FC<SidebarProps> = ({
 							Overview
 						</div>
 						<ul role="list" className="-mx-2 mt-2 space-y-1">
-							{sidebarOptions.map((option) => {
-								const Icon = Icons[option.Icon];
-								return (
-									<li key={option.id}>
-										<Link
-											href={option.href}
-											className="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-3 rounded-md p-2 text-sm leading-6 font-semibold"
-										>
-											<span className="text-gray-400 border-gray-200 group-hover:border-indigo-600 group-hover:text-indigo-600 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium bg-white">
-												<Icon className="h-4 w-4" />
-											</span>
-
-											<span className="truncate">{option.name}</span>
-										</Link>
-									</li>
-								);
-							})}
+							<li>
+								<Link
+									href={"/dashboard/add"}
+									className="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-3 rounded-md p-2 text-sm leading-6 font-semibold"
+								>
+									<span className="text-gray-400 border-gray-200 group-hover:border-indigo-600 group-hover:text-indigo-600 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium bg-white">
+										<UserPlusIcon className="h-4 w-4" />
+									</span>
+									<span className="truncate">Add friend</span>
+								</Link>
+							</li>
 							<li>
 								<FriendRequestSidebarOptions
 									sessionId={session.user.id}

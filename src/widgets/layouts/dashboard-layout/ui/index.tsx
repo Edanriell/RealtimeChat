@@ -6,31 +6,14 @@ import { FC, ReactNode } from "react";
 import { sessionModel } from "@/entities/session";
 import { friendModel } from "@/entities/friend";
 
-// Refactor
-import { Icon } from "@/components/Icons";
-import MobileChatLayout from "@/components/MobileChatLayout";
+// Widget
+// import MobileChatLayout from "@/components/MobileChatLayout";
 
 import { Sidebar } from "./sidebar";
 
 type DashboardLayoutProps = {
 	children: ReactNode;
 };
-
-type SidebarOption = {
-	id: number;
-	name: string;
-	href: string;
-	Icon: Icon;
-};
-
-const sidebarOptions: SidebarOption[] = [
-	{
-		id: 1,
-		name: "Add friend",
-		href: "/dashboard/add",
-		Icon: "UserPlus",
-	},
-];
 
 export const DashboardLayout: FC<DashboardLayoutProps> = async ({
 	children,
@@ -50,12 +33,12 @@ export const DashboardLayout: FC<DashboardLayoutProps> = async ({
 	return (
 		<div className={"w-full flex h-screen bg-slate-50"}>
 			<div className={"md:hidden"}>
-				<MobileChatLayout
+				{/* <MobileChatLayout
 					friends={friends}
 					session={session}
 					sidebarOptions={sidebarOptions}
 					unseenRequestCount={unseenRequest}
-				/>
+				/> */}
 			</div>
 			<Sidebar
 				friends={friends}

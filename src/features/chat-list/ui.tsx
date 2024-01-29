@@ -1,26 +1,28 @@
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
 import { FC, useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
 
-import { pusherClient } from "@/lib/pusher";
-import { chatHrefConstructor, toPusherKey } from "@/lib/utils";
+import { messageModel } from "@/entities/message";
 
-import UnseenChatToast from "@/components/UnseenChatToast";
+import { chatHrefConstructor, toPusherKey } from "@/shared/lib";
 import { Button } from "@/shared/ui";
+import UnseenChatToast from "@/components/UnseenChatToast";
 
-interface SidebarChatListProps {
+type ChatListProps = {
 	friends: User[];
 	sessionId: string;
-}
+};
 
 interface ExtendedMessage extends Message {
 	senderImg: string;
 	senderName: string;
 }
 
-export const ChatList: FC<SidebarChatListProps> = ({ friends, sessionId }) => {
+export const ChatList: FC<ChatListProps> = ({ friends, sessionId }) => {
+	const { pusherClient } = messageModel;
+
 	const router = useRouter();
 	const pathname = usePathname();
 
@@ -43,10 +45,9 @@ export const ChatList: FC<SidebarChatListProps> = ({ friends, sessionId }) => {
 
 			if (!shouldNotify) return;
 
-			// should be notified
-			toast.custom((t) => (
+			toast.custom((customToast) => (
 				<UnseenChatToast
-					t={t}
+					customToast={customToast}
 					sessionId={sessionId}
 					senderId={message.senderId}
 					senderImg={message.senderImg}
@@ -68,7 +69,7 @@ export const ChatList: FC<SidebarChatListProps> = ({ friends, sessionId }) => {
 			pusherClient.unbind("new_message", chatHandler);
 			pusherClient.unbind("new_friend", newFriendHandler);
 		};
-	}, [pathname, sessionId, router]);
+	}, [pathname, sessionId, router, pusherClient]);
 
 	useEffect(() => {
 		if (pathname?.includes("chat")) {

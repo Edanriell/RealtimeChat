@@ -8,8 +8,7 @@ import { friendModel } from "@/entities/friend";
 
 // Widget
 // import MobileChatLayout from "@/components/MobileChatLayout";
-
-import { Sidebar } from "./sidebar";
+import { Sidebar } from "@/widgets/sidebar";
 
 type DashboardLayoutProps = {
 	children: ReactNode;

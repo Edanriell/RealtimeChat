@@ -5,11 +5,11 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 
-import { Icon } from "@/shared/ui";
-
-import SidebarChatList from "@/components/SidebarChatList";
+import { ChatList } from "@/features/chat-list";
 import FriendRequestSidebarOptions from "@/components/FriendRequestSidebarOptions";
 import SignOutButton from "@/components/SignOutButton";
+
+import { Icon } from "@/shared/ui";
 
 type SidebarProps = {
 	friends: any;
@@ -53,10 +53,8 @@ export const Sidebar: FC<SidebarProps> = ({
 			) : null}
 			<nav className="flex flex-1 flex-col">
 				<ul role="list" className="flex flex-1 flex-col gap-y-7">
-					<li>
-						<SidebarChatList sessionId={session.user.id} friends={friends} />
-					</li>
-					<li>
+					<ChatList sessionId={session.user.id} friends={friends} />
+					{/* <li>
 						<div className="text-xs font-semibold leading-6 text-gray-400">
 							Overview
 						</div>
@@ -79,8 +77,8 @@ export const Sidebar: FC<SidebarProps> = ({
 								/>
 							</li>
 						</ul>
-					</li>
-					<li className="-mx-6 mt-auto flex items-center">
+					</li> */}
+					{/* <li className="-mx-6 mt-auto flex items-center">
 						<div className="flex flex-1 items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-gray-900">
 							<div className="relative h-8 w-8 bg-gray-50">
 								<Image
@@ -100,7 +98,7 @@ export const Sidebar: FC<SidebarProps> = ({
 							</div>
 						</div>
 						<SignOutButton className="h-full aspect-square" />
-					</li>
+					</li> */}
 				</ul>
 			</nav>
 		</motion.div>

@@ -7,8 +7,7 @@ import { toast } from "react-hot-toast";
 import { messageModel } from "@/entities/message";
 
 import { chatHrefConstructor, toPusherKey } from "@/shared/lib";
-import { Button } from "@/shared/ui";
-import UnseenChatToast from "@/components/UnseenChatToast";
+import { Button, UnseenChatToast } from "@/shared/ui";
 
 type ChatListProps = {
 	friends: User[];
@@ -34,7 +33,6 @@ export const ChatList: FC<ChatListProps> = ({ friends, sessionId }) => {
 		pusherClient.subscribe(toPusherKey(`user:${sessionId}:friends`));
 
 		const newFriendHandler = (newFriend: User) => {
-			console.log("received new user", newFriend);
 			setActiveChats((prev) => [...prev, newFriend]);
 		};
 
@@ -105,7 +103,6 @@ export const ChatList: FC<ChatListProps> = ({ friends, sessionId }) => {
 								type="button"
 								className="w-[160px] h-[40px]"
 							>
-								{/* <p className="relative text-white z-20">TestButton</p> */}
 								<p className="relative text-white z-20 mr-[10px]">
 									{friend.name}
 								</p>

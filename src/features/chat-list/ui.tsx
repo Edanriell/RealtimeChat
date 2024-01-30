@@ -90,7 +90,7 @@ export const ChatList: FC<ChatListProps> = ({ friends, sessionId }) => {
 						<ul
 							role="list"
 							className={
-								"flex items-center justify-center max-h-[25rem] " +
+								"flex flex-col items-center justify-center max-h-[25rem] " +
 								"overflow-y-auto -mx-2 space-y-1"
 							}
 						>
@@ -110,8 +110,7 @@ export const ChatList: FC<ChatListProps> = ({ friends, sessionId }) => {
 											)}`}
 											tabIndex={1}
 											className={
-												"text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex " +
-												"items-center gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold " +
+												"flex items-center gap-x-3 p-2 " +
 												"select-none "
 											}
 										>
@@ -120,19 +119,26 @@ export const ChatList: FC<ChatListProps> = ({ friends, sessionId }) => {
 												type="button"
 												className={"w-[160px] h-[40px]"}
 											>
-												<p className={"relative text-white z-20 mr-[10px]"}>
-													{friend.name}
-												</p>
-												{unseenMessagesCount > 0 ? (
-													<div
-														className={
-															"bg-slate-50 font-medium text-xs text-black w-4 h-4 " +
-															"rounded-full flex justify-center items-center z-20"
-														}
-													>
-														{unseenMessagesCount}
-													</div>
-												) : null}
+												<div
+													className={
+														"flex flex-row items-center justify-center"
+													}
+												>
+													<p className={"truncate relative text-white z-20"}>
+														{friend.name}
+													</p>
+													{unseenMessagesCount > 0 ? (
+														<div
+															className={
+																"bg-slate-50 font-medium text-xs text-black w-4 h-4 " +
+																"rounded-full flex justify-center items-center z-20 " +
+																"ml-[4px]"
+															}
+														>
+															{unseenMessagesCount}
+														</div>
+													) : null}
+												</div>
 											</AnimatedButton>
 										</a>
 									</li>

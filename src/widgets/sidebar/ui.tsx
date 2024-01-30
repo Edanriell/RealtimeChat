@@ -8,10 +8,7 @@ import Image from "next/image";
 import { ChatList } from "@/features/chat-list";
 import { Overview } from "@/features/overview";
 
-import FriendRequestSidebarOptions from "@/components/FriendRequestSidebarOptions";
 import SignOutButton from "@/components/SignOutButton";
-
-import { Icon } from "@/shared/ui";
 
 type SidebarProps = {
 	friends: any;
@@ -24,8 +21,6 @@ export const Sidebar: FC<SidebarProps> = ({
 	session,
 	unseenRequest,
 }) => {
-	const UserPlusIcon = Icon["UserPlus"];
-
 	return (
 		<motion.div
 			initial={{ width: 100 }}
@@ -49,7 +44,10 @@ export const Sidebar: FC<SidebarProps> = ({
 				/>
 			</Link>
 			<ChatList sessionId={session.user.id} friends={friends} />
-			<Overview />
+			<Overview
+				sessionId={session.user.id}
+				initialUnseenRequestCount={unseenRequest}
+			/>
 			<nav className="flex flex-1 flex-col">
 				<ul role="list" className="flex flex-1 flex-col gap-y-7">
 					{/* <li>

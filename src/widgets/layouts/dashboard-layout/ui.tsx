@@ -1,7 +1,7 @@
 "use server";
 
 import { notFound } from "next/navigation";
-import { FC, ReactNode } from "react";
+import { FC, ReactNode, useEffect } from "react";
 
 import { sessionModel } from "@/entities/session";
 import { friendModel } from "@/entities/friend";
@@ -25,9 +25,7 @@ export const DashboardLayout: FC<DashboardLayoutProps> = async ({
 
 	const friends = await getFriendsByUserId(session.user.id);
 
-	const unseenRequest = await (
-		unseenFriendsRequests(session.user.id) as unknown as sessionModel.User[]
-	).length;
+	const unseenRequest = await unseenFriendsRequests(session.user.id);
 
 	return (
 		<div className={"w-full flex h-screen bg-slate-50"}>

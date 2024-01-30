@@ -6,6 +6,8 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { ChatList } from "@/features/chat-list";
+import { Overview } from "@/features/overview";
+
 import FriendRequestSidebarOptions from "@/components/FriendRequestSidebarOptions";
 import SignOutButton from "@/components/SignOutButton";
 
@@ -46,14 +48,10 @@ export const Sidebar: FC<SidebarProps> = ({
 					height={60}
 				/>
 			</Link>
-			{friends.length > 0 ? (
-				<div className="text-md font-medium leading-6 text-gray-400">
-					Your chats
-				</div>
-			) : null}
+			<ChatList sessionId={session.user.id} friends={friends} />
+			<Overview />
 			<nav className="flex flex-1 flex-col">
 				<ul role="list" className="flex flex-1 flex-col gap-y-7">
-					<ChatList sessionId={session.user.id} friends={friends} />
 					{/* <li>
 						<div className="text-xs font-semibold leading-6 text-gray-400">
 							Overview
@@ -78,6 +76,7 @@ export const Sidebar: FC<SidebarProps> = ({
 							</li>
 						</ul>
 					</li> */}
+					{/* User Profile > Widget, SignOut > Feature */}
 					{/* <li className="-mx-6 mt-auto flex items-center">
 						<div className="flex flex-1 items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-gray-900">
 							<div className="relative h-8 w-8 bg-gray-50">

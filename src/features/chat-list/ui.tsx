@@ -80,42 +80,68 @@ export const ChatList: FC<ChatListProps> = ({ friends, sessionId }) => {
 	const AnimatedButton = Button["Animated"];
 
 	return (
-		<ul
-			role="list"
-			className="flex items-center justify-center max-h-[25rem] overflow-y-auto -mx-2 space-y-1"
-		>
-			{activeChats.sort().map((friend) => {
-				const unseenMessagesCount = unseenMessages.filter((unseenMsg) => {
-					return unseenMsg.senderId === friend.id;
-				}).length;
-
-				return (
-					<li key={friend.id}>
-						<a
-							href={`/dashboard/chat/${chatHrefConstructor(
-								sessionId,
-								friend.id,
-							)}`}
-							className="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex items-center gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
+		<>
+			{friends.length > 0 ? (
+				<div className={"flex flex-col items-center gap-y-[10px] "}>
+					<p className={"text-md font-medium leading-6 text-black"}>
+						Your chats
+					</p>
+					<nav>
+						<ul
+							role="list"
+							className={
+								"flex items-center justify-center max-h-[25rem] " +
+								"overflow-y-auto -mx-2 space-y-1"
+							}
 						>
-							<AnimatedButton
-								variant={"animated"}
-								type="button"
-								className="w-[160px] h-[40px]"
-							>
-								<p className="relative text-white z-20 mr-[10px]">
-									{friend.name}
-								</p>
-								{unseenMessagesCount > 0 ? (
-									<div className="bg-slate-50 font-medium text-xs text-black w-4 h-4 rounded-full flex justify-center items-center z-20">
-										{unseenMessagesCount}
-									</div>
-								) : null}
-							</AnimatedButton>
-						</a>
-					</li>
-				);
-			})}
-		</ul>
+							{activeChats.sort().map((friend) => {
+								const unseenMessagesCount = unseenMessages.filter(
+									(unseenMsg) => {
+										return unseenMsg.senderId === friend.id;
+									},
+								).length;
+
+								return (
+									<li key={friend.id}>
+										<a
+											href={`/dashboard/chat/${chatHrefConstructor(
+												sessionId,
+												friend.id,
+											)}`}
+											tabIndex={1}
+											className={
+												"text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex " +
+												"items-center gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold " +
+												"select-none "
+											}
+										>
+											<AnimatedButton
+												variant={"animated"}
+												type="button"
+												className={"w-[160px] h-[40px]"}
+											>
+												<p className={"relative text-white z-20 mr-[10px]"}>
+													{friend.name}
+												</p>
+												{unseenMessagesCount > 0 ? (
+													<div
+														className={
+															"bg-slate-50 font-medium text-xs text-black w-4 h-4 " +
+															"rounded-full flex justify-center items-center z-20"
+														}
+													>
+														{unseenMessagesCount}
+													</div>
+												) : null}
+											</AnimatedButton>
+										</a>
+									</li>
+								);
+							})}
+						</ul>
+					</nav>
+				</div>
+			) : null}
+		</>
 	);
 };

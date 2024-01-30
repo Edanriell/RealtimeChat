@@ -1,12 +1,7 @@
-import { FC, useEffect, useRef } from "react";
+import { FC } from "react";
 import Image from "next/image";
 import { toast, type Toast } from "react-hot-toast";
-import {
-	motion,
-	AnimatePresence,
-	usePresence,
-	useAnimate,
-} from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 import { chatHrefConstructor, cn } from "@/shared/lib";
 
@@ -27,7 +22,6 @@ export const UnseenChatToast: FC<UnseenChatToastProps> = ({
 	senderName,
 	senderMessage,
 }) => {
-
 	return (
 		<AnimatePresence>
 			{customToast.visible && (
@@ -43,35 +37,41 @@ export const UnseenChatToast: FC<UnseenChatToastProps> = ({
 					<a
 						onClick={() => toast.dismiss(customToast.id)}
 						href={`/dashboard/chat/${chatHrefConstructor(sessionId, senderId)}`}
-						className="flex-1 w-0 p-4"
+						className={"flex-1 w-0 p-4"}
 					>
-						<div className="flex items-start">
-							<div className="flex-shrink-0 pt-0.5">
-								<div className="relative h-10 w-10">
+						<div className={"flex items-start"}>
+							<div className={"flex-shrink-0 pt-0.5"}>
+								<div className={"relative h-10 w-10"}>
 									<Image
 										fill
 										referrerPolicy="no-referrer"
-										className="rounded-full"
+										className={"rounded-full"}
 										src={senderImg}
 										alt={`${senderName} profile picture`}
 									/>
 								</div>
 							</div>
-							<div className="ml-3 flex-1">
-								<p className="text-sm font-medium text-gray-900">
+							<div className={"ml-3 flex-1"}>
+								<p className={"text-sm font-medium text-gray-900"}>
 									{senderName}
 								</p>
-								<p className="mt-1 text-sm text-gray-500">{senderMessage}</p>
+								<p className={"mt-1 text-sm text-gray-500"}>{senderMessage}</p>
 							</div>
 						</div>
 					</a>
-					<div className="flex border-l border-gray-200">
-						<button
+					<div className={"flex border-l border-gray-200"}>
+						<motion.button
+							initial={{ backgroundColor: "#FFF", color: "#5a14de" }}
+							whileHover={{ backgroundColor: "#5a14de", color: "#FFF" }}
 							onClick={() => toast.dismiss(customToast.id)}
-							className="w-full border border-transparent rounded-none rounded-r-lg p-4 flex items-center justify-center text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+							className={
+								"w-full border border-transparent rounded-none rounded-r-lg p-4 flex " +
+								"items-center justify-center text-sm font-medium text-[#5a14de] " +
+								"focus:outline-none focus:ring-2 focus:ring-[#761beb]"
+							}
 						>
 							Close
-						</button>
+						</motion.button>
 					</div>
 				</motion.div>
 			)}

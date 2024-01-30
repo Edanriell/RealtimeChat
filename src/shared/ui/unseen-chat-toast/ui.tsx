@@ -44,6 +44,7 @@ export const UnseenChatToast: FC<UnseenChatToastProps> = ({
 								<div className={"relative h-10 w-10"}>
 									<Image
 										fill
+										style={{ objectFit: "contain" }}
 										referrerPolicy="no-referrer"
 										className={"rounded-full"}
 										src={senderImg}

@@ -7,8 +7,7 @@ import Image from "next/image";
 
 import { ChatList } from "@/features/chat-list";
 import { Overview } from "@/features/overview";
-
-import SignOutButton from "@/components/SignOutButton";
+import { UserProfile } from "@/widgets/user-profile";
 
 type SidebarProps = {
 	friends: any;
@@ -48,6 +47,7 @@ export const Sidebar: FC<SidebarProps> = ({
 				sessionId={session.user.id}
 				initialUnseenRequestCount={unseenRequest}
 			/>
+			<UserProfile session={session} />
 			<nav className="flex flex-1 flex-col">
 				<ul role="list" className="flex flex-1 flex-col gap-y-7">
 					{/* <li>

@@ -53,6 +53,7 @@ export const DashboardLayout: FC<DashboardLayoutProps> = async ({
 				<div className="g3 z-0"></div>
 				<div className="g4 z-0"></div>
 				<div className="g5 z-0"></div>
+				<div className="g6 z-0"></div>
 			</div>
 			<div className={"md:hidden"}>
 				{/* <MobileChatLayout

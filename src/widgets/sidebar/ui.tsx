@@ -28,7 +28,7 @@ export const Sidebar: FC<SidebarProps> = ({
 			className={
 				"hidden md:flex h-full " +
 				"flex-col gap-y-5 overflow-y-auto border-r border-gray-200 " +
-				"bg-white px-6 items-center py-[60px]"
+				"bg-white px-6 items-center py-[60px] shadow-fuck z-10"
 			}
 		>
 			<Link

@@ -28,7 +28,32 @@ export const DashboardLayout: FC<DashboardLayoutProps> = async ({
 	const unseenRequest = await unseenFriendsRequests(session.user.id);
 
 	return (
-		<div className={"w-full flex h-screen bg-slate-50"}>
+		<div className={"w-full flex h-screen gradient-bg z-0"}>
+			<svg xmlns="http://www.w3.org/2000/svg">
+				<defs>
+					<filter id="goo">
+						<feGaussianBlur
+							in="SourceGraphic"
+							stdDeviation="10"
+							result="blur"
+						/>
+						<feColorMatrix
+							in="blur"
+							mode="matrix"
+							values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8"
+							result="goo"
+						/>
+						<feBlend in="SourceGraphic" in2="goo" />
+					</filter>
+				</defs>
+			</svg>
+			<div className="gradients-container absolute z-0 pointer-events-none">
+				<div className="g1 z-0"></div>
+				<div className="g2 z-0"></div>
+				<div className="g3 z-0"></div>
+				<div className="g4 z-0"></div>
+				<div className="g5 z-0"></div>
+			</div>
 			<div className={"md:hidden"}>
 				{/* <MobileChatLayout
 					friends={friends}
@@ -42,9 +67,11 @@ export const DashboardLayout: FC<DashboardLayoutProps> = async ({
 				session={session}
 				unseenRequest={unseenRequest}
 			/>
-			<aside className="max-h-screen container py-16 md:py-12 w-full">
+			<aside className={"max-h-screen w-full mx-[20px] my-[30px]"}>
 				{children}
 			</aside>
 		</div>
 	);
 };
+
+// bg-slate-50

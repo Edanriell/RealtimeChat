@@ -9,10 +9,16 @@ type UserProfileProps = {
 
 export const UserProfile: FC<UserProfileProps> = ({ session }) => {
 	return (
-		<div className={"mt-[auto] flex flex-col items-center justify-center gap-y-[5px]"}>
+		<div
+			className={
+				"mt-[auto] flex flex-col items-center justify-center gap-y-[5px]"
+			}
+		>
 			<div
 				className={
-					"py-[10px] px-[10px] flex flex-row items-center justify-start bg-[#5a14de] rounded-[406px] w-[160px] gap-x-[4px]"
+					"py-[10px] px-[10px] flex flex-row items-center " +
+					"justify-start bg-[#5a14de] rounded-[406px] " +
+					"w-[160px] gap-x-[4px]"
 				}
 			>
 				<span className={"sr-only"}>Your profile</span>

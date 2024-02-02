@@ -1,19 +1,25 @@
-import { getFriendsByUserId } from "@/helpers/get-friends-by-user-id";
-import { fetchRedis } from "@/helpers/redis";
-import { authOptions } from "@/lib/auth";
-import { chatHrefConstructor } from "@/lib/utils";
-import { ChevronRight } from "lucide-react";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { ChevronRight } from "lucide-react";
+
+import { sessionModel } from "@/entities/session";
+import { friendModel } from "@/entities/friend";
+import { fetchRedis } from "@/shared/api";
+import { chatHrefConstructor } from "@/shared/lib/functions";
+
 export const DashboardPage = async () => {
+	const { authOptions } = sessionModel;
+	const { getFriendsByUserId } = friendModel;
+
 	const session = await getServerSession(authOptions);
 	if (!session) notFound();
 
 	const friends = await getFriendsByUserId(session.user.id);
 
+	// Should be in entities
 	const friendsWithLastMessage = await Promise.all(
 		friends.map(async (friend) => {
 			const [lastMessageRaw] = (await fetchRedis(
@@ -33,15 +39,26 @@ export const DashboardPage = async () => {
 	);
 
 	return (
-		<div className="container py-12">
-			<h1 className="font-bold text-5xl mb-8">Recent chats</h1>
+		<div
+			className={"w-full h-full rounded-[20px] p-[60px] shadow-fucks"}
+			style={{
+				background: "rgba(255, 255, 255, 0.2)",
+				boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
+				backdropFilter: "blur(5px)",
+				WebkitBackdropFilter: "blur(5px)",
+				borderRadius: "16px",
+				border: "1px solid rgba(255, 255, 255, 0.3)",
+			}}
+		>
+			<h1 className="font-bold text-5xl mb-8">Recent messages</h1>
+			{/* Feature Recent messages */}
 			{friendsWithLastMessage.length === 0 ? (
 				<p className="text-sm text-zinc-500">Nothing to show here...</p>
 			) : (
 				friendsWithLastMessage.map((friend) => (
 					<div
 						key={friend.id}
-						className="relative bg-zinc-50 border border-zinc-200 p-3 rounded-md"
+						className="relative bg-zinc-50 border border-zinc-200 p-3 rounded-[406px]"
 					>
 						<div className="absolute right-4 inset-y-0 flex items-center">
 							<ChevronRight className="h-7 w-7 text-zinc-400" />

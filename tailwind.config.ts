@@ -28,6 +28,9 @@ const config: Config = {
 				"gradient-radial-purple-darker":
 					"radial-gradient(circle farthest-side at top center, #482196, #1B0D48);",
 			},
+			boxShadow: {
+				fuck: "rgba(0, 0, 0, 0.1) 0px 10px 50px",
+			},
 		},
 	},
 	plugins: [require("@tailwindcss/forms")],

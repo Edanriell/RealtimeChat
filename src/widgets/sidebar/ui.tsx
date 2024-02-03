@@ -27,8 +27,8 @@ export const Sidebar: FC<SidebarProps> = ({
 				boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
 				backdropFilter: "blur(5px)",
 				WebkitBackdropFilter: "blur(5px)",
-				borderTopRightRadius: "16px",
-				borderBottomRightRadius: "16px",
+				borderTopRightRadius: "20px",
+				borderBottomRightRadius: "20px",
 				border: "1px solid rgba(255, 255, 255, 0.3)",
 			}}
 			initial={{ width: 100 }}
@@ -37,7 +37,7 @@ export const Sidebar: FC<SidebarProps> = ({
 			className={
 				"hidden md:flex h-full " +
 				"flex-col gap-y-5 overflow-y-auto border-r border-gray-200 " +
-				"bg-white px-6 items-center py-[60px] shadow-fuck z-10"
+				"bg-white px-6 items-center py-[60px] z-10 shadow-soft"
 			}
 		>
 			<Link

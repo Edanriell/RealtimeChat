@@ -8,7 +8,7 @@ import { ChevronRight } from "lucide-react";
 import { sessionModel } from "@/entities/session";
 import { friendModel } from "@/entities/friend";
 import { fetchRedis } from "@/shared/api";
-import { chatHrefConstructor } from "@/shared/lib/functions";
+import { chatHrefConstructor } from "@/shared/lib";
 
 export const DashboardPage = async () => {
 	const { authOptions } = sessionModel;
@@ -40,13 +40,13 @@ export const DashboardPage = async () => {
 
 	return (
 		<div
-			className={"w-full h-full rounded-[20px] p-[60px] shadow-fucks"}
+			className={"w-full h-full p-[60px] shadow-soft"}
 			style={{
 				background: "rgba(255, 255, 255, 0.2)",
 				boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
 				backdropFilter: "blur(5px)",
 				WebkitBackdropFilter: "blur(5px)",
-				borderRadius: "16px",
+				borderRadius: "20px",
 				border: "1px solid rgba(255, 255, 255, 0.3)",
 			}}
 		>

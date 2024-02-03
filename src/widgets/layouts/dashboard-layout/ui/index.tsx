@@ -10,7 +10,7 @@ import { friendModel } from "@/entities/friend";
 // import MobileChatLayout from "@/components/MobileChatLayout";
 import { Sidebar } from "@/widgets/sidebar";
 
-import { Test } from "./test";
+import { GradientCircles } from "./GradientCircles";
 
 type DashboardLayoutProps = {
 	children: ReactNode;
@@ -30,8 +30,8 @@ export const DashboardLayout: FC<DashboardLayoutProps> = async ({
 	const unseenRequest = await unseenFriendsRequests(session.user.id);
 
 	return (
-		<div className={"w-full flex h-screen gradient-bg z-0"}>
-			<Test />
+		<div className={"w-full flex h-screen gradient-background z-0"}>
+			<GradientCircles interactiveCircle={true} />
 			<div className={"md:hidden"}>
 				{/* <MobileChatLayout
 					friends={friends}

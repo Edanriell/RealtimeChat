@@ -1,7 +1,7 @@
 "use server";
 
 import { notFound } from "next/navigation";
-import { FC, ReactNode, useEffect } from "react";
+import { FC, ReactNode } from "react";
 
 import { sessionModel } from "@/entities/session";
 import { friendModel } from "@/entities/friend";
@@ -9,6 +9,8 @@ import { friendModel } from "@/entities/friend";
 // Widget
 // import MobileChatLayout from "@/components/MobileChatLayout";
 import { Sidebar } from "@/widgets/sidebar";
+
+import { Test } from "./test";
 
 type DashboardLayoutProps = {
 	children: ReactNode;
@@ -29,32 +31,7 @@ export const DashboardLayout: FC<DashboardLayoutProps> = async ({
 
 	return (
 		<div className={"w-full flex h-screen gradient-bg z-0"}>
-			<svg xmlns="http://www.w3.org/2000/svg">
-				<defs>
-					<filter id="goo">
-						<feGaussianBlur
-							in="SourceGraphic"
-							stdDeviation="10"
-							result="blur"
-						/>
-						<feColorMatrix
-							in="blur"
-							mode="matrix"
-							values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8"
-							result="goo"
-						/>
-						<feBlend in="SourceGraphic" in2="goo" />
-					</filter>
-				</defs>
-			</svg>
-			<div className="gradients-container absolute z-0 pointer-events-none">
-				<div className="g1 z-0"></div>
-				<div className="g2 z-0"></div>
-				<div className="g3 z-0"></div>
-				<div className="g4 z-0"></div>
-				<div className="g5 z-0"></div>
-				<div className="g6 z-0"></div>
-			</div>
+			<Test />
 			<div className={"md:hidden"}>
 				{/* <MobileChatLayout
 					friends={friends}

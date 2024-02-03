@@ -27,7 +27,8 @@ export const Sidebar: FC<SidebarProps> = ({
 				boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
 				backdropFilter: "blur(5px)",
 				WebkitBackdropFilter: "blur(5px)",
-				borderRadius: "16px",
+				borderTopRightRadius: "16px",
+				borderBottomRightRadius: "16px",
 				border: "1px solid rgba(255, 255, 255, 0.3)",
 			}}
 			initial={{ width: 100 }}

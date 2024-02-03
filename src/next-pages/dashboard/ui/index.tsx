@@ -1,3 +1,5 @@
+"use server";
+
 import { getServerSession } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,55 +9,31 @@ import { ChevronRight } from "lucide-react";
 
 import { sessionModel } from "@/entities/session";
 import { friendModel } from "@/entities/friend";
-import { fetchRedis } from "@/shared/api";
 import { chatHrefConstructor } from "@/shared/lib";
 
 export const DashboardPage = async () => {
 	const { authOptions } = sessionModel;
-	const { getFriendsByUserId } = friendModel;
+	const { getFriendsByUserId, friendsWithLastMessage } = friendModel;
 
 	const session = await getServerSession(authOptions);
 	if (!session) notFound();
 
 	const friends = await getFriendsByUserId(session.user.id);
 
-	// Should be in entities
-	const friendsWithLastMessage = await Promise.all(
-		friends.map(async (friend) => {
-			const [lastMessageRaw] = (await fetchRedis(
-				"zrange",
-				`chat:${chatHrefConstructor(session.user.id, friend.id)}:messages`,
-				-1,
-				-1,
-			)) as string[];
-
-			const lastMessage = JSON.parse(lastMessageRaw) as Message;
-
-			return {
-				...friend,
-				lastMessage,
-			};
-		}),
-	);
+	const recentMessages = await friendsWithLastMessage(friends, session.user.id);
 
 	return (
 		<div
-			className={"w-full h-full p-[60px] shadow-soft"}
-			style={{
-				background: "rgba(255, 255, 255, 0.2)",
-				boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
-				backdropFilter: "blur(5px)",
-				WebkitBackdropFilter: "blur(5px)",
-				borderRadius: "20px",
-				border: "1px solid rgba(255, 255, 255, 0.3)",
-			}}
+			className={
+				"w-full h-full p-[60px] shadow-soft glassmorphism rounded-[20px]"
+			}
 		>
 			<h1 className="font-bold text-5xl mb-8">Recent messages</h1>
 			{/* Feature Recent messages */}
-			{friendsWithLastMessage.length === 0 ? (
+			{recentMessages.length === 0 ? (
 				<p className="text-sm text-zinc-500">Nothing to show here...</p>
 			) : (
-				friendsWithLastMessage.map((friend) => (
+				recentMessages.map((friend: any) => (
 					<div
 						key={friend.id}
 						className="relative bg-zinc-50 border border-zinc-200 p-3 rounded-[406px]"

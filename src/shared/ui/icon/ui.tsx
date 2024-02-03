@@ -1,3 +1,5 @@
+"use client";
+
 import { LucideProps, UserPlus, User, LogOut, Send } from "lucide-react";
 
 export const Icon = {

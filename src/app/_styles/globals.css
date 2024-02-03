@@ -95,7 +95,7 @@
 	filter: url(#goo) blur(40px);
 }
 
-.gradient-circle-0 {
+.gradient-circle-1 {
 	position: absolute;
 	background: radial-gradient(
 			circle at center,
@@ -113,7 +113,7 @@
 	opacity: 1;
 }
 
-.gradient-circle-1 {
+.gradient-circle-2 {
 	position: absolute;
 	background: radial-gradient(
 			circle at center,
@@ -131,7 +131,7 @@
 	opacity: 1;
 }
 
-.gradient-circle-2 {
+.gradient-circle-3 {
 	position: absolute;
 	background: radial-gradient(
 			circle at center,
@@ -149,7 +149,7 @@
 	opacity: 1;
 }
 
-.gradient-circle-3 {
+.gradient-circle-4 {
 	position: absolute;
 	background: radial-gradient(
 			circle at center,
@@ -167,7 +167,7 @@
 	opacity: 0.7;
 }
 
-.gradient-circle-4 {
+.gradient-circle-5 {
 	position: absolute;
 	background: radial-gradient(
 			circle at center,
@@ -185,7 +185,7 @@
 	opacity: 1;
 }
 
-.gradient-circle-5 {
+.gradient-circle-6 {
 	position: absolute;
 	background: radial-gradient(
 			circle at center,

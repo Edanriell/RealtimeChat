@@ -20,17 +20,17 @@ export const GradientCircles: FC<GradientCirclesProps> = ({
 	const tgY = useRef(0);
 
 	useEffect(() => {
-		const interBubble = interactiveCircleRef.current;
+		const interactiveCircle = interactiveCircleRef.current;
 
-		const move = () => {
+		const moveInteractiveCircle = () => {
 			curX.current += (tgX.current - curX.current) / 20;
 			curY.current += (tgY.current - curY.current) / 20;
-			if (interBubble) {
-				interBubble.style.transform = `translate(${Math.round(
+			if (interactiveCircle) {
+				interactiveCircle.style.transform = `translate(${Math.round(
 					curX.current,
 				)}px, ${Math.round(curY.current)}px)`;
 			}
-			requestAnimationFrame(move);
+			requestAnimationFrame(moveInteractiveCircle);
 		};
 
 		const handleMouseMove = (event: MouseEvent) => {
@@ -40,7 +40,8 @@ export const GradientCircles: FC<GradientCirclesProps> = ({
 
 		window.addEventListener("mousemove", handleMouseMove);
 
-		move(); // Initial call to start animation
+		// Initial function call to start animation
+		moveInteractiveCircle();
 
 		return () => {
 			// Cleanup event listener on component unmount
@@ -74,11 +75,10 @@ export const GradientCircles: FC<GradientCirclesProps> = ({
 					"w-full h-full"
 				}
 			>
-				{/* <div className="gradient-circle-0 z-0"></div>
-				<div className="gradient-circle-1 z-0"></div>
-				<div className="gradient-circle-2 z-0"></div>
-				<div className="gradient-circle-3 z-0"></div>
-				<div className="gradient-circle-4 z-0"></div> */}
+				{animatedCircles &&
+					Array.from({ length: animatedCirclesCount }).map((_, index) => (
+						<div key={index} className={`gradient-circle-${index} z-0`}></div>
+					))}
 				{interactiveCircle && (
 					<div
 						className={"gradient-circle-interactive"}

@@ -19,6 +19,14 @@ export type Message = {
 	timestamp: number;
 };
 
+export type RecentMessage = {
+	lastMessage: Message;
+	name: string;
+	email: string;
+	image: string;
+	id: string;
+};
+
 export const pusherServer = new PusherServer({
 	appId: process.env.PUSHER_APP_ID!,
 	key: process.env.NEXT_PUBLIC_PUSHER_APP_KEY!,

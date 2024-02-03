@@ -1,6 +1,13 @@
 "use client";
 
-import { LucideProps, UserPlus, User, LogOut, Send } from "lucide-react";
+import {
+	LucideProps,
+	UserPlus,
+	User,
+	LogOut,
+	Send,
+	ChevronRight,
+} from "lucide-react";
 
 export const Icon = {
 	Logo: (props: LucideProps) => (
@@ -81,4 +88,5 @@ export const Icon = {
 	User,
 	LogOut,
 	Send,
+	ChevronRight,
 };

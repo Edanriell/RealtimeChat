@@ -32,7 +32,7 @@ export const RecentMessages: FC<RecentMessagesProps> = ({
 						key={friend.id}
 						className={
 							"relative bg-[white] border-light p-[10px] rounded-[406px] " +
-							"flex flex-row-reverse items-center justify-center"
+							"flex flex-row-reverse items-center justify-center overflow-hidden"
 						}
 					>
 						<motion.div
@@ -40,12 +40,13 @@ export const RecentMessages: FC<RecentMessagesProps> = ({
 							initial={{
 								scaleX: 1,
 								scaleY: 1,
+								transformOrigin: "100% 50% 0",
 								borderRadius: "406px / 406px",
 							}}
 							whileHover={{
-								scaleX: 1,
-								scaleY: 2,
-								borderRadius: "406px / 203px",
+								scaleX: 8.75,
+								scaleY: 1,
+								borderRadius: "46.4px / 406px",
 							}}
 							transition={{ type: "linear", duration: 1 }}
 						>

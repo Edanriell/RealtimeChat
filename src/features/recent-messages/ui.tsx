@@ -1,6 +1,6 @@
 "use client";
 
-import { FC } from "react";
+import { FC, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Session } from "next-auth";
@@ -21,6 +21,17 @@ export const RecentMessages: FC<RecentMessagesProps> = ({
 }) => {
 	const ChevronRightIcon = Icon["ChevronRight"];
 
+	const [isOpen, setIsOpen] = useState(false);
+
+	// const variants = {
+	// 	open: {
+	// 		scaleX: 1,
+	// 	},
+	// 	closed: {
+	// 		scaleX: 8.75,
+	// 	},
+	// };
+
 	return (
 		<>
 			<h1 className={"font-bold text-5xl mb-10"}>Recent messages</h1>
@@ -32,34 +43,36 @@ export const RecentMessages: FC<RecentMessagesProps> = ({
 						key={friend.id}
 						className={
 							"relative bg-[white] border-light p-[10px] rounded-[406px] " +
-							"flex flex-row-reverse items-center justify-center overflow-hidden"
+							"flex flex-row-reverse items-center justify-center"
 						}
 					>
 						<motion.div
-							className={"w-[80px] h-[80px] bg-[red] overflow-hidden"}
-							initial={{
-								scaleX: 1,
-								scaleY: 1,
-								transformOrigin: "100% 50% 0",
-								borderRadius: "406px / 406px",
-							}}
+							layout
+							className={"w-[80px] h-[80px] bg-[red] z-10 block overflow-hidden absolute"}
+							style={{ borderRadius: 406 }}
 							whileHover={{
-								scaleX: 8.75,
-								scaleY: 1,
-								borderRadius: "46.4px / 406px",
+								width: "100%",
+								height: "100px"
 							}}
-							transition={{ type: "linear", duration: 1 }}
+							onMouseEnter={() => setIsOpen(false)}
+							onMouseLeave={() => setIsOpen(true)}
 						>
-							<Link
+							{/* <Link
 								href={`/dashboard/chat/${chatHrefConstructor(
 									session.user.id,
 									friend.id,
 								)}`}
 								className={
 									"flex items-center justify-center " +
-									"bg-[#5a14de] h-full relative transform-none"
+									"bg-[#5a14de] h-full relative box-border"
 								}
-							></Link>
+							></Link> */}
+							<div
+								className={
+									"flex items-center justify-center " +
+									"bg-[#5a14de] h-full relative box-border"
+								}
+							></div>
 						</motion.div>
 						<ChevronRightIcon
 							className={"h-7 w-7 text-[white] transform-none absolute"}

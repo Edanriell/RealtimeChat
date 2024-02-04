@@ -31,25 +31,21 @@ export const RecentMessages: FC<RecentMessagesProps> = ({
 					<div
 						key={friend.id}
 						className={
-							"relative bg-[white] border-light p-3 rounded-[406px] " +
-							"flex flex-row-reverse items-center overflow-hidden"
+							"relative bg-[white] border-light p-[10px] rounded-[406px] " +
+							"flex flex-row-reverse items-center justify-center"
 						}
 					>
 						<motion.div
-							className={
-								"absolute w-[80px] h-[80px] top-[15%] right-[0] bg-[red]"
-							}
+							className={"w-[80px] h-[80px] bg-[red] overflow-hidden"}
 							initial={{
-								borderRadius: 406,
-								scaleZ: 100,
-								scaleY: 1,
 								scaleX: 1,
+								scaleY: 1,
+								borderRadius: "406px / 406px",
 							}}
 							whileHover={{
-								scaleZ: 100,
-								scaleY: 30,
-								scaleX: 30,
-								borderRadius: 406,
+								scaleX: 1,
+								scaleY: 2,
+								borderRadius: "406px / 203px",
 							}}
 							transition={{ type: "linear", duration: 1 }}
 						>
@@ -60,7 +56,7 @@ export const RecentMessages: FC<RecentMessagesProps> = ({
 								)}`}
 								className={
 									"flex items-center justify-center " +
-									"bg-[#5a14de] rounded-full h-full relative"
+									"bg-[#5a14de] h-full relative transform-none"
 								}
 							></Link>
 						</motion.div>

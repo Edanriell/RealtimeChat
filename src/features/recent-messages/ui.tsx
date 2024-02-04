@@ -4,6 +4,7 @@ import { FC } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Session } from "next-auth";
+import { motion } from "framer-motion";
 
 import { messageModel } from "@/entities/message";
 import { chatHrefConstructor } from "@/shared/lib";
@@ -31,25 +32,45 @@ export const RecentMessages: FC<RecentMessagesProps> = ({
 						key={friend.id}
 						className={
 							"relative bg-[white] border-light p-3 rounded-[406px] " +
-							"flex flex-row-reverse items-center justify-between"
+							"flex flex-row-reverse items-center overflow-hidden"
 						}
 					>
+						<motion.div
+							className={
+								"absolute w-[80px] h-[80px] top-[15%] right-[0] bg-[red]"
+							}
+							initial={{
+								borderRadius: 406,
+								scaleZ: 100,
+								scaleY: 1,
+								scaleX: 1,
+							}}
+							whileHover={{
+								scaleZ: 100,
+								scaleY: 30,
+								scaleX: 30,
+								borderRadius: 406,
+							}}
+							transition={{ type: "linear", duration: 1 }}
+						>
+							<Link
+								href={`/dashboard/chat/${chatHrefConstructor(
+									session.user.id,
+									friend.id,
+								)}`}
+								className={
+									"flex items-center justify-center " +
+									"bg-[#5a14de] rounded-full h-full relative"
+								}
+							></Link>
+						</motion.div>
+						<ChevronRightIcon
+							className={"h-7 w-7 text-[white] transform-none absolute"}
+						/>
 						<div
 							className={
-								"flex items-center justify-center " +
-								"w-[80px] h-[80px] bg-[#5a14de] rounded-full"
-							}
-						>
-							<ChevronRightIcon className={"h-7 w-7 text-[white]"} />
-						</div>
-						<Link
-							href={`/dashboard/chat/${chatHrefConstructor(
-								session.user.id,
-								friend.id,
-							)}`}
-							className={
-								"relative flex flex-row items-center justify-start " +
-								"gap-x-[20px]"
+								"relative flex flex-row items-center justify-center " +
+								"gap-x-[20px] mr-[auto]"
 							}
 						>
 							<Image
@@ -71,7 +92,7 @@ export const RecentMessages: FC<RecentMessagesProps> = ({
 									{friend.lastMessage.text}
 								</p>
 							</div>
-						</Link>
+						</div>
 					</div>
 				))
 			)}

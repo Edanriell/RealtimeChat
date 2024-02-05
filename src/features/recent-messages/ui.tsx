@@ -21,7 +21,7 @@ export const RecentMessages: FC<RecentMessagesProps> = ({
 }) => {
 	const ChevronRightIcon = Icon["ChevronRight"];
 
-	const [isOpen, setIsOpen] = useState(false);
+	const [isHovered, setIsHovered] = useState<boolean>(false);
 
 	// const variants = {
 	// 	open: {
@@ -43,41 +43,46 @@ export const RecentMessages: FC<RecentMessagesProps> = ({
 						key={friend.id}
 						className={
 							"relative bg-[white] border-light rounded-[406px] " +
-							"flex flex-row-reverse items-center justify-between p-[10px]"
+							"flex flex-row-reverse items-center justify-start " +
+							"p-[10px] h-[100px]"
 						}
 					>
 						<motion.div
 							className={
-								"w-[80px] h-[80px] bg-[#5a14de] z-0 " +
-								"flex items-center justify-center box-border absolute"
+								"w-[80px] h-[80px] bg-[#5a14de] z-10 " +
+								"flex items-center justify-center box-border " +
+								"absolute"
 							}
-							layout={true}
-							initial={{ borderRadius: 406 }}
+							initial={{ borderRadius: 406, overflow: "hidden" }}
 							whileHover={{
 								width: "100%",
-								height: "100px",
+								height: "100%",
 								x: 10,
 							}}
-							onMouseEnter={() => setIsOpen(false)}
-							onMouseLeave={() => setIsOpen(true)}
-						></motion.div>
-						{/* <Link
+							onMouseEnter={() => setIsHovered(true)}
+							onMouseLeave={() => setIsHovered(false)}
+						>
+							<Link
 								href={`/dashboard/chat/${chatHrefConstructor(
 									session.user.id,
 									friend.id,
 								)}`}
 								className={
-									"flex items-center justify-center z-0 " +
-									"h-full relative box-border bg-transparent "
+									"flex items-center justify-center z-20 " +
+									"h-full relative box-border bg-[transparent] w-full"
 								}
-							></Link> */}
+							></Link>
+						</motion.div>
 						<ChevronRightIcon
-							className={"h-7 w-7 text-[white] absolute pointer-events-none"}
+							className={
+								"h-7 w-7 text-[white] absolute pointer-events-none " +
+								"z-30 right-[32px]"
+							}
 						/>
 						<div
 							className={
 								"relative flex flex-row items-center justify-center " +
-								"gap-x-[20px] mr-[auto]"
+								"gap-x-[20px] pointer-events-none mr-[auto] z-30"
 							}
 						>
 							<Image

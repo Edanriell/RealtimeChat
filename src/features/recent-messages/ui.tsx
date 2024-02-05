@@ -19,18 +19,18 @@ export const RecentMessages: FC<RecentMessagesProps> = ({
 	recentMessages,
 	session,
 }) => {
-	const ChevronRightIcon = Icon["ChevronRight"];
-
 	const [isHovered, setIsHovered] = useState<boolean>(false);
 
-	// const variants = {
-	// 	open: {
-	// 		scaleX: 1,
-	// 	},
-	// 	closed: {
-	// 		scaleX: 8.75,
-	// 	},
-	// };
+	const textVariants = {
+		hovered: {
+			color: "#FFF",
+		},
+		notHovered: {
+			color: "#000",
+		},
+	};
+
+	const ChevronRightIcon = Icon["ChevronRight"];
 
 	return (
 		<>
@@ -75,8 +75,8 @@ export const RecentMessages: FC<RecentMessagesProps> = ({
 						</motion.div>
 						<ChevronRightIcon
 							className={
-								"h-7 w-7 text-[white] absolute pointer-events-none " +
-								"z-30 right-[32px]"
+								"h-[30px] w-[30px] text-[white] absolute pointer-events-none " +
+								"z-30 right-[35px]"
 							}
 						/>
 						<div
@@ -94,15 +94,29 @@ export const RecentMessages: FC<RecentMessagesProps> = ({
 								src={friend.image}
 							/>
 							<div>
-								<h4 className={"text-lg font-semibold"}>{friend.name}</h4>
-								<p className={"mt-1 max-w-md"}>
-									<span className={"text-zinc-400"}>
+								<motion.h4
+									variants={textVariants}
+									animate={isHovered ? "hovered" : "notHovered"}
+									className={"text-lg font-semibold"}
+								>
+									{friend.name}
+								</motion.h4>
+								<motion.p
+									variants={textVariants}
+									animate={isHovered ? "hovered" : "notHovered"}
+									className={"mt-1 max-w-md"}
+								>
+									<motion.span
+										variants={textVariants}
+										animate={isHovered ? "hovered" : "notHovered"}
+										className={"text-[#000]"}
+									>
 										{friend.lastMessage.senderId === session.user.id
 											? "You: "
 											: ""}
-									</span>
+									</motion.span>
 									{friend.lastMessage.text}
-								</p>
+								</motion.p>
 							</div>
 						</div>
 					</div>

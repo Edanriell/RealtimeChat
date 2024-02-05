@@ -42,40 +42,37 @@ export const RecentMessages: FC<RecentMessagesProps> = ({
 					<div
 						key={friend.id}
 						className={
-							"relative bg-[white] border-light p-[10px] rounded-[406px] " +
-							"flex flex-row-reverse items-center justify-center"
+							"relative bg-[white] border-light rounded-[406px] " +
+							"flex flex-row-reverse items-center justify-between p-[10px]"
 						}
 					>
 						<motion.div
-							layout
-							className={"w-[80px] h-[80px] bg-[red] z-10 block overflow-hidden absolute"}
-							style={{ borderRadius: 406 }}
+							className={
+								"w-[80px] h-[80px] bg-[#5a14de] z-0 " +
+								"flex items-center justify-center box-border absolute"
+							}
+							layout={true}
+							initial={{ borderRadius: 406 }}
 							whileHover={{
 								width: "100%",
-								height: "100px"
+								height: "100px",
+								x: 10,
 							}}
 							onMouseEnter={() => setIsOpen(false)}
 							onMouseLeave={() => setIsOpen(true)}
-						>
-							{/* <Link
+						></motion.div>
+						{/* <Link
 								href={`/dashboard/chat/${chatHrefConstructor(
 									session.user.id,
 									friend.id,
 								)}`}
 								className={
-									"flex items-center justify-center " +
-									"bg-[#5a14de] h-full relative box-border"
+									"flex items-center justify-center z-0 " +
+									"h-full relative box-border bg-transparent "
 								}
 							></Link> */}
-							<div
-								className={
-									"flex items-center justify-center " +
-									"bg-[#5a14de] h-full relative box-border"
-								}
-							></div>
-						</motion.div>
 						<ChevronRightIcon
-							className={"h-7 w-7 text-[white] transform-none absolute"}
+							className={"h-7 w-7 text-[white] absolute pointer-events-none"}
 						/>
 						<div
 							className={

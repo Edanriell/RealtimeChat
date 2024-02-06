@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 
 import { messageModel } from "@/entities/message";
 import { chatHrefConstructor } from "@/shared/lib";
-import { Icon } from "@/shared/ui";
+import { Icon, Button } from "@/shared/ui";
 
 type RecentMessagesProps = {
 	recentMessages: Array<messageModel.RecentMessage>;
@@ -31,6 +31,7 @@ export const RecentMessages: FC<RecentMessagesProps> = ({
 	};
 
 	const ChevronRightIcon = Icon["ChevronRight"];
+	const ExpandableButton = Button["Expandable"];
 
 	return (
 		<>
@@ -44,21 +45,15 @@ export const RecentMessages: FC<RecentMessagesProps> = ({
 						className={
 							"relative bg-[white] border-light rounded-[406px] " +
 							"flex flex-row-reverse items-center justify-start " +
-							"p-[10px] h-[100px]"
+							"p-[10px] h-[100px] focus:outline-none focus:ring-2 " +
+							"focus:ring-[#761beb] focus:ring-offset-2 " +
+							"disabled:opacity-50 disabled:pointer-events-none"
 						}
+						tabIndex={0}
 					>
-						<motion.div
-							className={
-								"w-[80px] h-[80px] bg-[#5a14de] z-10 " +
-								"flex items-center justify-center box-border " +
-								"absolute"
-							}
-							initial={{ borderRadius: 406, overflow: "hidden" }}
-							whileHover={{
-								width: "100%",
-								height: "100%",
-								x: 10,
-							}}
+						<ExpandableButton
+							variant={"expandable"}
+							size={"expandable"}
 							onMouseEnter={() => setIsHovered(true)}
 							onMouseLeave={() => setIsHovered(false)}
 						>
@@ -72,7 +67,7 @@ export const RecentMessages: FC<RecentMessagesProps> = ({
 									"h-full relative box-border bg-[transparent] w-full"
 								}
 							></Link>
-						</motion.div>
+						</ExpandableButton>
 						<ChevronRightIcon
 							className={
 								"h-[30px] w-[30px] text-[white] absolute pointer-events-none " +
@@ -104,12 +99,12 @@ export const RecentMessages: FC<RecentMessagesProps> = ({
 								<motion.p
 									variants={textVariants}
 									animate={isHovered ? "hovered" : "notHovered"}
-									className={"mt-1 max-w-md"}
+									className={"mt-1 max-w-md font-normal"}
 								>
 									<motion.span
 										variants={textVariants}
 										animate={isHovered ? "hovered" : "notHovered"}
-										className={"text-[#000]"}
+										className={"text-[#000] font-light"}
 									>
 										{friend.lastMessage.senderId === session.user.id
 											? "You: "

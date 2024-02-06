@@ -27,14 +27,19 @@ export const buttonVariants = cva(
 	{
 		variants: {
 			variant: {
-				default: "bg-slate-50 text-black focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none",
+				default:
+					"bg-slate-50 text-black focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none",
 				ghost: "bg-transparent hover:text-slate-900 hover:bg-slate-200",
-				animated: "relative overflow-hidden bg-[#5a14de] focus:outline-none focus:ring-2 focus:ring-[#761beb] focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none",
+				animated:
+					"relative overflow-hidden bg-[#5a14de] focus:outline-none focus:ring-2 focus:ring-[#761beb] focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none",
+				expandable:
+					"bg-[#5a14de] z-10 flex items-center justify-center box-border absolute focus:outline-none focus:ring-2 focus:ring-[#761beb] focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none",
 			},
 			size: {
 				default: "h-10 py-2 px-4",
 				sm: "h-9 px-2",
 				lg: "h-11 px-8",
+				expandable: "w-[80px] h-[80px]",
 			},
 		},
 		defaultVariants: {
@@ -102,6 +107,31 @@ export const Button = {
 						"select-none"
 					}
 				></div>
+			</motion.button>
+		);
+	},
+	Expandable: ({
+		className,
+		children,
+		variant,
+		isLoading,
+		size,
+		...props
+	}: MotionProps & ButtonProps) => {
+		return (
+			<motion.button
+				initial={{ borderRadius: 406, overflow: "hidden" }}
+				whileHover={{
+					width: "100%",
+					height: "100%",
+					x: 10,
+				}}
+				className={cn(buttonVariants({ variant, size, className }))}
+				disabled={isLoading}
+				{...props}
+			>
+				{isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+				{children}
 			</motion.button>
 		);
 	},

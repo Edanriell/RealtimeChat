@@ -1,5 +1,9 @@
 import PusherServer from "pusher";
 import PusherClient from "pusher-js";
+import { notFound } from "next/navigation";
+
+import { fetchRedis } from "@/shared/api";
+import { messageArrayValidator } from "@/shared/lib";
 
 export type IncomingFriendRequest = {
 	senderId: string;
@@ -41,3 +45,28 @@ export const pusherClient = new PusherClient(
 		cluster: "eu",
 	},
 );
+
+export async function getChatMessages(chatId: string) {
+	try {
+		const results: string[] = await fetchRedis(
+			"zrange",
+			`chat:${chatId}:messages`,
+			0,
+			-1,
+		);
+
+		const dbMessages = results.map((message) => JSON.parse(message) as Message);
+
+		const reversedDbMessages = dbMessages.reverse();
+
+		const messages = messageArrayValidator.parse(reversedDbMessages);
+
+		return messages;
+	} catch (error) {
+		notFound();
+	}
+}
+
+export async function getChatPartner(chatPartnerId: string) {
+	return JSON.parse(await fetchRedis("get", `user:${chatPartnerId}`));
+}

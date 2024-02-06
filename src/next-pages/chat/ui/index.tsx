@@ -1,12 +1,14 @@
-import ChatInput from "@/components/ChatInput";
-import Messages from "@/components/Messages";
+import { FC } from "react";
+import { getServerSession } from "next-auth";
+import { notFound } from "next/navigation";
+import Image from "next/image";
+
 import { fetchRedis } from "@/helpers/redis";
 import { authOptions } from "@/lib/auth";
 import { messageArrayValidator } from "@/lib/validations/message";
-import { getServerSession } from "next-auth";
-import Image from "next/image";
-import { notFound } from "next/navigation";
-import { FC } from "react";
+
+import ChatInput from "@/components/ChatInput";
+import Messages from "@/components/Messages";
 
 // HELPER FUNCTION SHOULD BE IN SHARED
 export async function generateMetadata({
@@ -71,7 +73,6 @@ export const ChatPage: FC<ChatPageProps> = async ({ params }) => {
 	}
 
 	const chatPartnerId = user.id === userId1 ? userId2 : userId1;
-	// new
 
 	const chatPartnerRaw = (await fetchRedis(
 		"get",

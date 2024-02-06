@@ -5,7 +5,6 @@ export const ChatPageLoading: FC = () => {
 	return (
 		<div className="flex flex-col h-full items-center">
 			<Skeleton className="mb-4" height={40} width={400} />
-			{/* chat messages */}
 			<div className="flex-1 max-h-full overflow-y-scroll w-full">
 				<div className="flex flex-col flex-auto h-full p-6">
 					<div className="flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-gray-50 h-full p-4">
@@ -32,8 +31,6 @@ export const ChatPageLoading: FC = () => {
 											</div>
 										</div>
 									</div>
-
-									{/* my messages */}
 									<div className="col-start-1 col-end-8 p-3 rounded-lg">
 										<div className="flex flex-row items-center">
 											<div className="relative h-10 w-10">
@@ -70,14 +67,6 @@ export const ChatPageLoading: FC = () => {
 					</div>
 				</div>
 			</div>
-
-			{/* chat input */}
-
-			{/* <ChatInput
-        chatPartner={chatPartner}
-        img={session.user.image}
-        chatId={chatId}
-      /> */}
 		</div>
 	);
 };

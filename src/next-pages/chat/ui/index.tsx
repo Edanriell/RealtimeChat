@@ -4,10 +4,9 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 
 import { sessionModel } from "@/entities/session";
-import { messageModel } from "@/entities/message";
+import { messageModel, Messages } from "@/entities/message";
 
 import ChatInput from "@/components/ChatInput";
-import Messages from "@/components/Messages";
 
 type ChatPageProps = {
 	params: {
@@ -79,7 +78,6 @@ export const ChatPage: FC<ChatPageProps> = async ({ params }) => {
 						</div>
 					</div>
 				</div>
-
 				<Messages
 					chatId={chatId}
 					chatPartner={chatPartner}
@@ -87,6 +85,7 @@ export const ChatPage: FC<ChatPageProps> = async ({ params }) => {
 					sessionId={session.user.id}
 					initialMessages={initialMessages}
 				/>
+
 				<ChatInput chatId={chatId} chatPartner={chatPartner} />
 			</div>
 		</div>

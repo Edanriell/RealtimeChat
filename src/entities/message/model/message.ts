@@ -1,9 +1,10 @@
 import PusherServer from "pusher";
 import PusherClient from "pusher-js";
 import { notFound } from "next/navigation";
+import { z } from "zod";
 
 import { fetchRedis } from "@/shared/api";
-import { messageArrayValidator } from "@/shared/lib";
+import { messageArrayValidator, messageValidator } from "@/shared/lib";
 
 export type IncomingFriendRequest = {
 	senderId: string;
@@ -30,6 +31,8 @@ export type RecentMessage = {
 	image: string;
 	id: string;
 };
+
+export type ValidatedMessage = z.infer<typeof messageValidator>;
 
 export const pusherServer = new PusherServer({
 	appId: process.env.PUSHER_APP_ID!,

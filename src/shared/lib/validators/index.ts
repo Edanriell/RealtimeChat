@@ -1,7 +1,5 @@
 import { z } from "zod";
 
-export type Message = z.infer<typeof messageValidator>;
-
 export const addFriendValidator = z.object({
 	email: z.string().email(),
 });

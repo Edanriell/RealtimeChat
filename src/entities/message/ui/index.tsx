@@ -2,6 +2,7 @@
 
 import { FC, useEffect, useState } from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 import { messageModel } from "@/entities/message";
 import { formatTimestamp, cn, toPusherKey } from "@/shared/lib";
@@ -68,7 +69,9 @@ export const Messages: FC<MessagesProps> = ({
 									},
 								)}
 							>
-								<span
+								<motion.span
+									initial={{ opacity: 0, x: isCurrentUser ? 20 : -20 }}
+									animate={{ opacity: 1, x: 0 }}
 									className={cn("px-4 py-2 rounded-lg inline-block", {
 										"bg-[#5a14de] text-white": isCurrentUser,
 										"bg-white text-black": !isCurrentUser,
@@ -82,7 +85,7 @@ export const Messages: FC<MessagesProps> = ({
 									<span className={"ml-2 text-xs text-gray-400"}>
 										{formatTimestamp(message.timestamp)}
 									</span>
-								</span>
+								</motion.span>
 							</div>
 							<div
 								className={cn("relative w-6 h-6", {

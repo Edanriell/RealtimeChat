@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import Image from "next/image";
 
 import { messageModel } from "@/entities/message";
@@ -41,18 +41,8 @@ export const Messages: FC<MessagesProps> = ({
 		};
 	}, [chatId, pusherClient]);
 
-	const scrollDownRef = useRef<HTMLDivElement | null>(null);
-
 	return (
-		<div
-			id="messages"
-			className={
-				"flex h-full flex-1 flex-col-reverse gap-4 p-3 overflow-y-auto " +
-				"scrollbar-thumb-indigo scrollbar-thumb-rounded scrollbar-track-glass " +
-				"scrollbar-w-2 scrolling-touch"
-			}
-		>
-			<div ref={scrollDownRef} />
+		<>
 			{messages.map((message, index) => {
 				const isCurrentUser = message.senderId === sessionId;
 
@@ -115,6 +105,6 @@ export const Messages: FC<MessagesProps> = ({
 					</div>
 				);
 			})}
-		</div>
+		</>
 	);
 };

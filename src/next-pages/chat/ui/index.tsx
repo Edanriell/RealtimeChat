@@ -4,7 +4,8 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 
 import { sessionModel } from "@/entities/session";
-import { messageModel, Messages } from "@/entities/message";
+import { messageModel } from "@/entities/message";
+import { Chat } from "@/widgets/chat";
 
 import ChatInput from "@/components/ChatInput";
 
@@ -78,7 +79,7 @@ export const ChatPage: FC<ChatPageProps> = async ({ params }) => {
 						</div>
 					</div>
 				</div>
-				<Messages
+				<Chat
 					chatId={chatId}
 					chatPartner={chatPartner}
 					sessionImg={session.user.image}

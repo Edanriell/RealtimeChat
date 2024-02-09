@@ -7,8 +7,6 @@ import { sessionModel } from "@/entities/session";
 import { messageModel } from "@/entities/message";
 import { Chat } from "@/widgets/chat";
 
-import ChatInput from "@/components/ChatInput";
-
 type ChatPageProps = {
 	params: {
 		chatId: string;
@@ -86,8 +84,6 @@ export const ChatPage: FC<ChatPageProps> = async ({ params }) => {
 					sessionId={session.user.id}
 					initialMessages={initialMessages}
 				/>
-
-				<ChatInput chatId={chatId} chatPartner={chatPartner} />
 			</div>
 		</div>
 	);

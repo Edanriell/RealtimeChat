@@ -72,14 +72,17 @@ export const Messages: FC<MessagesProps> = ({
 								<motion.span
 									initial={{ opacity: 0, x: isCurrentUser ? 20 : -20 }}
 									animate={{ opacity: 1, x: 0 }}
-									className={cn("px-4 py-2 rounded-lg inline-block", {
-										"bg-[#5a14de] text-white": isCurrentUser,
-										"bg-white text-black": !isCurrentUser,
-										"rounded-br-none":
-											!hasNextMessageFromSameUser && isCurrentUser,
-										"rounded-bl-none":
-											!hasNextMessageFromSameUser && !isCurrentUser,
-									})}
+									className={cn(
+										"px-4 py-2 rounded-lg inline-block shadow-soft",
+										{
+											"bg-[#5a14de] text-white": isCurrentUser,
+											"bg-white text-black": !isCurrentUser,
+											"rounded-br-none":
+												!hasNextMessageFromSameUser && isCurrentUser,
+											"rounded-bl-none":
+												!hasNextMessageFromSameUser && !isCurrentUser,
+										},
+									)}
 								>
 									{message.text}{" "}
 									<span className={"ml-2 text-xs text-gray-400"}>

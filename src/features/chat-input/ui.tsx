@@ -5,7 +5,7 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import TextareaAutosize from "react-textarea-autosize";
 
-import Button from "../../components/ui/Button";
+import { Button } from "@/shared/ui";
 
 type ChatInputProps = {
 	chatPartner: User;
@@ -32,6 +32,8 @@ export const ChatInput: FC<ChatInputProps> = ({ chatPartner, chatId }) => {
 		}
 	};
 
+	const Animated3dButton = Button["Animated3d"];
+
 	return (
 		<div className={"border-t border-light px-4 pt-4 mb-2 sm:mb-0"}>
 			<div className={"flex flex-row items-center justify-center gap-x-[20px]"}>
@@ -53,9 +55,10 @@ export const ChatInput: FC<ChatInputProps> = ({ chatPartner, chatId }) => {
 						"sm:leading-6 rounded-[20px] shadow-soft box-border"
 					}
 				/>
-				<Button isLoading={isLoading} onClick={sendMessage} type="submit">
+				<Animated3dButton></Animated3dButton>
+				{/* <Button isLoading={isLoading} onClick={sendMessage} type="submit">
 					Send
-				</Button>
+				</Button> */}
 			</div>
 		</div>
 	);

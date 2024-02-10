@@ -1,7 +1,9 @@
 import { motion } from "framer-motion-3d";
 import { MotionConfig, useSpring, useTransform } from "framer-motion";
 import { useRef, useLayoutEffect } from "react";
-import { Canvas, useThree } from "@react-three/fiber";
+import { Canvas, useThree, useLoader } from "@react-three/fiber";
+import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
+import { STLLoader} from "three/examples/jsm/loaders/STLLoader";
 
 function useSmoothTransform(value, springOptions, transformer) {
 	return useSpring(useTransform(value, transformer), springOptions);
@@ -59,11 +61,15 @@ export function Lights() {
 }
 
 export function Sphere() {
+	const message = useLoader(STLLoader, "/message.stl");
+
 	return (
-		<motion.mesh position={[-0.5, -0.5, 0]} variants={{ hover: { z: 2 } }}>
-			<sphereGeometry args={[0.4]} />
+		<motion.mesh scale={0.01} position={[-0.5, -0.5, 0]} variants={{ hover: { z: 2 } }}>
+			{/* <sphereGeometry args={[0.4]} /> */}
+			<primitive object={message} />
 			<Material />
 		</motion.mesh>
+
 	);
 }
 

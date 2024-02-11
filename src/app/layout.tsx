@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 import { ReactHotToastProvider } from "./_providers";
 import { BaseLayout } from "@/widgets/layouts";
 
-import "./_styles/globals.css";
+import "./_styles/globals.scss";
 
 export const metadata = {
 	title: "ChatX | Sign in",

@@ -1,83 +1,3 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
-	container {
-		@apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
-	}
-}
-
-:root {
-	--color-bg1: rgb(248 250 252);
-	--color-bg2: rgb(226 232 240);
-	--color1: 18, 113, 255;
-	--color2: 221, 74, 255;
-	--color3: 100, 220, 255;
-	--color4: 200, 50, 50;
-	--color5: 180, 180, 50;
-	--color6: 118, 27, 235;
-	--color-interactive: 90, 20, 222;
-	--circle-size: 80%;
-	--blending: hard-light;
-}
-
-.scrollbar-w-2::-webkit-scrollbar {
-	width: 0.25rem;
-	height: 0.25rem;
-}
-
-.scrollbar-track-glass::-webkit-scrollbar-track {
-	background: rgba(255, 255, 255, 0.2);
-	backdrop-filter: blur(5px);
-	-webkit-backdrop-filter: blur(5px);
-	border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.scrollbar-thumb-indigo::-webkit-scrollbar-thumb {
-	background-color: #5a14de;
-}
-
-.scrollbar-thumb-rounded::-webkit-scrollbar-thumb {
-	border-radius: 0.25rem;
-}
-
-@keyframes moveInCircle {
-	0% {
-		transform: rotate(0deg);
-	}
-	50% {
-		transform: rotate(180deg);
-	}
-	100% {
-		transform: rotate(360deg);
-	}
-}
-
-@keyframes moveVertical {
-	0% {
-		transform: translateY(-50%);
-	}
-	50% {
-		transform: translateY(50%);
-	}
-	100% {
-		transform: translateY(-50%);
-	}
-}
-
-@keyframes moveHorizontal {
-	0% {
-		transform: translateX(-50%) translateY(-10%);
-	}
-	50% {
-		transform: translateX(50%) translateY(10%);
-	}
-	100% {
-		transform: translateX(-50%) translateY(-10%);
-	}
-}
-
 .gradient-background {
 	width: 100vw;
 	height: 100vh;
@@ -218,144 +138,38 @@
 	opacity: 0.2;
 }
 
-.glassmorphism {
-	background: rgba(255, 255, 255, 0.2);
-	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-	backdrop-filter: blur(5px);
-	-webkit-backdrop-filter: blur(5px);
-	border: 1px solid rgba(255, 255, 255, 0.3);
+@keyframes moveInCircle {
+	0% {
+		transform: rotate(0deg);
+	}
+	50% {
+		transform: rotate(180deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
 }
 
-.border-light {
-	border: 1px solid rgba(255, 255, 255, 0.3);
+@keyframes moveVertical {
+	0% {
+		transform: translateY(-50%);
+	}
+	50% {
+		transform: translateY(50%);
+	}
+	100% {
+		transform: translateY(-50%);
+	}
 }
 
-/* button {
-	--purple: #db07d1;
-	--pink: #f2056f;
-	--blue: #61dafb;
-
-	appearance: none;
-	border: none;
-	cursor: pointer;
-	background-color: #acc7ed;
-	color: #fff;
-	border-radius: 60px;
-	outline: none;
-	margin: 0;
-	padding: 12px 25px;
-	font-family: "Poppins";
-	font-size: 48px;
-	font-weight: 600;
-	line-height: 48px;
-	letter-spacing: -1px;
-	position: relative;
-	text-align: center;
-	display: flex;
-	align-items: center;
+@keyframes moveHorizontal {
+	0% {
+		transform: translateX(-50%) translateY(-10%);
+	}
+	50% {
+		transform: translateX(50%) translateY(10%);
+	}
+	100% {
+		transform: translateX(-50%) translateY(-10%);
+	}
 }
-
-.shapes {
-	position: absolute;
-	top: -1px;
-	left: -1px;
-	right: -1px;
-	bottom: -1px;
-	border-radius: 60px;
-	background: linear-gradient(
-		60deg,
-		var(--blue) 0%,
-		#d6cbf6 30%,
-		var(--pink) 70%
-	);
-}
-
-.blush {
-	position: absolute;
-	bottom: -15px;
-	width: 100px;
-	height: 30px;
-	filter: blur(20px);
-}
-
-.blush.pink {
-	right: 20px;
-	background: var(--purple);
-}
-
-.blush.blue {
-	left: 20px;
-	background: var(--blue);
-}
-
-.shapes .container {
-	position: absolute;
-	top: -100px;
-	bottom: -100px;
-	left: -100px;
-	right: -100px;
-	width: calc(100% + 200px);
-	pointer-events: none;
-}
-
-.shapes canvas {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-}
-
-.label {
-	width: 180px;
-	padding: 20px 0;
-	transform: translateZ(0);
-	font-weight: 700;
-	z-index: 1;
-}
-
-.default {
-	display: block;
-}
-
-.number {
-	padding: 20px 0;
-	width: 88px;
-	position: relative;
-	transform: translateZ(0);
-}
-
-.number:before {
-	content: "";
-	position: absolute;
-	left: 0;
-	top: 1px;
-	bottom: 1px;
-	width: 1px;
-	background-color: #35373f;
-}
-
-.current {
-	color: #8a8d9b;
-	opacity: 1;
-	display: block;
-}
-
-.new {
-	color: #fbfaaa;
-	position: absolute;
-	top: 20px;
-	left: 0;
-	right: 0;
-	display: block;
-}
-
-.add {
-	position: absolute;
-	bottom: 100%;
-	left: 0;
-	right: 0;
-	opacity: 0;
-	transform: translateY(38px);
-	pointer-events: none;
-	color: #d0d0db;
-	display: block;
-} */

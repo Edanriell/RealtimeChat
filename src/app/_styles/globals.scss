@@ -1,0 +1,47 @@
+@use "./scrollbar.scss";
+@use "./gradient-background.scss";
+@use "./glassmorphism.scss";
+// @use "./animated-3d-button.scss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+	--color-bg1: rgb(248 250 252);
+	--color-bg2: rgb(226 232 240);
+	--color1: 18, 113, 255;
+	--color2: 221, 74, 255;
+	--color3: 100, 220, 255;
+	--color4: 200, 50, 50;
+	--color5: 180, 180, 50;
+	--color6: 118, 27, 235;
+	--color-interactive: 90, 20, 222;
+	--circle-size: 80%;
+	--blending: hard-light;
+}
+
+// button {
+// 	--purple: #db07d1;
+// 	--pink: #f2056f;
+// 	--blue: #61dafb;
+
+// 	appearance: none;
+// 	border: none;
+// 	cursor: pointer;
+// 	background-color: #acc7ed;
+// 	color: #fff;
+// 	border-radius: 60px;
+// 	outline: none;
+// 	margin: 0;
+// 	padding: 12px 25px;
+// 	font-family: "Poppins";
+// 	font-size: 48px;
+// 	font-weight: 600;
+// 	line-height: 48px;
+// 	letter-spacing: -1px;
+// 	position: relative;
+// 	text-align: center;
+// 	display: flex;
+// 	align-items: center;
+// }

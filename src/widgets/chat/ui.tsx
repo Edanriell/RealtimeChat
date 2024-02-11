@@ -1,7 +1,6 @@
 import { FC } from "react";
 
 import { messageModel, Messages } from "@/entities/message";
-
 import { ChatInput } from "@/features/chat-input";
 
 type ChatProps = {

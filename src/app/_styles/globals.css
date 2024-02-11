@@ -230,7 +230,7 @@
 	border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-button {
+/* button {
 	--purple: #db07d1;
 	--pink: #f2056f;
 	--blue: #61dafb;
@@ -358,4 +358,4 @@ button {
 	pointer-events: none;
 	color: #d0d0db;
 	display: block;
-}
+} */

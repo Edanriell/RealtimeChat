@@ -1,12 +1,39 @@
 import { motion } from "framer-motion-3d";
 import { MotionConfig, useSpring, useTransform } from "framer-motion";
-import { useRef, useLayoutEffect } from "react";
-import { Canvas, useThree, useLoader } from "@react-three/fiber";
+import { useRef, useLayoutEffect, useEffect } from "react";
+import { Canvas, useThree, useLoader, useFrame } from "@react-three/fiber";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
-import { STLLoader} from "three/examples/jsm/loaders/STLLoader";
+import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
+import { CameraHelper, Light } from "three";
 
 function useSmoothTransform(value, springOptions, transformer) {
 	return useSpring(useTransform(value, transformer), springOptions);
+}
+
+function useShadowHelper(ref: React.MutableRefObject<Light | undefined>) {
+	const helper = useRef<CameraHelper>();
+	const scene = useThree((state) => state.scene);
+
+	useEffect(() => {
+		if (!ref.current) return;
+
+		helper.current = new CameraHelper(ref.current?.shadow.camera);
+		if (helper.current) {
+			scene.add(helper.current);
+		}
+
+		return () => {
+			if (helper.current) {
+				scene.remove(helper.current);
+			}
+		};
+	}, [helper.current?.uuid, ref.current]);
+
+	useFrame(() => {
+		if (helper.current?.update) {
+			helper.current.update();
+		}
+	});
 }
 
 export function Shapes({ isHover, isPress, mouseX, mouseY }) {
@@ -48,14 +75,21 @@ export function Shapes({ isHover, isPress, mouseX, mouseY }) {
 }
 
 export function Lights() {
+	const refka = useRef<any>();
+	useShadowHelper(refka);
 	return (
 		<>
-			<spotLight color="#61dafb" position={[-10, -10, -10]} intensity={0.2} />
-			<spotLight color="#61dafb" position={[-10, 0, 15]} intensity={0.8} />
-			<spotLight color="#61dafb" position={[-5, 20, 2]} intensity={0.5} />
-			<spotLight color="#f2056f" position={[15, 10, -2]} intensity={2} />
-			<spotLight color="#f2056f" position={[15, 10, 5]} intensity={1} />
-			<spotLight color="#b107db" position={[5, -10, 5]} intensity={0.8} />
+			<spotLight
+				ref={refka}
+				color="#61dafb"
+				position={[-10, -10, -10]}
+				intensity={220}
+			/>
+			<spotLight color="#61dafb" position={[-10, 0, 15]} intensity={880} />
+			<spotLight color="#61dafb" position={[-5, 20, 2]} intensity={550} />
+			<spotLight color="#f2056f" position={[15, 10, -2]} intensity={2200} />
+			<spotLight color="#f2056f" position={[15, 10, 5]} intensity={1100} />
+			<spotLight color="#b107db" position={[5, -10, 5]} intensity={880} />
 		</>
 	);
 }
@@ -64,12 +98,15 @@ export function Sphere() {
 	const message = useLoader(STLLoader, "/message.stl");
 
 	return (
-		<motion.mesh scale={0.01} position={[-0.5, -0.5, 0]} variants={{ hover: { z: 2 } }}>
+		<motion.mesh
+			scale={0.01}
+			position={[-0.5, -0.5, 0]}
+			variants={{ hover: { z: 2 } }}
+		>
 			{/* <sphereGeometry args={[0.4]} /> */}
 			<primitive object={message} />
 			<Material />
 		</motion.mesh>
-
 	);
 }
 

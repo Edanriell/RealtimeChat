@@ -227,7 +227,7 @@ export const Button = {
 						variants={{ hover: { scale: 0.85 }, press: { scale: 1.1 } }}
 						className="label"
 					>
-						Send
+						{children}
 					</motion.div>
 				</motion.button>
 			</MotionConfig>

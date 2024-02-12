@@ -38,7 +38,8 @@ export const ChatPage: FC<ChatPageProps> = async ({ params }) => {
 	return (
 		<div
 			className={
-				"w-full h-full p-[60px] shadow-soft glassmorphism rounded-[20px]"
+				"w-full h-full p-[60px] rounded-[20px] shadow-soft " +
+				"glassmorphic-element glassmorphic-element__border"
 			}
 		>
 			<div
@@ -49,8 +50,8 @@ export const ChatPage: FC<ChatPageProps> = async ({ params }) => {
 			>
 				<div
 					className={
-						"flex sm:items-center justify-between py-3 border-b-2 " +
-						"border-light"
+						"flex sm:items-center justify-between py-3 " +
+						"glassmorphic-element__border_position_bottom"
 					}
 				>
 					<div className={"relative flex items-center space-x-4"}>

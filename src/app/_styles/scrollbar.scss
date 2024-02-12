@@ -1,19 +1,16 @@
-.scrollbar-w-2::-webkit-scrollbar {
+.scrollbar::-webkit-scrollbar {
 	width: 0.25rem;
 	height: 0.25rem;
 }
 
-.scrollbar-track-glass::-webkit-scrollbar-track {
+.scrollbar__track::-webkit-scrollbar-track {
 	background: rgba(255, 255, 255, 0.2);
 	backdrop-filter: blur(5px);
 	-webkit-backdrop-filter: blur(5px);
 	border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.scrollbar-thumb-indigo::-webkit-scrollbar-thumb {
+.scrollbar__thumb::-webkit-scrollbar-thumb {
 	background-color: #5a14de;
-}
-
-.scrollbar-thumb-rounded::-webkit-scrollbar-thumb {
 	border-radius: 0.25rem;
 }

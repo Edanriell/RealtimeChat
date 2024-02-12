@@ -30,8 +30,8 @@ export const DashboardLayout: FC<DashboardLayoutProps> = async ({
 	const unseenRequest = await unseenFriendsRequests(session.user.id);
 
 	return (
-		<div className={"w-full flex h-screen gradient-background z-0"}>
-			<GradientCircles interactiveCircle={true} />
+		<div className={"w-full flex h-screen z-0 gradient-background"}>
+			<GradientCircles interactiveCircle={true} animatedCircles={false} />
 			<div className={"md:hidden"}>
 				{/* <MobileChatLayout
 					friends={friends}

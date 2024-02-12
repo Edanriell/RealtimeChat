@@ -22,7 +22,8 @@ export const DashboardPage: FC = async () => {
 	return (
 		<div
 			className={
-				"w-full h-full p-[60px] shadow-soft glassmorphism rounded-[20px]"
+				"w-full h-full p-[60px] shadow-soft rounded-[20px] " +
+				"glassmorphic-element glassmorphic-element__border"
 			}
 		>
 			<RecentMessages session={session} recentMessages={recentMessages} />

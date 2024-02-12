@@ -22,9 +22,9 @@ export const Chat: FC<ChatProps> = ({
 		<div
 			id="messages"
 			className={
-				"flex h-full flex-1 flex-col-reverse gap-4 p-3 overflow-y-auto " +
-				"scrollbar-thumb-indigo scrollbar-thumb-rounded scrollbar-track-glass " +
-				"scrollbar-w-2 scrolling-touch"
+				"flex h-full flex-1 flex-col-reverse overflow-y-auto " +
+				"scrollbar-thumb-indigo scrollbar-thumb-rounded gap-4 p-3 " +
+				"scrollbar scrollbar__track scrollbar__thumb"
 			}
 		>
 			<Messages

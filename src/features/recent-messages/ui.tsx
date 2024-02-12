@@ -43,11 +43,12 @@ export const RecentMessages: FC<RecentMessagesProps> = ({
 					<div
 						key={friend.id}
 						className={
-							"relative bg-[white] border-light rounded-[406px] " +
+							"relative bg-[white] rounded-[406px] " +
 							"flex flex-row-reverse items-center justify-start " +
 							"p-[10px] h-[100px] focus:outline-none focus:ring-2 " +
 							"focus:ring-[#761beb] focus:ring-offset-2 " +
-							"disabled:opacity-50 disabled:pointer-events-none"
+							"disabled:opacity-50 disabled:pointer-events-none " +
+							"glassmorphic-element__border shadow-soft"
 						}
 						tabIndex={0}
 					>

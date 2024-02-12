@@ -51,37 +51,40 @@ export const GradientCircles: FC<GradientCirclesProps> = ({
 
 	return (
 		<>
-			<svg xmlns="http://www.w3.org/2000/svg" className={"hidden"}>
-				<defs>
-					<filter id="goo">
-						<feGaussianBlur
-							in="SourceGraphic"
-							stdDeviation="10"
-							result="blur"
-						/>
-						<feColorMatrix
-							in="blur"
-							mode="matrix"
-							values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8"
-							result="goo"
-						/>
-						<feBlend in="SourceGraphic" in2="goo" />
-					</filter>
-				</defs>
-			</svg>
 			<div
 				className={
-					"gradients-container absolute z-0 pointer-events-none " +
-					"w-full h-full"
+					"absolute z-0 pointer-events-none " +
+					"w-full h-full gradient-background__container"
 				}
 			>
+				<svg xmlns="http://www.w3.org/2000/svg" className={"hidden"}>
+					<defs>
+						<filter id="goo">
+							<feGaussianBlur
+								in="SourceGraphic"
+								stdDeviation="10"
+								result="blur"
+							/>
+							<feColorMatrix
+								in="blur"
+								mode="matrix"
+								values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8"
+								result="goo"
+							/>
+							<feBlend in="SourceGraphic" in2="goo" />
+						</filter>
+					</defs>
+				</svg>
 				{animatedCircles &&
 					Array.from({ length: animatedCirclesCount }).map((_, index) => (
-						<div key={index} className={`gradient-circle-${index} z-0`}></div>
+						<div
+							key={index}
+							className={`gradient-background__circle-${index} z-0`}
+						></div>
 					))}
 				{interactiveCircle && (
 					<div
-						className={"gradient-circle-interactive"}
+						className={"gradient-background__interactive-circle"}
 						ref={interactiveCircleRef}
 					></div>
 				)}

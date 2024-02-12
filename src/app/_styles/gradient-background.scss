@@ -3,18 +3,17 @@
 	height: 100vh;
 	position: relative;
 	overflow: hidden;
-	/* background: linear-gradient(40deg, var(--color-bg1), var(--color-bg2)); */
-	/* background: linear-gradient(40deg, var(--color-bg1), var(--color-bg2)); */
+	//background: linear-gradient(40deg, var(--color-bg1), var(--color-bg2));
 	background: white;
 	top: 0;
 	left: 0;
 }
 
-.gradients-container {
+.gradient-background__container {
 	filter: url(#goo) blur(40px);
 }
 
-.gradient-circle-1 {
+.gradient-background__circle-1 {
 	position: absolute;
 	background: radial-gradient(
 			circle at center,
@@ -32,7 +31,7 @@
 	opacity: 1;
 }
 
-.gradient-circle-2 {
+.gradient-background__circle-2 {
 	position: absolute;
 	background: radial-gradient(
 			circle at center,
@@ -50,7 +49,7 @@
 	opacity: 1;
 }
 
-.gradient-circle-3 {
+.gradient-background__circle-3 {
 	position: absolute;
 	background: radial-gradient(
 			circle at center,
@@ -68,7 +67,7 @@
 	opacity: 1;
 }
 
-.gradient-circle-4 {
+.gradient-background__circle-4 {
 	position: absolute;
 	background: radial-gradient(
 			circle at center,
@@ -86,7 +85,7 @@
 	opacity: 0.7;
 }
 
-.gradient-circle-5 {
+.gradient-background__circle-5 {
 	position: absolute;
 	background: radial-gradient(
 			circle at center,
@@ -104,7 +103,7 @@
 	opacity: 1;
 }
 
-.gradient-circle-6 {
+.gradient-background__circle-6 {
 	position: absolute;
 	background: radial-gradient(
 			circle at center,
@@ -122,7 +121,7 @@
 	opacity: 1;
 }
 
-.gradient-circle-interactive {
+.gradient-background__interactive-circle {
 	position: absolute;
 	background: radial-gradient(
 			circle at center,

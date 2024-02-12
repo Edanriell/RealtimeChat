@@ -1,11 +1,26 @@
-.glassmorphism {
+.glassmorphic-element {
 	background: rgba(255, 255, 255, 0.2);
 	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 	backdrop-filter: blur(5px);
 	-webkit-backdrop-filter: blur(5px);
+}
+
+.glassmorphic-element__border {
 	border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.border-light {
-	border: 1px solid rgba(255, 255, 255, 0.3);
+.glassmorphic-element__border_position_top {
+	border-top: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.glassmorphic-element__border_position_bottom {
+	border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.glassmorphic-element__border_position_right {
+	border-right: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.glassmorphic-element__border_position_left {
+	border-left: 1px solid rgba(255, 255, 255, 0.3);
 }

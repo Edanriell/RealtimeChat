@@ -26,10 +26,10 @@ export const Sidebar: FC<SidebarProps> = ({
 			whileHover={{ width: [null, 400, 320] }}
 			transition={{ duration: 0.25 }}
 			className={
-				"hidden md:flex h-full " +
-				"flex-col gap-y-5 overflow-y-auto border-r border-gray-200 " +
-				"bg-white px-6 items-center py-[60px] z-10 shadow-soft " + 
-				"glassmorphism rounded-tr-[20px] rounded-br-[20px]" 
+				"hidden md:flex h-full py-[60px] z-10 " +
+				"flex-col gap-y-5 overflow-y-auto px-6 items-center " +
+				"rounded-tr-[20px] rounded-br-[20px] shadow-soft " +
+				"glassmorphic-element glassmorphic-element__border_position_right"
 			}
 		>
 			<Link

@@ -35,7 +35,11 @@ export const ChatInput: FC<ChatInputProps> = ({ chatPartner, chatId }) => {
 	const Animated3dButton = Button["Animated3d"];
 
 	return (
-		<div className={"border-t border-light px-4 pt-4 mb-2 sm:mb-0"}>
+		<div
+			className={
+				"px-4 pt-4 mb-2 sm:mb-0 glassmorphic-element__border_position_top"
+			}
+		>
 			<div className={"flex flex-row items-center justify-center gap-x-[20px]"}>
 				<TextareaAutosize
 					ref={textareaRef}

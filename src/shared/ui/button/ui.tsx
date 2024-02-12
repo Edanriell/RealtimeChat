@@ -43,6 +43,7 @@ export const buttonVariants = cva(
 					"relative overflow-hidden bg-[#5a14de] focus:outline-none focus:ring-2 focus:ring-[#761beb] focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none",
 				expandable:
 					"bg-[#5a14de] z-10 flex items-center justify-center box-border absolute focus:outline-none focus:ring-2 focus:ring-[#761beb] focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none",
+				animated3d: "",
 			},
 			size: {
 				default: "h-10 py-2 px-4",
@@ -196,6 +197,9 @@ export const Button = {
 						mouseX.set(e.clientX - bounds.x - bounds.width / 2);
 						mouseY.set(e.clientY - bounds.y - bounds.height / 2);
 					}}
+					className={cn(buttonVariants({ variant, size, className }))}
+					disabled={isLoading}
+					{...props}
 				>
 					<motion.div
 						className="shapes"

@@ -43,13 +43,15 @@ export const buttonVariants = cva(
 					"relative overflow-hidden bg-[#5a14de] focus:outline-none focus:ring-2 focus:ring-[#761beb] focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none",
 				expandable:
 					"bg-[#5a14de] z-10 flex items-center justify-center box-border absolute focus:outline-none focus:ring-2 focus:ring-[#761beb] focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none",
-				animated3d: "",
+				animated3d:
+					"appearance-none border-none cursor-pointer bg-[#acc7ed] text-[#FFF] rounded-[60px] outline-none m-0 text-[48px] font-semibold leading-[48px] tracking-[-1px] relative text-center flex items-center justify-center",
 			},
 			size: {
 				default: "h-10 py-2 px-4",
 				sm: "h-9 px-2",
 				lg: "h-11 px-8",
 				expandable: "w-[80px] h-[80px]",
+				animated3d: "py-[12px] px-[25px]",
 			},
 		},
 		defaultVariants: {

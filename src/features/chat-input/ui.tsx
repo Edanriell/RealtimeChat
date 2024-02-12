@@ -59,7 +59,10 @@ export const ChatInput: FC<ChatInputProps> = ({ chatPartner, chatId }) => {
 						"sm:leading-6 rounded-[20px] shadow-soft box-border"
 					}
 				/>
-				<Animated3dButton></Animated3dButton>
+				<Animated3dButton
+					variant={"animated3d"}
+					size={"animated3d"}
+				></Animated3dButton>
 				{/* <Button isLoading={isLoading} onClick={sendMessage} type="submit">
 					Send
 				</Button> */}

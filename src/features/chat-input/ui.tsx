@@ -56,7 +56,8 @@ export const ChatInput: FC<ChatInputProps> = ({ chatPartner, chatId }) => {
 					className={
 						"block w-full resize-none border-0 bg-white text-black " +
 						"placeholder:text-gray-400 focus:ring-0 p-[20px] sm:text-sm " +
-						"sm:leading-6 rounded-[20px] shadow-soft box-border"
+						"sm:leading-6 rounded-[20px] shadow-soft box-border " +
+						"focus:outline-none focus:ring-2 focus:ring-[#761beb] focus:ring-offset-2"
 					}
 				/>
 				<Animated3dButton variant={"animated3d"} size={"animated3d"}>

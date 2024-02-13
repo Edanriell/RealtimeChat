@@ -44,14 +44,14 @@ export const buttonVariants = cva(
 				expandable:
 					"bg-[#5a14de] z-10 flex items-center justify-center box-border absolute focus:outline-none focus:ring-2 focus:ring-[#761beb] focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none",
 				animated3d:
-					"appearance-none border-none cursor-pointer bg-[#5a14de] focus:outline-none focus:ring-2 focus:ring-[#761beb] focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none text-[#FFF] outline-none m-0 text-[24px] font-semibold tracking-[-1px] relative text-center",
+					"appearance-none border-none cursor-pointer bg-[#5a14de] focus:outline-none focus:ring-2 focus:ring-[#761beb] focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none text-[#FFF] outline-none m-0 text-[20px] font-semibold tracking-[-1px] relative text-center",
 			},
 			size: {
 				default: "h-10 py-2 px-4",
 				sm: "h-9 px-2",
 				lg: "h-11 px-8",
 				expandable: "w-[80px] h-[80px]",
-				animated3d: "py-[6px] px-[4px]",
+				animated3d: "h-[68px] w-[136px]",
 			},
 		},
 		defaultVariants: {
@@ -166,6 +166,7 @@ export const Button = {
 			mouseY.set(0);
 		};
 
+		// Transition config, move to shared ?? 
 		const transition = {
 			type: "spring",
 			duration: 0.7,

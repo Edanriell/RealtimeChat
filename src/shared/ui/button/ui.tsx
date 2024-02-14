@@ -44,7 +44,7 @@ export const buttonVariants = cva(
 				expandable:
 					"bg-[#5a14de] z-10 flex items-center justify-center box-border absolute focus:outline-none focus:ring-2 focus:ring-[#761beb] focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none",
 				animated3d:
-					"appearance-none border-none cursor-pointer bg-[#5a14de] focus:outline-none focus:ring-2 focus:ring-[#761beb] focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none text-[#FFF] outline-none m-0 text-[20px] font-semibold tracking-[-1px] relative text-center",
+					"animated-3d-button appearance-none border-none cursor-pointer bg-[#5a14de] focus:outline-none focus:ring-2 focus:ring-[#761beb] focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none text-[#FFF] outline-none m-0 text-[20px] font-semibold tracking-[-1px] relative text-center",
 			},
 			size: {
 				default: "h-10 py-2 px-4",
@@ -234,7 +234,7 @@ export const Button = {
 					</motion.div>
 					<motion.div
 						variants={{ hover: { scale: 0.85 }, press: { scale: 1.1 } }}
-						className="label"
+						className={"animated-3d-button__label"}
 					>
 						{children}
 					</motion.div>

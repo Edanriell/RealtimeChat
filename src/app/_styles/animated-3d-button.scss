@@ -1,4 +1,4 @@
-button {
+.animated-3d-button {
 	--purple: #db07d1;
 	--pink: #f2056f;
 	--blue: #61dafb;
@@ -53,58 +53,10 @@ button {
 	background: var(--blue);
 }
 
-.label {
+.animated-3d-button__label {
 	width: 180px;
 	padding: 20px 0;
 	transform: translateZ(0);
 	font-weight: 700;
 	z-index: 1;
-}
-
-.default {
-	display: block;
-}
-
-.number {
-	padding: 20px 0;
-	width: 88px;
-	position: relative;
-	transform: translateZ(0);
-}
-
-.number:before {
-	content: "";
-	position: absolute;
-	left: 0;
-	top: 1px;
-	bottom: 1px;
-	width: 1px;
-	background-color: #35373f;
-}
-
-.current {
-	color: #8a8d9b;
-	opacity: 1;
-	display: block;
-}
-
-.new {
-	color: #fbfaaa;
-	position: absolute;
-	top: 20px;
-	left: 0;
-	right: 0;
-	display: block;
-}
-
-.add {
-	position: absolute;
-	bottom: 100%;
-	left: 0;
-	right: 0;
-	opacity: 0;
-	transform: translateY(38px);
-	pointer-events: none;
-	color: #d0d0db;
-	display: block;
 }

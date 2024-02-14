@@ -40,6 +40,7 @@ export function Shapes({ isHover, isPress, mouseX, mouseY }) {
 	const lightRotateX = useSmoothTransform(mouseY, spring, mouseToLightRotation);
 	const lightRotateY = useSmoothTransform(mouseX, spring, mouseToLightRotation);
 
+	// Config should be pulled out
 	const transition = {
 		type: "spring",
 		duration: 0.7,
@@ -95,7 +96,7 @@ export function Lights() {
 }
 
 export function Sphere() {
-	const message = useLoader(STLLoader, "/message.stl");
+	const message = useLoader(STLLoader, "/models/message.stl");
 
 	return (
 		<motion.mesh
@@ -111,8 +112,11 @@ export function Sphere() {
 }
 
 export function Cone() {
+	const hand = useLoader(OBJLoader, "/models/hand.obj");
+
 	return (
 		<motion.mesh
+			scale={0.5}
 			position={[-0.8, 0.4, 0]}
 			rotation={[-0.5, 0, -0.3]}
 			variants={{
@@ -124,15 +128,19 @@ export function Cone() {
 				},
 			}}
 		>
-			<coneGeometry args={[0.3, 0.6, 20]} />
+			{/* <coneGeometry args={[0.3, 0.6, 20]} /> */}
+			<primitive object={hand} />
 			<Material />
 		</motion.mesh>
 	);
 }
 
 export function Torus() {
+	const face = useLoader(STLLoader, "/models/face.STL");
+
 	return (
 		<motion.mesh
+			scale={0.35}
 			position={[0.1, 0.4, 0]}
 			rotation={[-0.5, 0.5, 0]}
 			variants={{
@@ -143,15 +151,19 @@ export function Torus() {
 				},
 			}}
 		>
-			<torusGeometry args={[0.2, 0.1, 10, 50]} />
+			{/* <torusGeometry args={[0.2, 0.1, 10, 50]} /> */}
+			<primitive object={face} />
 			<Material />
 		</motion.mesh>
 	);
 }
 
 export function Icosahedron() {
+	const paperPlanes = useLoader(STLLoader, "/models/paper-plane.stl");
+
 	return (
 		<motion.mesh
+			scale={4}
 			position={[1.1, 0, 0]}
 			rotation-z={0.5}
 			variants={{
@@ -163,7 +175,8 @@ export function Icosahedron() {
 				},
 			}}
 		>
-			<icosahedronGeometry args={[0.7, 0]} />
+			{/* <icosahedronGeometry args={[0.7, 0]} /> */}
+			<primitive object={paperPlanes} />
 			<Material />
 		</motion.mesh>
 	);

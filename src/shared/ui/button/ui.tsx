@@ -166,7 +166,7 @@ export const Button = {
 			mouseY.set(0);
 		};
 
-		// Transition config, move to shared ?? 
+		// Transition config, move to shared ??
 		const transition = {
 			type: "spring",
 			duration: 0.7,
@@ -205,15 +205,23 @@ export const Button = {
 					{...props}
 				>
 					<motion.div
-						className="shapes"
+						className={"animated-3d-button__container"}
 						variants={{
 							rest: { opacity: 0 },
 							hover: { opacity: 1 },
 						}}
 					>
-						<div className="pink blush" />
-						<div className="blue blush" />
-						<div className="container">
+						<div
+							className={
+								"animated-3d-button__blush animated-3d-button__blush_color_pink"
+							}
+						/>
+						<div
+							className={
+								"animated-3d-button__blush animated-3d-button__blush_color_blue"
+							}
+						/>
+						<div className={"animated-3d-button__shapes"}>
 							<Suspense fallback={null}>
 								<Shapes
 									isHover={isHover}

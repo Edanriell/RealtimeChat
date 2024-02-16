@@ -1,7 +1,7 @@
 .animated-3d-button {
-	--purple: #db07d1;
-	--pink: #f2056f;
-	--blue: #61dafb;
+	--purple: #5a14de;
+	--pink: #FFF;
+	--blue: #761beb;
 }
 
 .animated-3d-button__container {
@@ -14,7 +14,7 @@
 	background: linear-gradient(
 		60deg,
 		var(--blue) 0%,
-		#d6cbf6 30%,
+		var(--purple) 30%,
 		var(--pink) 70%
 	);
 }

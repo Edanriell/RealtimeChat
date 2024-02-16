@@ -82,15 +82,15 @@ export function Lights() {
 		<>
 			<spotLight
 				ref={refka}
-				color="#61dafb"
+				color="#5a14de"
 				position={[-10, -10, -10]}
 				intensity={220}
 			/>
-			<spotLight color="#61dafb" position={[-10, 0, 15]} intensity={880} />
-			<spotLight color="#61dafb" position={[-5, 20, 2]} intensity={550} />
-			<spotLight color="#f2056f" position={[15, 10, -2]} intensity={2200} />
-			<spotLight color="#f2056f" position={[15, 10, 5]} intensity={1100} />
-			<spotLight color="#b107db" position={[5, -10, 5]} intensity={880} />
+			<spotLight color="#761beb" position={[-10, 0, 15]} intensity={880} />
+			<spotLight color="#761beb" position={[-5, 20, 2]} intensity={550} />
+			<spotLight color="#761beb" position={[15, 10, -2]} intensity={2200} />
+			<spotLight color="#761beb" position={[15, 10, 5]} intensity={1100} />
+			<spotLight color="##5a14de" position={[5, -10, 5]} intensity={880} />
 		</>
 	);
 }
@@ -183,7 +183,7 @@ export function Icosahedron() {
 }
 
 export function Material() {
-	return <meshPhongMaterial color="#fff" specular="#61dafb" shininess={10} />;
+	return <meshPhongMaterial color="#fff" specular="#5a14de" shininess={10} />;
 }
 
 function Camera({ mouseX, mouseY, ...props }) {

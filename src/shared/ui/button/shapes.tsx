@@ -80,17 +80,18 @@ export function Lights() {
 	useShadowHelper(refka);
 	return (
 		<>
+			<spotLight color="#761beb" position={[-10, -10, -10]} intensity={220} />
+			<spotLight color="#5a14de" position={[-10, 0, 15]} intensity={880} />
+			<spotLight color="#5a14de" position={[-5, 20, 2]} intensity={550} />
+			<spotLight color="#5a14de" position={[15, 10, -2]} intensity={2200} />
+			<spotLight color="#5a14de" position={[15, 10, 5]} intensity={1100} />
+			<spotLight color="##761beb" position={[5, -10, 5]} intensity={880} />
 			<spotLight
 				ref={refka}
 				color="#5a14de"
-				position={[-10, -10, -10]}
-				intensity={220}
+				position={[100, 1000, 100]}
+				intensity={2200}
 			/>
-			<spotLight color="#761beb" position={[-10, 0, 15]} intensity={880} />
-			<spotLight color="#761beb" position={[-5, 20, 2]} intensity={550} />
-			<spotLight color="#761beb" position={[15, 10, -2]} intensity={2200} />
-			<spotLight color="#761beb" position={[15, 10, 5]} intensity={1100} />
-			<spotLight color="##5a14de" position={[5, -10, 5]} intensity={880} />
 		</>
 	);
 }
@@ -142,7 +143,7 @@ export function Torus() {
 		<motion.mesh
 			scale={0.35}
 			position={[0.1, 0.4, 0]}
-			rotation={[-0.5, 0.5, 0]}
+			rotation={[-20, 2, 0]}
 			variants={{
 				hover: {
 					y: 0.5,
@@ -183,7 +184,7 @@ export function Icosahedron() {
 }
 
 export function Material() {
-	return <meshPhongMaterial color="#fff" specular="#5a14de" shininess={10} />;
+	return <meshPhongMaterial color="#FFF" specular="#5a14de" shininess={10} />;
 }
 
 function Camera({ mouseX, mouseY, ...props }) {

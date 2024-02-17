@@ -1,8 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-	transpilePackages: ['three'],
+	transpilePackages: ["three"],
 	images: {
-		domains: ["lh3.googleusercontent.com"],
+		domains: [
+			"lh3.googleusercontent.com",
+			"pbs.twimg.com",
+			"avatars.githubusercontent.com",
+		],
 	},
 	env: {
 		NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,

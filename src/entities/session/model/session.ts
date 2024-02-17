@@ -50,6 +50,8 @@ export const authOptions: NextAuthOptions = {
 				| string
 				| null;
 
+			// console.log(dbUserResult);
+			console.log(user);
 			if (!dbUserResult) {
 				if (user) {
 					token.id = user!.id;

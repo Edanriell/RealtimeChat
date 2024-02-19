@@ -3,7 +3,7 @@
 import { FC, useRef, useState } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
-import TextareaAutosize from "react-textarea-autosize";
+import TextareaAutoSize from "react-textarea-autosize";
 
 import { Button } from "@/shared/ui";
 
@@ -17,7 +17,7 @@ export const ChatInput: FC<ChatInputProps> = ({ chatPartner, chatId }) => {
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [input, setInput] = useState<string>("");
 
-	const sendMessage = async () => {
+	const handleSendMessageClick = async () => {
 		if (!input) return;
 		setIsLoading(true);
 
@@ -41,12 +41,12 @@ export const ChatInput: FC<ChatInputProps> = ({ chatPartner, chatId }) => {
 			}
 		>
 			<div className={"flex flex-row items-center justify-center gap-x-[20px]"}>
-				<TextareaAutosize
+				<TextareaAutoSize
 					ref={textareaRef}
 					onKeyDown={(e) => {
 						if (e.key === "Enter" && !e.shiftKey) {
 							e.preventDefault();
-							sendMessage();
+							handleSendMessageClick();
 						}
 					}}
 					minRows={3}
@@ -60,12 +60,15 @@ export const ChatInput: FC<ChatInputProps> = ({ chatPartner, chatId }) => {
 						"focus:outline-none focus:ring-2 focus:ring-[#761beb] focus:ring-offset-2"
 					}
 				/>
-				<Animated3dButton variant={"animated3d"} size={"animated3d"}>
+				<Animated3dButton
+					// isLoading={isLoading}
+					// onClick={handleSendMessageClick}
+					type="submit"
+					variant={"animated3d"}
+					size={"animated3d"}
+				>
 					Send
 				</Animated3dButton>
-				{/* <Button isLoading={isLoading} onClick={sendMessage} type="submit">
-					Send
-				</Button> */}
 			</div>
 		</div>
 	);

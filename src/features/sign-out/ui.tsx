@@ -22,7 +22,7 @@ export const SignOut: FC = () => {
 	};
 
 	const AnimatedButton = Button["Animated"];
-    
+
 	const LogOutIcon = Icon["LogOut"];
 
 	return (

@@ -85,7 +85,9 @@ export const Button = {
 			disabled={isLoading}
 			{...props}
 		>
-			{isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+			{isLoading ? (
+				<Loader2 className={"h-[15px] w-[15px] text-[#000] animate-spin"} />
+			) : null}
 			{children}
 		</motion.button>
 	),
@@ -106,11 +108,16 @@ export const Button = {
 				onMouseLeave={() => setIsHovered(false)}
 				whileHover={{ scale: 1.05 }}
 				whileTap={{ scale: 0.95 }}
+				transition={{ type: "spring", stiffness: 400, damping: 10 }}
 				className={cn(buttonVariants({ variant, size, className }))}
 				disabled={isLoading}
 				{...props}
 			>
-				{isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+				{isLoading ? (
+					<Loader2
+						className={"h-[15px] w-[15px] text-[#FFF] z-20 animate-spin"}
+					/>
+				) : null}
 				{children}
 				<div
 					ref={buttonScope}
@@ -139,11 +146,21 @@ export const Button = {
 					height: "100%",
 					x: 10,
 				}}
+				whileTap={{
+					width: "100%",
+					height: "100%",
+					x: 10,
+				}}
+				transition={{ type: "linear" }}
 				className={cn(buttonVariants({ variant, size, className }))}
 				disabled={isLoading}
 				{...props}
 			>
-				{isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+				{isLoading ? (
+					<Loader2
+						className={"h-[15px] w-[15px] text-[#FFF] z-20 animate-spin"}
+					/>
+				) : null}
 				{children}
 			</motion.button>
 		);
@@ -156,7 +173,7 @@ export const Button = {
 		size,
 		...props
 	}: MotionProps & ButtonProps) => {
-		const [ref, bounds] = useMeasure({ scroll: false });
+		const [buttonRef, bounds] = useMeasure({ scroll: false });
 		const [isHover, setIsHover] = useState(false);
 		const [isPress, setIsPress] = useState(false);
 		const mouseX = useMotionValue(0);
@@ -170,14 +187,14 @@ export const Button = {
 		return (
 			<MotionConfig transition={springTransition}>
 				<motion.button
-					ref={ref}
+					ref={buttonRef}
 					initial={false}
 					animate={isHover ? "hover" : "rest"}
 					whileTap="press"
 					variants={{
 						rest: { scale: 1 },
-						hover: { scale: 1.5 },
-						press: { scale: 1.4 },
+						hover: { scale: 1.2 },
+						press: { scale: 1.1 },
 					}}
 					onHoverStart={() => {
 						resetMousePosition();
@@ -190,9 +207,9 @@ export const Button = {
 					onTapStart={() => setIsPress(true)}
 					onTap={() => setIsPress(false)}
 					onTapCancel={() => setIsPress(false)}
-					onPointerMove={(e) => {
-						mouseX.set(e.clientX - bounds.x - bounds.width / 2);
-						mouseY.set(e.clientY - bounds.y - bounds.height / 2);
+					onPointerMove={(pointerEvent) => {
+						mouseX.set(pointerEvent.clientX - bounds.x - bounds.width / 2);
+						mouseY.set(pointerEvent.clientY - bounds.y - bounds.height / 2);
 					}}
 					className={cn(buttonVariants({ variant, size, className }))}
 					disabled={isLoading}
@@ -227,9 +244,17 @@ export const Button = {
 						</div>
 					</motion.div>
 					<motion.div
-						variants={{ hover: { scale: 0.85 }, press: { scale: 1.1 } }}
-						className={"animated-3d-button__label"}
+						variants={{ hover: { scale: 0.8 }, press: { scale: 1.1 } }}
+						className={
+							"flex items-center justify-center flex-row-reverse gap-x-[6px] " +
+							"animated-3d-button__label"
+						}
 					>
+						{isLoading ? (
+							<Loader2
+								className={"h-[20px] w-[20px] text-[#FFF] z-20 animate-spin"}
+							/>
+						) : null}
 						{children}
 					</motion.div>
 				</motion.button>

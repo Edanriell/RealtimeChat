@@ -13,6 +13,7 @@ import {
 import useMeasure from "react-use-measure";
 
 import { cn } from "@/shared/lib";
+import { springTransition } from "@/shared/config";
 
 import { Shapes } from "./shapes";
 
@@ -166,15 +167,8 @@ export const Button = {
 			mouseY.set(0);
 		};
 
-		// Transition config, move to shared ??
-		const transition = {
-			type: "spring",
-			duration: 0.7,
-			bounce: 0.2,
-		};
-
 		return (
-			<MotionConfig transition={transition}>
+			<MotionConfig transition={springTransition}>
 				<motion.button
 					ref={ref}
 					initial={false}

@@ -10,6 +10,7 @@ import { useRef, useLayoutEffect } from "react";
 import { Canvas, useThree, useLoader } from "@react-three/fiber";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
+import { PerspectiveCamera } from "three";
 
 import { springTransition } from "@/shared/config";
 
@@ -50,10 +51,10 @@ export function Shapes({ isHover, isPress, mouseX, mouseY }: ShapesProps) {
 						hover: { z: isPress ? -0.9 : 0 },
 					}}
 				>
-					<Sphere />
-					<Cone />
-					<Torus />
-					<Icosahedron />
+					<MessageModel />
+					<HandModel />
+					<FaceModel />
+					<PaperPlaneModel />
 				</motion.group>
 			</MotionConfig>
 		</Canvas>
@@ -74,8 +75,8 @@ export function Lights() {
 	);
 }
 
-export function Sphere() {
-	const message = useLoader(STLLoader, "/models/message.stl");
+export function MessageModel() {
+	const messageModel = useLoader(STLLoader, "/models/message.stl");
 
 	return (
 		<motion.mesh
@@ -83,15 +84,14 @@ export function Sphere() {
 			position={[-0.5, -0.5, 0]}
 			variants={{ hover: { z: 2 } }}
 		>
-			{/* <sphereGeometry args={[0.4]} /> */}
-			<primitive object={message} />
+			<primitive object={messageModel} />
 			<Material />
 		</motion.mesh>
 	);
 }
 
-export function Cone() {
-	const hand = useLoader(OBJLoader, "/models/hand.obj");
+export function HandModel() {
+	const handModel = useLoader(OBJLoader, "/models/hand.obj");
 
 	return (
 		<motion.mesh
@@ -107,15 +107,14 @@ export function Cone() {
 				},
 			}}
 		>
-			{/* <coneGeometry args={[0.3, 0.6, 20]} /> */}
-			<primitive object={hand} />
+			<primitive object={handModel} />
 			<Material />
 		</motion.mesh>
 	);
 }
 
-export function Torus() {
-	const face = useLoader(STLLoader, "/models/face.STL");
+export function FaceModel() {
+	const faceModel = useLoader(STLLoader, "/models/face.STL");
 
 	return (
 		<motion.mesh
@@ -130,15 +129,14 @@ export function Torus() {
 				},
 			}}
 		>
-			{/* <torusGeometry args={[0.2, 0.1, 10, 50]} /> */}
-			<primitive object={face} />
+			<primitive object={faceModel} />
 			<Material />
 		</motion.mesh>
 	);
 }
 
-export function Icosahedron() {
-	const paperPlanes = useLoader(STLLoader, "/models/paper-plane.stl");
+export function PaperPlaneModel() {
+	const paperPlaneModel = useLoader(STLLoader, "/models/paper-plane.stl");
 
 	return (
 		<motion.mesh
@@ -154,8 +152,7 @@ export function Icosahedron() {
 				},
 			}}
 		>
-			{/* <icosahedronGeometry args={[0.7, 0]} /> */}
-			<primitive object={paperPlanes} />
+			<primitive object={paperPlaneModel} />
 			<Material />
 		</motion.mesh>
 	);
@@ -165,7 +162,12 @@ export function Material() {
 	return <meshPhongMaterial color="#FFF" specular="#5a14de" shininess={10} />;
 }
 
-function Camera({ mouseX, mouseY, ...props }) {
+type CameraProps = {
+	mouseX: MotionValue<number>;
+	mouseY: MotionValue<number>;
+};
+
+function Camera({ mouseX, mouseY, ...props }: CameraProps) {
 	const cameraX = useSmoothTransform(mouseX, spring, (x) => x / 350);
 	const cameraY = useSmoothTransform(mouseY, spring, (y) => (-1 * y) / 350);
 
@@ -173,13 +175,13 @@ function Camera({ mouseX, mouseY, ...props }) {
 	const camera = useThree(({ camera }) => camera);
 	const size = useThree(({ size }) => size);
 	const scene = useThree(({ scene }) => scene);
-	const cameraRef = useRef();
+	const cameraRef = useRef<any>();
 
 	useLayoutEffect(() => {
 		const { current: cam } = cameraRef;
 		if (cam) {
-			cam.aspect = size.width / size.height;
-			cam.updateProjectionMatrix();
+			(cam as PerspectiveCamera).aspect = size.width / size.height;
+			(cam as PerspectiveCamera).updateProjectionMatrix();
 		}
 	}, [size, props]);
 
@@ -192,18 +194,19 @@ function Camera({ mouseX, mouseY, ...props }) {
 	}, [camera, cameraRef, set]);
 
 	useLayoutEffect(() => {
-		return cameraX.onChange(() => camera.lookAt(scene.position));
+		return cameraX.on("change", () => camera.lookAt(scene.position));
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [cameraX]);
 
 	return (
 		<motion.perspectiveCamera
 			ref={cameraRef}
 			fov={90}
-			position={[cameraX, cameraY, 3.8]}
+			position={[cameraX as any, cameraY as any, 3.8]}
 		/>
 	);
 }
 
 const spring = { stiffness: 600, damping: 30 };
 
-const mouseToLightRotation = (v) => (-1 * v) / 140;
+const mouseToLightRotation = (v: number) => (-1 * v) / 140;

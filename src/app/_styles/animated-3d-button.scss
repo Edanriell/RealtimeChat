@@ -1,6 +1,6 @@
 .animated-3d-button {
 	--purple: #5a14de;
-	--pink: #FFF;
+	--pink: #fff;
 	--blue: #761beb;
 }
 
@@ -26,7 +26,11 @@
 	left: -100px;
 	right: -100px;
 	width: calc(100% + 200px);
-	pointer-events: none;
+	pointer-events: none !important;
+}
+
+.animated-3d-button__shapes > div {
+	pointer-events: none !important;
 }
 
 .animated-3d-button__container canvas {

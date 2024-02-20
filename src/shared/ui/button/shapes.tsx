@@ -1,59 +1,44 @@
 import { motion } from "framer-motion-3d";
-import { MotionConfig, useSpring, useTransform } from "framer-motion";
-import { useRef, useLayoutEffect, useEffect } from "react";
-import { Canvas, useThree, useLoader, useFrame } from "@react-three/fiber";
+import {
+	MotionConfig,
+	useSpring,
+	useTransform,
+	SpringOptions,
+	MotionValue,
+} from "framer-motion";
+import { useRef, useLayoutEffect } from "react";
+import { Canvas, useThree, useLoader } from "@react-three/fiber";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
-import { CameraHelper, Light } from "three";
 
-function useSmoothTransform(value, springOptions, transformer) {
+import { springTransition } from "@/shared/config";
+
+function useSmoothTransform<T, U>(
+	value: MotionValue<T>,
+	springOptions: SpringOptions,
+	transformer: (value: T) => U,
+): MotionValue<any> {
 	return useSpring(useTransform(value, transformer), springOptions);
 }
 
-function useShadowHelper(ref: React.MutableRefObject<Light | undefined>) {
-	const helper = useRef<CameraHelper>();
-	const scene = useThree((state) => state.scene);
+type ShapesProps = {
+	isHover: boolean;
+	isPress: boolean;
+	mouseX: MotionValue<any>;
+	mouseY: MotionValue<any>;
+};
 
-	useEffect(() => {
-		if (!ref.current) return;
-
-		helper.current = new CameraHelper(ref.current?.shadow.camera);
-		if (helper.current) {
-			scene.add(helper.current);
-		}
-
-		return () => {
-			if (helper.current) {
-				scene.remove(helper.current);
-			}
-		};
-	}, [helper.current?.uuid, ref.current]);
-
-	useFrame(() => {
-		if (helper.current?.update) {
-			helper.current.update();
-		}
-	});
-}
-
-export function Shapes({ isHover, isPress, mouseX, mouseY }) {
+export function Shapes({ isHover, isPress, mouseX, mouseY }: ShapesProps) {
 	const lightRotateX = useSmoothTransform(mouseY, spring, mouseToLightRotation);
 	const lightRotateY = useSmoothTransform(mouseX, spring, mouseToLightRotation);
-
-	// Config should be pulled out
-	const transition = {
-		type: "spring",
-		duration: 0.7,
-		bounce: 0.2,
-	};
 
 	return (
 		<Canvas shadows dpr={[1, 2]} resize={{ scroll: false, offsetSize: true }}>
 			<Camera mouseX={mouseX} mouseY={mouseY} />
-			<MotionConfig transition={transition}>
+			<MotionConfig transition={springTransition}>
 				<motion.group
-					center={[0, 0, 0]}
-					rotation={[lightRotateX, lightRotateY, 0]}
+					position={[0, 0, 0]}
+					rotation={[lightRotateX as any, lightRotateY as any, 0]}
 				>
 					<Lights />
 				</motion.group>

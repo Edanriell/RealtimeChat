@@ -1,1 +1,0 @@
-export { AddFriendsPageLoading } from "./ui";

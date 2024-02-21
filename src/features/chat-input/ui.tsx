@@ -61,8 +61,8 @@ export const ChatInput: FC<ChatInputProps> = ({ chatPartner, chatId }) => {
 					}
 				/>
 				<Animated3dButton
-					// isLoading={isLoading}
-					// onClick={handleSendMessageClick}
+					isLoading={isLoading}
+					onClick={handleSendMessageClick}
 					type="submit"
 					variant={"animated3d"}
 					size={"animated3d"}

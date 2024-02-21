@@ -1,8 +1,6 @@
 import AddFriendButton from "@/components/AddFriendButton";
 import { FC } from "react";
 
-// MAIN TAG IS NOT NECESSARY HERE
-// ADDFRIEND IS FEATURE
 export const AddFriendsPage: FC = () => {
 	return (
 		<main className="pt-8">
@@ -11,3 +9,6 @@ export const AddFriendsPage: FC = () => {
 		</main>
 	);
 };
+
+// Fix all loadings, they all are broken because of default export and next.js limits
+// Also fix button scale in dashboard

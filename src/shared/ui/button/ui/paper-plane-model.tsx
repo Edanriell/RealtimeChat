@@ -9,9 +9,9 @@ export function PaperPlaneModel() {
 
 	return (
 		<motion.mesh
-			scale={4}
+			scale={5}
 			position={[1.1, 0, 0]}
-			rotation-z={0.5}
+			rotation={[1.6, 2.2, 0.5]}
 			variants={{
 				hover: {
 					x: 1.8,

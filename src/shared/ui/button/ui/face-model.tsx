@@ -9,12 +9,11 @@ export function FaceModel() {
 
 	return (
 		<motion.mesh
-			scale={0.35}
-			position={[0.1, 0.4, 0]}
-			rotation={[-20, 2, 0]}
+			scale={0.28}
+            position={[-0.4, -0.5, 0]}
+			rotation={[4.4, -2.9, 0.5]}
 			variants={{
 				hover: {
-					y: 0.5,
 					z: 2,
 					rotateY: -0.2,
 				},

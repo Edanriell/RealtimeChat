@@ -50,9 +50,9 @@ export function Models({ isHover, isPress, mouseX, mouseY }: ModelsProps) {
 						hover: { z: isPress ? -0.9 : 0 },
 					}}
 				>
-					<MessageModel />
-					<HandModel />
 					<FaceModel />
+					<HandModel />
+					<MessageModel />
 					<PaperPlaneModel />
 				</motion.group>
 			</MotionConfig>

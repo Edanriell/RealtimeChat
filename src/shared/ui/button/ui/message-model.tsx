@@ -9,8 +9,8 @@ export function MessageModel() {
 
 	return (
 		<motion.mesh
-			scale={0.01}
-			position={[-0.5, -0.5, 0]}
+			scale={0.0175}
+			position={[0.1, 0.6, 0]}
 			variants={{ hover: { z: 2 } }}
 		>
 			<primitive object={messageModel} />

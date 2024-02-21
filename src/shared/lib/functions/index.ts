@@ -18,3 +18,7 @@ export function chatHrefConstructor(id1: string, id2: string) {
 export function formatTimestamp(timestamp: number) {
 	return format(timestamp, "HH:mm");
 }
+
+export function mouseToLightRotation(v: number) {
+	return (-1 * v) / 140;
+}

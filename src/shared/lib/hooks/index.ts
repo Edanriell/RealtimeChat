@@ -3,6 +3,12 @@
 import { useRef, useEffect } from "react";
 import { useThree, useFrame } from "@react-three/fiber";
 import { CameraHelper, Light } from "three";
+import {
+	useSpring,
+	useTransform,
+	SpringOptions,
+	MotionValue,
+} from "framer-motion";
 
 export function useShadowHelper(
 	ref: React.MutableRefObject<Light | undefined>,
@@ -31,4 +37,12 @@ export function useShadowHelper(
 			helper.current.update();
 		}
 	});
+}
+
+export function useSmoothTransform<T, U>(
+	value: MotionValue<T>,
+	springOptions: SpringOptions,
+	transformer: (value: T) => U,
+): MotionValue<any> {
+	return useSpring(useTransform(value, transformer), springOptions);
 }

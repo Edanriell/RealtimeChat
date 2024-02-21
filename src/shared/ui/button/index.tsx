@@ -12,10 +12,10 @@ import {
 } from "framer-motion";
 import useMeasure from "react-use-measure";
 
+import { Models } from "./ui/models";
+
 import { cn } from "@/shared/lib";
 import { springTransition } from "@/shared/config";
-
-import { Shapes } from "./shapes";
 
 const useButtonAnimation = (isHovered: boolean | null) => {
 	const [buttonScope, animateButton] = useAnimate();
@@ -234,7 +234,7 @@ export const Button = {
 						/>
 						<div className={"animated-3d-button__shapes"}>
 							<Suspense fallback={null}>
-								<Shapes
+								<Models
 									isHover={isHover}
 									isPress={isPress}
 									mouseX={mouseX}

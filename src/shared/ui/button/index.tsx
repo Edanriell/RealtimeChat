@@ -174,8 +174,8 @@ export const Button = {
 		...props
 	}: MotionProps & ButtonProps) => {
 		const [buttonRef, bounds] = useMeasure({ scroll: false });
-		const [isHover, setIsHover] = useState(false);
-		const [isPress, setIsPress] = useState(false);
+		const [isHovered, setIsHovered] = useState(false);
+		const [isPressed, setIsPressed] = useState(false);
 		const mouseX = useMotionValue(0);
 		const mouseY = useMotionValue(0);
 
@@ -189,7 +189,7 @@ export const Button = {
 				<motion.button
 					ref={buttonRef}
 					initial={false}
-					animate={isHover ? "hover" : "rest"}
+					animate={isHovered ? "hover" : "rest"}
 					whileTap="press"
 					variants={{
 						rest: { scale: 1 },
@@ -198,15 +198,15 @@ export const Button = {
 					}}
 					onHoverStart={() => {
 						resetMousePosition();
-						setIsHover(true);
+						setIsHovered(true);
 					}}
 					onHoverEnd={() => {
 						resetMousePosition();
-						setIsHover(false);
+						setIsHovered(false);
 					}}
-					onTapStart={() => setIsPress(true)}
-					onTap={() => setIsPress(false)}
-					onTapCancel={() => setIsPress(false)}
+					onTapStart={() => setIsPressed(true)}
+					onTap={() => setIsPressed(false)}
+					onTapCancel={() => setIsPressed(false)}
 					onPointerMove={(pointerEvent) => {
 						mouseX.set(pointerEvent.clientX - bounds.x - bounds.width / 2);
 						mouseY.set(pointerEvent.clientY - bounds.y - bounds.height / 2);
@@ -235,8 +235,8 @@ export const Button = {
 						<div className={"animated-3d-button__shapes"}>
 							<Suspense fallback={null}>
 								<Models
-									isHover={isHover}
-									isPress={isPress}
+									isHover={isHovered}
+									isPress={isPressed}
 									mouseX={mouseX}
 									mouseY={mouseY}
 								/>

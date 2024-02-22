@@ -2,7 +2,7 @@ import { FC } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-export const FriendRequestsPageLoading: FC = () => {
+const FriendRequestsPageLoading: FC = () => {
 	return (
 		<div className="w-full flex flex-col gap-3">
 			<Skeleton className="mb-4" height={60} width={500} />
@@ -12,3 +12,5 @@ export const FriendRequestsPageLoading: FC = () => {
 		</div>
 	);
 };
+
+export default FriendRequestsPageLoading;

@@ -9,7 +9,3 @@ export const AddFriendsPage: FC = () => {
 		</main>
 	);
 };
-
-// TODO
-// Fix all loadings, they all are broken because of default export and next.js limits
-// Also fix button scale in dashboard weird 

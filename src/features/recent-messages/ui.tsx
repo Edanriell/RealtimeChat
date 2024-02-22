@@ -20,6 +20,7 @@ export const RecentMessages: FC<RecentMessagesProps> = ({
 	session,
 }) => {
 	const [isHovered, setIsHovered] = useState<boolean>(false);
+	const [isPress, setIsPress] = useState(false);
 
 	const textVariants = {
 		hovered: {
@@ -40,7 +41,12 @@ export const RecentMessages: FC<RecentMessagesProps> = ({
 				<p className={"text-sm text-black"}>Nothing to show here...</p>
 			) : (
 				recentMessages.map((friend: any) => (
-					<div
+					<motion.div
+						animate={isPress ? "press" : "rest"}
+						variants={{
+							rest: { scale: 1 },
+							press: { scale: 0.9 },
+						}}
 						key={friend.id}
 						className={
 							"relative bg-[white] rounded-[406px] " +
@@ -57,6 +63,9 @@ export const RecentMessages: FC<RecentMessagesProps> = ({
 							size={"expandable"}
 							onMouseEnter={() => setIsHovered(true)}
 							onMouseLeave={() => setIsHovered(false)}
+							onTapStart={() => setIsPress(true)}
+							onTap={() => setIsPress(false)}
+							onTapCancel={() => setIsPress(false)}
 						>
 							<Link
 								href={`/dashboard/chat/${chatHrefConstructor(
@@ -115,7 +124,7 @@ export const RecentMessages: FC<RecentMessagesProps> = ({
 								</motion.p>
 							</div>
 						</div>
-					</div>
+					</motion.div>
 				))
 			)}
 		</>

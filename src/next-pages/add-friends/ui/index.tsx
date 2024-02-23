@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import AddFriendButton from "@/components/AddFriendButton";
+import { AddFriend } from "@/features/add-friend";
 
 export const AddFriendsPage: FC = () => {
 	return (
@@ -11,7 +11,7 @@ export const AddFriendsPage: FC = () => {
 			}
 		>
 			<h1 className="font-bold text-5xl mb-8">Add a friend</h1>
-			<AddFriendButton />
+			<AddFriend />
 		</div>
 	);
 };

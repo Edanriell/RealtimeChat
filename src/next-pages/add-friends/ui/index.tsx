@@ -15,6 +15,3 @@ export const AddFriendsPage: FC = () => {
 		</div>
 	);
 };
-
-// TODO
-// Refactor add friends page

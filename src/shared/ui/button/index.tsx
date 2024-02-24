@@ -42,6 +42,8 @@ export const buttonVariants = cva(
 				ghost: "bg-transparent hover:text-slate-900 hover:bg-slate-200",
 				animated:
 					"relative overflow-hidden bg-[#5a14de] focus:outline-none focus:ring-2 focus:ring-[#761beb] focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none",
+				animatedColor:
+					"relative overflow-hidden bg-[#5a14de] focus:outline-none focus:ring-2 focus:ring-[#761beb] focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none text-[#FFF]",
 				expandable:
 					"bg-[#5a14de] z-10 flex items-center justify-center box-border absolute focus:outline-none focus:ring-2 focus:ring-[#761beb] focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none",
 				animated3d:
@@ -51,6 +53,7 @@ export const buttonVariants = cva(
 				default: "h-10 py-2 px-4",
 				sm: "h-9 px-2",
 				lg: "h-11 px-8",
+				animatedColor: "px-[20px] py-[10px]",
 				expandable: "w-[80px] h-[80px]",
 				animated3d: "h-[68px] w-[136px]",
 			},
@@ -127,6 +130,31 @@ export const Button = {
 						"select-none"
 					}
 				></div>
+			</motion.button>
+		);
+	},
+	AnimatedColor: ({
+		className,
+		children,
+		variant,
+		isLoading,
+		size,
+		...props
+	}: MotionProps & ButtonProps) => {
+		return (
+			<motion.button
+				whileHover={{ scale: 1.05, backgroundColor: "#761beb" }}
+				whileTap={{ scale: 0.95 }}
+				className={cn(buttonVariants({ variant, size, className }))}
+				disabled={isLoading}
+				{...props}
+			>
+				{isLoading ? (
+					<Loader2
+						className={"h-[15px] w-[15px] text-[#FFF] z-20 animate-spin"}
+					/>
+				) : null}
+				{children}
 			</motion.button>
 		);
 	},

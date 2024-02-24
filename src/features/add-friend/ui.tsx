@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-hot-toast";
 
+import { Button } from "@/shared/ui/button";
 import { addFriendValidator } from "@/shared/lib/validators";
 
 type FormData = z.infer<typeof addFriendValidator>;
@@ -57,6 +58,8 @@ export const AddFriend: FC = () => {
 		addFriend(data.email);
 	};
 
+	const AnimatedButton = Button["AnimatedColor"];
+
 	return (
 		<form onSubmit={handleSubmit(onFriendSubmit)} className={"max-w-sm"}>
 			<div className={"flex flex-col gap-y-[20px]"}>
@@ -79,7 +82,13 @@ export const AddFriend: FC = () => {
 						placeholder="you@example.com"
 					/>
 				</div>
-				<button className={"mr-auto ml-auto"}>Add</button>
+				<AnimatedButton
+					className={"mr-auto ml-auto"}
+					variant={"animatedColor"}
+					size={"animatedColor"}
+				>
+					Send request
+				</AnimatedButton>
 			</div>
 			<p className={"mt-1 text-sm text-red-600"}>{errors.email?.message}</p>
 			{showSuccessState ? (

@@ -7,10 +7,11 @@ export const AddFriendsPage: FC = () => {
 		<div
 			className={
 				"w-full h-full p-[60px] rounded-[20px] shadow-soft " +
-				"glassmorphic-element glassmorphic-element__border"
+				"glassmorphic-element glassmorphic-element__border " +
+				"relative"
 			}
 		>
-			<h1 className="font-bold text-5xl mb-8">Add a friend</h1>
+			<h1 className={"font-bold text-5xl mb-8 text-center"}>Add a friend</h1>
 			<AddFriend />
 		</div>
 	);

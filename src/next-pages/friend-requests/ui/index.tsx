@@ -1,16 +1,17 @@
-import FriendRequests from "@/components/FriendRequests";
-import { fetchRedis } from "@/helpers/redis";
-import { authOptions } from "@/lib/auth";
+import { FC } from "react";
 import { getServerSession } from "next-auth";
 import { notFound } from "next/navigation";
-import { FC } from "react";
 
-// ALL Session stuff should be in entities session
+import { sessionModel } from "@/entities/session";
+import { FriendRequests } from "@/widgets/friend-requests";
+import { fetchRedis } from "@/shared/api";
+
 export const FriendRequestsPage: FC = async () => {
+	const { authOptions } = sessionModel;
+
 	const session = await getServerSession(authOptions);
 	if (!session) notFound();
 
-	// ids of people who sent current logged in user a friend requests
 	const incomingSenderIds = (await fetchRedis(
 		"smembers",
 		`user:${session.user.id}:incoming_friend_requests`,
@@ -29,14 +30,18 @@ export const FriendRequestsPage: FC = async () => {
 	);
 
 	return (
-		<main className="pt-8">
-			<h1 className="font-bold text-5xl mb-8">Add a friend</h1>
-			<div className="flex flex-col gap-4">
-				<FriendRequests
-					incomingFriendRequests={incomingFriendRequests}
-					sessionId={session.user.id}
-				/>
-			</div>
-		</main>
+		<div
+			className={
+				"w-full h-full p-[60px] rounded-[20px] shadow-soft " +
+				"glassmorphic-element glassmorphic-element__border " +
+				"relative"
+			}
+		>
+			<h1 className={"font-bold text-5xl mb-8 text-center"}>Friend requests</h1>
+			<FriendRequests
+				incomingFriendRequests={incomingFriendRequests}
+				sessionId={session.user.id}
+			/>
+		</div>
 	);
 };

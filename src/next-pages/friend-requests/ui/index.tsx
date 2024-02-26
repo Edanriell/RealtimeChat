@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { sessionModel } from "@/entities/session";
 import { FriendRequests } from "@/widgets/friend-requests";
 import { fetchRedis } from "@/shared/api";
+import { User } from "@/entities/session/model";
 
 export const FriendRequestsPage: FC = async () => {
 	const { authOptions } = sessionModel;

@@ -5,24 +5,65 @@ import { Check, UserPlus, X } from "lucide-react";
 
 import { messageModel } from "@/entities/message";
 import { IncomingFriendRequest } from "@/entities/message/model";
+import { User } from "@/entities/session/model";
 import { AcceptFriend } from "@/features/accept-friend";
 import { DenyFriend } from "@/features/deny-friend";
 import { toPusherKey } from "@/shared/lib";
+import { fetchRedis } from "@/shared/api";
 
 type FriendRequestsProps = {
-	incomingFriendRequests: IncomingFriendRequest[];
 	sessionId: string;
 };
 
-export const FriendRequests: FC<FriendRequestsProps> = ({
-	incomingFriendRequests,
-	sessionId,
-}) => {
+export const FriendRequests: FC<FriendRequestsProps> = ({ sessionId }) => {
 	const { pusherClient } = messageModel;
 
 	const [friendRequests, setFriendRequests] = useState<IncomingFriendRequest[]>(
-		incomingFriendRequests,
+		[],
 	);
+
+	// const incomingSenderIds = async () =>
+	// 	(await fetchRedis(
+	// 		"smembers",
+	// 		`user:${sessionId}:incoming_friend_requests`,
+	// 	)) as string[];
+
+	// const incomingFriendRequests = async () =>
+	// 	Promise.all(
+	// 		incomingSenderIds.map(async (senderId: number) => {
+	// 			const sender = (await fetchRedis("get", `user:${senderId}`)) as string;
+	// 			const senderParsed = JSON.parse(sender) as User;
+
+	// 			return {
+	// 				senderId,
+	// 				senderEmail: senderParsed.email,
+	// 			};
+	// 		}),
+	// 	);
+
+	useEffect(() => {
+		const fetchFriendRequests = async () => {
+			const incomingSenderIds = await fetchRedis(
+				"smembers",
+				`user:${sessionId}:incoming_friend_requests`,
+			);
+			const requests = await Promise.all(
+				incomingSenderIds.map(async (senderId: string) => {
+					const sender = await fetchRedis("get", `user:${senderId}`);
+					const senderParsed = JSON.parse(sender) as User;
+
+					return {
+						senderId,
+						senderEmail: senderParsed.email,
+					};
+				}),
+			);
+			setFriendRequests(requests);
+		};
+
+		fetchFriendRequests();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	useEffect(() => {
 		pusherClient.subscribe(

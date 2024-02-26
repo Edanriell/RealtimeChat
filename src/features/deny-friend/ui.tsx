@@ -25,7 +25,7 @@ export const DenyFriend: FC<DenyFriendProps> = ({ friendRequest }) => {
 
 	return (
 		<button
-			onClick={() => denyFriend(friendRequests.senderId)}
+			onClick={() => denyFriend(friendRequest.senderId)}
 			aria-label="deny friend"
 			className="w-8 h-8 bg-red-600 hover:bg-red-700 grid place-items-center rounded-full transition hover:shadow-md"
 		>

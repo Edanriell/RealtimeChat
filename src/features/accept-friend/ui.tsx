@@ -25,7 +25,7 @@ export const AcceptFriend: FC<AcceptFriendProps> = ({ friendRequest }) => {
 
 	return (
 		<button
-			onClick={() => acceptFriend(friendRequests.senderId)}
+			onClick={() => acceptFriend(friendRequest.senderId)}
 			aria-label="accept friend"
 			className="w-8 h-8 bg-indigo-600 hover:bg-indigo-700 grid place-items-center rounded-full transition hover:shadow-md"
 		>

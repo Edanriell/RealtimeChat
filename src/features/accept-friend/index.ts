@@ -1,0 +1,1 @@
+export { AcceptFriend } from "./ui";

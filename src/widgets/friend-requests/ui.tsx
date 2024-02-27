@@ -1,13 +1,13 @@
 "use client";
 
 import { FC, useEffect, useState } from "react";
-import { Check, UserPlus, X } from "lucide-react";
 
 import { messageModel } from "@/entities/message";
 import { IncomingFriendRequest } from "@/entities/message/model";
 import { User } from "@/entities/session/model";
 import { AcceptFriend } from "@/features/accept-friend";
 import { DenyFriend } from "@/features/deny-friend";
+import { Icon } from "@/shared/ui";
 import { toPusherKey } from "@/shared/lib";
 import { fetchRedis } from "@/shared/api";
 
@@ -69,6 +69,8 @@ export const FriendRequests: FC<FriendRequestsProps> = ({ sessionId }) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [sessionId]);
 
+	const UserPlusIcon = Icon["UserPlus"];
+
 	return (
 		<div
 			className={
@@ -80,9 +82,15 @@ export const FriendRequests: FC<FriendRequestsProps> = ({ sessionId }) => {
 			) : (
 				friendRequests.map((request) => (
 					<div key={request.senderId} className="flex gap-4 items-center">
-						<UserPlus className="text-black" />
-						<AcceptFriend friendRequest={request} />
-						<DenyFriend friendRequest={request} />
+						<UserPlusIcon className="text-black" />
+						<AcceptFriend
+							friendRequest={request}
+							setFriendRequests={setFriendRequests}
+						/>
+						<DenyFriend
+							friendRequest={request}
+							setFriendRequests={setFriendRequests}
+						/>
 						<p className="font-medium text-lg">{request.senderEmail}</p>
 					</div>
 				))

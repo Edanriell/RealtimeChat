@@ -7,6 +7,7 @@ import {
 	LogOut,
 	Send,
 	ChevronRight,
+	Check
 } from "lucide-react";
 
 export const Icon = {
@@ -89,4 +90,5 @@ export const Icon = {
 	LogOut,
 	Send,
 	ChevronRight,
+	Check
 };

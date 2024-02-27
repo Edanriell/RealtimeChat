@@ -22,25 +22,6 @@ export const FriendRequests: FC<FriendRequestsProps> = ({ sessionId }) => {
 		[],
 	);
 
-	// const incomingSenderIds = async () =>
-	// 	(await fetchRedis(
-	// 		"smembers",
-	// 		`user:${sessionId}:incoming_friend_requests`,
-	// 	)) as string[];
-
-	// const incomingFriendRequests = async () =>
-	// 	Promise.all(
-	// 		incomingSenderIds.map(async (senderId: number) => {
-	// 			const sender = (await fetchRedis("get", `user:${senderId}`)) as string;
-	// 			const senderParsed = JSON.parse(sender) as User;
-
-	// 			return {
-	// 				senderId,
-	// 				senderEmail: senderParsed.email,
-	// 			};
-	// 		}),
-	// 	);
-
 	useEffect(() => {
 		const fetchFriendRequests = async () => {
 			const incomingSenderIds = await fetchRedis(

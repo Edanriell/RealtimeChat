@@ -12,6 +12,7 @@ import { addFriendValidator } from "@/shared/lib/validators";
 type FormData = z.infer<typeof addFriendValidator>;
 
 export const AddFriend: FC = () => {
+	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [showSuccessState, setShowSuccessState] = useState<boolean>(false);
 
 	const {
@@ -25,6 +26,8 @@ export const AddFriend: FC = () => {
 
 	const addFriend = async (email: string) => {
 		try {
+			setIsLoading(true);
+
 			const validatedEmail = addFriendValidator.parse({ email });
 
 			await axios.post("/api/friends/add", {
@@ -44,6 +47,8 @@ export const AddFriend: FC = () => {
 			}
 
 			setError("email", { message: "Something went wrong." });
+		} finally {
+			setIsLoading(false);
 		}
 	};
 
@@ -93,6 +98,7 @@ export const AddFriend: FC = () => {
 					className={"mr-auto ml-auto"}
 					variant={"animatedColor"}
 					size={"animatedColor"}
+					isLoading={isLoading}
 				>
 					Send request
 				</AnimatedButton>

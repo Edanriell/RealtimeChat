@@ -48,6 +48,8 @@ export const buttonVariants = cva(
 					"bg-[#5a14de] z-10 flex items-center justify-center box-border absolute focus:outline-none focus:ring-2 focus:ring-[#761beb] focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none",
 				animated3d:
 					"animated-3d-button appearance-none border-none cursor-pointer bg-[#5a14de] focus:outline-none focus:ring-2 focus:ring-[#761beb] focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none text-[#FFF] outline-none m-0 text-[20px] font-semibold tracking-[-1px] relative text-center",
+				animatedCircle:
+					"relative focus:outline-none focus:ring-2 focus:ring-[#761beb] focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none rounded-full block",
 			},
 			size: {
 				default: "h-10 py-2 px-4",
@@ -56,6 +58,7 @@ export const buttonVariants = cva(
 				animatedColor: "px-[20px] py-[10px]",
 				expandable: "w-[80px] h-[80px]",
 				animated3d: "h-[68px] w-[136px]",
+				animatedCircle: "w-[40px] h-[40px]",
 			},
 		},
 		defaultVariants: {
@@ -70,6 +73,10 @@ export interface ButtonProps
 		VariantProps<typeof buttonVariants> {
 	isLoading?: boolean;
 }
+
+type CircleButton = {
+	bgColor?: string;
+};
 
 export const Button = {
 	Default: ({
@@ -130,6 +137,60 @@ export const Button = {
 						"select-none"
 					}
 				></div>
+			</motion.button>
+		);
+	},
+	AnimatedCircle: ({
+		className,
+		children,
+		variant,
+		isLoading,
+		size,
+		bgColor,
+		...props
+	}: MotionProps & ButtonProps & CircleButton) => {
+		const [isHovered, setIsHovered] = useState<boolean | null>(null);
+
+		const iconVariants = {
+			rest: {
+				scale: 1,
+				transition: { type: "spring", stiffness: 400, damping: 10 },
+			},
+			hover: {
+				scale: 0.8,
+				transition: { type: "spring", stiffness: 400, damping: 10 },
+			},
+			press: {
+				scale: 1.2,
+				transition: { type: "spring", stiffness: 400, damping: 10 },
+			},
+		};
+
+		return (
+			<motion.button
+				onMouseEnter={() => setIsHovered(true)}
+				onMouseLeave={() => setIsHovered(false)}
+				initial={{ backgroundColor: bgColor }}
+				whileHover={{ scale: 1.05 }}
+				whileTap={{ scale: 0.95 }}
+				transition={{ type: "spring", stiffness: 400, damping: 10 }}
+				className={cn(buttonVariants({ variant, size, className }))}
+				disabled={isLoading}
+				{...props}
+			>
+				{isLoading ? (
+					<Loader2
+						className={"h-[15px] w-[15px] text-[#FFF] z-20 animate-spin"}
+					/>
+				) : null}
+				<motion.div
+					className={"flex items-center justify-center"}
+					animate={isHovered ? "hover" : "rest"}
+					whileTap="press"
+					variants={iconVariants}
+				>
+					{children}
+				</motion.div>
 			</motion.button>
 		);
 	},

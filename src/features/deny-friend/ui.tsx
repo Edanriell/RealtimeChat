@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 
 import { IncomingFriendRequest } from "@/entities/message/model";
-import { Icon } from "@/shared/ui";
+import { Icon, Button } from "@/shared/ui";
 
 type DenyFriendProps = {
 	friendRequest: IncomingFriendRequest;
@@ -26,15 +26,18 @@ export const DenyFriend: FC<DenyFriendProps> = ({
 		router.refresh();
 	};
 
+	const AnimatedCircleButton = Button["AnimatedCircle"];
 	const CrossIcon = Icon["Cross"];
 
 	return (
-		<button
+		<AnimatedCircleButton
+			variant={"animatedCircle"}
 			onClick={() => denyFriend(friendRequest.senderId)}
 			aria-label="deny friend"
-			className="w-8 h-8 bg-red-600 hover:bg-red-700 grid place-items-center rounded-full transition hover:shadow-md"
+			bgColor={"red"}
+			size={"animatedCircle"}
 		>
-			<CrossIcon className="font-semibold text-white w-3/4 h-3/4" />
-		</button>
+			<CrossIcon className="font-semibold text-white w-[25px] h-[25px]" />
+		</AnimatedCircleButton>
 	);
 };

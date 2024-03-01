@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 
 import { messageModel } from "@/entities/message";
 import { formatTimestamp, cn, toPusherKey } from "@/shared/lib";
+import { User } from "@/entities/session/model";
 
 type MessagesProps = {
 	initialMessages: messageModel.ValidatedMessage[];

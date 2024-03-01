@@ -1,9 +1,13 @@
-import { authOptions } from "@/lib/auth";
-import { db } from "@/lib/db";
 import { getServerSession } from "next-auth";
 import { z } from "zod";
 
+import { db } from "@/shared/config";
+
+import { sessionModel } from "@/entities/session";
+
 export async function POST(req: Request) {
+	const { authOptions } = sessionModel;
+
 	try {
 		const body = await req.json();
 		const session = await getServerSession(authOptions);

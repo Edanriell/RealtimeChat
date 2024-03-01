@@ -1,13 +1,17 @@
-import { fetchRedis } from "@/helpers/redis";
-import { authOptions } from "@/lib/auth";
-import { db } from "@/lib/db";
-import { pusherServer } from "@/lib/pusher";
-import { toPusherKey } from "@/lib/utils";
-import { addFriendValidator } from "@/lib/validations/add-friend";
 import { getServerSession } from "next-auth";
 import { z } from "zod";
 
+import { fetchRedis } from "@/shared/api";
+import { db } from "@/shared/config";
+import { toPusherKey, addFriendValidator } from "@/shared/lib";
+
+import { sessionModel } from "@/entities/session";
+import { messageModel } from "@/entities/message";
+
 export async function POST(req: Request) {
+	const { authOptions } = sessionModel;
+	const { pusherServer } = messageModel;
+
 	try {
 		const body = await req.json();
 

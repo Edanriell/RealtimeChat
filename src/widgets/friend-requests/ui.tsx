@@ -78,7 +78,7 @@ export const FriendRequests: FC<FriendRequestsProps> = ({ sessionId }) => {
 			}
 		>
 			{friendRequests.length === 0 ? (
-				<p className="text-sm text-zinc-500">Nothing to show here...</p>
+				<p className="text-md text-[black]">Nothing to show here...</p>
 			) : (
 				friendRequests.map((request) => (
 					<div key={request.senderId} className="flex gap-4 items-center">

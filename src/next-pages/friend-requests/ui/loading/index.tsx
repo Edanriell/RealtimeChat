@@ -4,11 +4,25 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 const FriendRequestsPageLoading: FC = () => {
 	return (
-		<div className="w-full flex flex-col gap-3">
-			<Skeleton className="mb-4" height={60} width={500} />
-			<Skeleton height={50} width={350} />
-			<Skeleton height={50} width={350} />
-			<Skeleton height={50} width={350} />
+		<div
+			className={
+				"w-full h-full p-[60px] rounded-[20px] shadow-soft " +
+				"glassmorphic-element glassmorphic-element__border " +
+				"relative"
+			}
+		>
+			<h1 className={"font-bold text-5xl mb-8 text-center"}>
+				<Skeleton className={"block text-center"} width={346.39} height={48} />
+			</h1>
+			<div
+				className={
+					"absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
+				}
+			>
+				<p className="text-md text-[black]">
+					<Skeleton width={164.6} height={24} />
+				</p>
+			</div>
 		</div>
 	);
 };

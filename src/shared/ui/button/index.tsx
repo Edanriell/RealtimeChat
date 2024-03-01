@@ -145,6 +145,7 @@ export const Button = {
 			<motion.button
 				whileHover={{ scale: 1.05, backgroundColor: "#761beb" }}
 				whileTap={{ scale: 0.95 }}
+				transition={{ type: "spring", stiffness: 400, damping: 10 }}
 				className={cn(buttonVariants({ variant, size, className }))}
 				disabled={isLoading}
 				{...props}

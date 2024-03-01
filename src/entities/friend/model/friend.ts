@@ -1,7 +1,6 @@
-import { fetchRedis } from "@/helpers/redis";
-
 import { sessionModel } from "@/entities/session";
 import { chatHrefConstructor } from "@/shared/lib";
+import { fetchRedis } from "@/shared/api";
 
 export type FriendRequest = {
 	id: string;

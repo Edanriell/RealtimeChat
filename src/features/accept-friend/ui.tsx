@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 
 import { IncomingFriendRequest } from "@/entities/message/model";
-import { Icon } from "@/shared/ui";
+import { Icon, Button } from "@/shared/ui";
 
 type AcceptFriendProps = {
 	friendRequest: IncomingFriendRequest;
@@ -26,15 +26,18 @@ export const AcceptFriend: FC<AcceptFriendProps> = ({
 		router.refresh();
 	};
 
+	const AnimatedCircleButton = Button["AnimatedCircle"];
 	const CheckIcon = Icon["Check"];
 
 	return (
-		<button
+		<AnimatedCircleButton
+			variant={"animatedCircle"}
 			onClick={() => acceptFriend(friendRequest.senderId)}
 			aria-label="accept friend"
-			className="w-8 h-8 bg-indigo-600 hover:bg-indigo-700 grid place-items-center rounded-full transition hover:shadow-md"
+			bgColor={"#5a14de"}
+			size={"animatedCircle"}
 		>
-			<CheckIcon className="font-semibold text-white w-3/4 h-3/4" />
-		</button>
+			<CheckIcon className={"font-semibold text-white w-[25px] h-[25px]"} />
+		</AnimatedCircleButton>
 	);
 };

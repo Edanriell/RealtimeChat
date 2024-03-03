@@ -82,11 +82,15 @@ export const FriendRequests: FC<FriendRequestsProps> = ({ sessionId }) => {
 						key={request.senderId}
 						className={
 							"flex gap-x-[24px] items-center bg-[white] px-[40px] py-[20px] " +
-							"rounded-[406px] shadow-soft"
+							"rounded-[406px] mb-[20px] shadow-soft"
 						}
 					>
 						<p className={"font-medium text-lg"}>{request.senderEmail}</p>
-						<div className={"flex flex-row items-center justify-center gap-x-[8px]"}>
+						<div
+							className={
+								"flex flex-row items-center justify-center gap-x-[8px]"
+							}
+						>
 							<AcceptFriend
 								friendRequest={request}
 								setFriendRequests={setFriendRequests}

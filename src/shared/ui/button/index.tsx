@@ -173,7 +173,6 @@ export const Button = {
 				initial={{ backgroundColor: bgColor }}
 				whileHover={{ scale: 1.05 }}
 				whileTap={{ scale: 0.95 }}
-				transition={{ type: "spring", stiffness: 400, damping: 10 }}
 				className={cn(buttonVariants({ variant, size, className }))}
 				disabled={isLoading}
 				{...props}
@@ -184,6 +183,7 @@ export const Button = {
 					/>
 				) : null}
 				<motion.div
+					tabIndex={1}
 					className={"flex items-center justify-center"}
 					animate={isHovered ? "hover" : "rest"}
 					whileTap="press"

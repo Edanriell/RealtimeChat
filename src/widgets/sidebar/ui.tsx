@@ -1,6 +1,6 @@
 "use client";
 
-import { FC } from "react";
+import { FC, useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
@@ -20,11 +20,12 @@ export const Sidebar: FC<SidebarProps> = ({
 	session,
 	unseenRequest,
 }) => {
+	const [isSidebarExpanded, setIsSidebarExpanded] = useState("notExpanded");
+
 	return (
 		<motion.div
-			initial={{ width: 100 }}
-			whileHover={{ width: [null, 400, 320] }}
-			transition={{ duration: 0.25 }}
+			initial={{ width: 120 }}
+			whileHover={{ width: 360 }}
 			className={
 				"hidden md:flex h-full py-[60px] z-10 " +
 				"flex-col gap-y-5 overflow-y-auto px-6 items-center " +

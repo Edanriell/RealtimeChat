@@ -9,6 +9,8 @@ import {
 	ChevronRight,
 	Check,
 	X as Cross,
+	Plus,
+	Minus,
 } from "lucide-react";
 
 export const Icon = {
@@ -93,4 +95,6 @@ export const Icon = {
 	ChevronRight,
 	Check,
 	Cross,
+	Plus,
+	Minus,
 };

@@ -25,13 +25,16 @@ export const Sidebar: FC<SidebarProps> = ({
 
 	const sidebarVariants = {
 		notExpanded: {
-			width: 120,
+			width: 100,
+			transition: { type: "linear" },
 		},
 		preExpanded: {
-			width: 140,
+			width: 120,
+			transition: { type: "linear" },
 		},
 		expanded: {
 			width: 320,
+			transition: { type: "spring" },
 		},
 	};
 
@@ -67,11 +70,15 @@ export const Sidebar: FC<SidebarProps> = ({
 						style={{ objectFit: "contain" }}
 						src="/images/chatx-logo-bubble.png"
 						alt="ChatX company logotype"
-						width={60}
-						height={60}
+						width={70}
+						height={70}
 					/>
 				</Link>
-				<ChatList sessionId={session.user.id} friends={friends} />
+				<ChatList
+					sessionId={session.user.id}
+					friends={friends}
+					sidebarStatus={isSidebarExpanded}
+				/>
 				<Overview
 					sessionId={session.user.id}
 					initialUnseenRequestCount={unseenRequest}

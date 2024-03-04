@@ -3,15 +3,19 @@
 import { FC, useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
+import { motion } from "framer-motion";
 
 import { messageModel } from "@/entities/message";
 
 import { chatHrefConstructor, toPusherKey } from "@/shared/lib";
 import { Button, UnseenChatToast } from "@/shared/ui";
+import { User } from "@/entities/session/model";
+import { Message } from "@/entities/message/model";
 
 type ChatListProps = {
 	friends: User[];
 	sessionId: string;
+	sidebarStatus: string;
 };
 
 interface ExtendedMessage extends Message {
@@ -19,7 +23,11 @@ interface ExtendedMessage extends Message {
 	senderName: string;
 }
 
-export const ChatList: FC<ChatListProps> = ({ friends, sessionId }) => {
+export const ChatList: FC<ChatListProps> = ({
+	friends,
+	sessionId,
+	sidebarStatus,
+}) => {
 	const { pusherClient } = messageModel;
 
 	const router = useRouter();
@@ -79,6 +87,17 @@ export const ChatList: FC<ChatListProps> = ({ friends, sessionId }) => {
 
 	const AnimatedButton = Button["Animated"];
 
+	const animatedButtonVariants = {
+		expanded: {
+			width: "180px",
+			transition: { type: "spring" },
+		},
+		notExpanded: {
+			width: "80px",
+			transition: { type: "linear" },
+		},
+	};
+
 	return (
 		<>
 			{friends.length > 0 ? (
@@ -110,36 +129,44 @@ export const ChatList: FC<ChatListProps> = ({ friends, sessionId }) => {
 											)}`}
 											tabIndex={1}
 											className={
-												"flex items-center gap-x-3 p-2 " +
-												"select-none "
+												"flex items-center gap-x-3 p-2 " + "select-none "
 											}
 										>
-											<AnimatedButton
-												variant={"animated"}
-												type="button"
-												className={"w-[160px] h-[40px]"}
+											<motion.div
+												variants={animatedButtonVariants}
+												animate={
+													sidebarStatus === "expanded"
+														? "expanded"
+														: "notExpanded"
+												}
 											>
-												<div
-													className={
-														"flex flex-row items-center justify-center"
-													}
+												<AnimatedButton
+													variant={"animated"}
+													type="button"
+													className={"w-[100%] h-[40px]"}
 												>
-													<p className={"truncate relative text-white z-20"}>
-														{friend.name}
-													</p>
-													{unseenMessagesCount > 0 ? (
-														<div
-															className={
-																"bg-slate-50 font-medium text-xs text-black w-4 h-4 " +
-																"rounded-full flex justify-center items-center z-20 " +
-																"ml-[4px]"
-															}
-														>
-															{unseenMessagesCount}
-														</div>
-													) : null}
-												</div>
-											</AnimatedButton>
+													<div
+														className={
+															"flex flex-row items-center justify-center"
+														}
+													>
+														<p className={"truncate relative text-white z-20"}>
+															{friend.name}
+														</p>
+														{unseenMessagesCount > 0 ? (
+															<div
+																className={
+																	"bg-slate-50 font-medium text-xs text-black w-4 h-4 " +
+																	"rounded-full flex justify-center items-center z-20 " +
+																	"ml-[4px]"
+																}
+															>
+																{unseenMessagesCount}
+															</div>
+														) : null}
+													</div>
+												</AnimatedButton>
+											</motion.div>
 										</a>
 									</li>
 								);

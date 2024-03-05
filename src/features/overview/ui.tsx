@@ -1,5 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 import { messageModel } from "@/entities/message";
 
@@ -9,11 +10,13 @@ import { Button, Icon } from "@/shared/ui";
 type OverviewProps = {
 	sessionId: string;
 	initialUnseenRequestCount: number;
+	sidebarState: string;
 };
 
 export const Overview: FC<OverviewProps> = ({
 	sessionId,
 	initialUnseenRequestCount,
+	sidebarState,
 }) => {
 	const { pusherClient } = messageModel;
 
@@ -54,6 +57,17 @@ export const Overview: FC<OverviewProps> = ({
 	const UserPlusIcon = Icon["UserPlus"];
 	const UserIcon = Icon["User"];
 
+	const animatedButtonVariants = {
+		expanded: {
+			width: "180px",
+			transition: { type: "linear" },
+		},
+		collapsed: {
+			width: "75px",
+			transition: { type: "linear" },
+		},
+	};
+
 	return (
 		<div className={"flex flex-col items-center justify-center gap-y-[10px]"}>
 			<p className={"text-md font-medium leading-6 text-black"}>Overview</p>
@@ -65,24 +79,32 @@ export const Overview: FC<OverviewProps> = ({
 							className={"select-none"}
 							tabIndex={1}
 						>
-							<AnimatedButton
-								variant={"animated"}
-								type="button"
-								className={"w-[160px] h-[40px]"}
+							<motion.div
+								initial={"collapsed"}
+								variants={animatedButtonVariants}
+								animate={sidebarState === "expanded" ? "expanded" : "collapsed"}
 							>
-								<div
-									className={
-										"flex flex-row items-center justify-center gap-x-[4px]"
-									}
+								<AnimatedButton
+									variant={"animated"}
+									type="button"
+									className={"w-[100%] h-[40px]"}
 								>
-									<UserPlusIcon
-										className={"text-white z-20 w-[20px] h-[20px]"}
-									/>
-									<p className={"truncate relative text-white z-20"}>
-										Add friend
-									</p>
-								</div>
-							</AnimatedButton>
+									<div
+										className={
+											"flex flex-row items-center justify-center gap-x-[4px]"
+										}
+									>
+										<UserPlusIcon
+											className={"text-white z-20 w-[20px] h-[20px]"}
+										/>
+										{sidebarState === "expanded" ? (
+											<p className={"truncate relative text-white z-20"}>
+												Add friend
+											</p>
+										) : null}
+									</div>
+								</AnimatedButton>
+							</motion.div>
 						</Link>
 					</li>
 					<li>
@@ -91,32 +113,41 @@ export const Overview: FC<OverviewProps> = ({
 							className="select-none"
 							tabIndex={1}
 						>
-							<AnimatedButton
-								variant={"animated"}
-								type="button"
-								className={"w-[160px] h-[40px]"}
+							<motion.div
+								initial={"collapsed"}
+								variants={animatedButtonVariants}
+								animate={sidebarState === "expanded" ? "expanded" : "collapsed"}
 							>
-								<div
-									className={
-										"flex flex-row items-center justify-center gap-x-[4px]"
-									}
+								<AnimatedButton
+									variant={"animated"}
+									type="button"
+									className={"w-[100%] h-[40px]"}
 								>
-									<UserIcon className={"text-white z-20 w-[20px] h-[20px]"} />
-									<p className={"truncate text-white z-20"}>Friend requests</p>
-
-									{unseenRequestCount > 0 ? (
-										<div
-											className={
-												"bg-slate-50 font-medium text-xs text-black w-4 h-4 " +
-												"rounded-full flex justify-center items-center z-20 " +
-												"ml-[4px]"
-											}
-										>
-											{unseenRequestCount}
-										</div>
-									) : null}
-								</div>
-							</AnimatedButton>
+									<div
+										className={
+											"flex flex-row items-center justify-center gap-x-[4px]"
+										}
+									>
+										<UserIcon className={"text-white z-20 w-[20px] h-[20px]"} />
+										{sidebarState === "expanded" ? (
+											<p className={"truncate text-white z-20"}>
+												Friend requests
+											</p>
+										) : null}
+										{unseenRequestCount > 0 ? (
+											<div
+												className={
+													"bg-slate-50 font-medium text-xs text-black w-4 h-4 " +
+													"rounded-full flex justify-center items-center z-20 " +
+													"ml-[4px]"
+												}
+											>
+												{unseenRequestCount}
+											</div>
+										) : null}
+									</div>
+								</AnimatedButton>
+							</motion.div>
 						</Link>
 					</li>
 				</ul>

@@ -16,25 +16,23 @@ type SidebarProps = {
 	unseenRequest: any;
 };
 
+type SidebarState = "collapsed" | "expanded";
+
 export const Sidebar: FC<SidebarProps> = ({
 	friends,
 	session,
 	unseenRequest,
 }) => {
-	const [isSidebarExpanded, setIsSidebarExpanded] = useState("notExpanded");
+	const [sidebarState, setSidebarState] = useState<SidebarState>("collapsed");
 
 	const sidebarVariants = {
-		notExpanded: {
+		collapsed: {
 			width: 100,
-			transition: { type: "linear" },
-		},
-		preExpanded: {
-			width: 120,
 			transition: { type: "linear" },
 		},
 		expanded: {
 			width: 320,
-			transition: { type: "spring" },
+			transition: { type: "linear" },
 		},
 	};
 
@@ -44,16 +42,9 @@ export const Sidebar: FC<SidebarProps> = ({
 	return (
 		<div className={"flex flex-row items-center gap-x-[20px]"}>
 			<motion.div
+				initial={"collapsed"}
 				variants={sidebarVariants}
-				initial={{ width: 120 }}
-				animate={
-					isSidebarExpanded === "preExpanded"
-						? "preExpanded"
-						: isSidebarExpanded === "expanded"
-							? "expanded"
-							: "notExpanded"
-				}
-				// whileHover={{ width: 360 }}
+				animate={sidebarState === "collapsed" ? "collapsed" : "expanded"}
 				className={
 					"hidden md:flex h-full py-[60px] z-10 " +
 					"flex-col gap-y-5 overflow-y-auto px-6 items-center " +
@@ -77,36 +68,28 @@ export const Sidebar: FC<SidebarProps> = ({
 				<ChatList
 					sessionId={session.user.id}
 					friends={friends}
-					sidebarStatus={isSidebarExpanded}
+					sidebarState={sidebarState}
 				/>
 				<Overview
 					sessionId={session.user.id}
 					initialUnseenRequestCount={unseenRequest}
+					sidebarState={sidebarState}
 				/>
-				<UserProfile session={session} />
+				<UserProfile session={session} sidebarState={sidebarState} />
 			</motion.div>
-			<motion.div
-				onHoverStart={() => {
-					if (isSidebarExpanded !== "expanded")
-						setIsSidebarExpanded("preExpanded");
-				}}
-				onHoverEnd={() => {
-					if (isSidebarExpanded !== "expanded")
-						setIsSidebarExpanded("notExpanded");
-				}}
-			>
-				{isSidebarExpanded !== "expanded" ? (
+			<div>
+				{sidebarState === "collapsed" ? (
 					<PlusIcon
-						onClick={() => setIsSidebarExpanded("expanded")}
+						onClick={() => setSidebarState("expanded")}
 						className={"text-slate-400 w-[36px] h-[36px] mr-[30px]"}
 					/>
 				) : (
 					<MinusIcon
-						onClick={() => setIsSidebarExpanded("notExpanded")}
+						onClick={() => setSidebarState("collapsed")}
 						className={"text-slate-400 w-[36px] h-[36px] mr-[25px]"}
 					/>
 				)}
-			</motion.div>
+			</div>
 		</div>
 	);
 };

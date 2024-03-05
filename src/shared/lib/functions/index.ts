@@ -22,3 +22,16 @@ export function formatTimestamp(timestamp: number) {
 export function mouseToLightRotation(v: number) {
 	return (-1 * v) / 140;
 }
+
+export function getFriendInitialLetters(friendName: string) {
+	let initialLetters = "";
+	const userName = friendName.split(" ");
+	if (userName.length === 2) {
+		initialLetters += userName[0][0];
+		initialLetters += userName[1][0];
+	} else {
+		initialLetters += userName[0][0];
+	}
+
+	return initialLetters;
+}

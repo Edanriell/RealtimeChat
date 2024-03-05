@@ -3,19 +3,20 @@
 import { FC, useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 import { messageModel } from "@/entities/message";
 
 import { chatHrefConstructor, toPusherKey } from "@/shared/lib";
 import { Button, UnseenChatToast } from "@/shared/ui";
+import { getFriendInitialLetters } from "@/shared/lib/functions";
 import { User } from "@/entities/session/model";
 import { Message } from "@/entities/message/model";
 
 type ChatListProps = {
 	friends: User[];
 	sessionId: string;
-	sidebarStatus: string;
+	sidebarState: string;
 };
 
 interface ExtendedMessage extends Message {
@@ -26,7 +27,7 @@ interface ExtendedMessage extends Message {
 export const ChatList: FC<ChatListProps> = ({
 	friends,
 	sessionId,
-	sidebarStatus,
+	sidebarState,
 }) => {
 	const { pusherClient } = messageModel;
 
@@ -90,10 +91,10 @@ export const ChatList: FC<ChatListProps> = ({
 	const animatedButtonVariants = {
 		expanded: {
 			width: "180px",
-			transition: { type: "spring" },
+			transition: { type: "linear" },
 		},
-		notExpanded: {
-			width: "80px",
+		collapsed: {
+			width: "75px",
 			transition: { type: "linear" },
 		},
 	};
@@ -133,11 +134,12 @@ export const ChatList: FC<ChatListProps> = ({
 											}
 										>
 											<motion.div
+												initial={"collapsed"}
 												variants={animatedButtonVariants}
 												animate={
-													sidebarStatus === "expanded"
+													sidebarState === "expanded"
 														? "expanded"
-														: "notExpanded"
+														: "collapsed"
 												}
 											>
 												<AnimatedButton
@@ -150,9 +152,19 @@ export const ChatList: FC<ChatListProps> = ({
 															"flex flex-row items-center justify-center"
 														}
 													>
-														<p className={"truncate relative text-white z-20"}>
-															{friend.name}
-														</p>
+														{sidebarState === "expanded" ? (
+															<p
+																className={"truncate relative text-white z-20"}
+															>
+																{friend.name}
+															</p>
+														) : (
+															<p
+																className={"truncate relative text-white z-20"}
+															>
+																{getFriendInitialLetters(friend.name)}
+															</p>
+														)}
 														{unseenMessagesCount > 0 ? (
 															<div
 																className={

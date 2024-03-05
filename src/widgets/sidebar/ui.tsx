@@ -55,7 +55,10 @@ export const Sidebar: FC<SidebarProps> = ({
 			>
 				<Link
 					href="/dashboard"
-					className={"flex shrink-0 items-center mb-[40px]"}
+					className={
+						"flex shrink-0 items-center mb-[40px] rounded-[406px] " +
+						"focus:outline-none focus:ring-2 focus:ring-[#761beb] focus:ring-offset-2"
+					}
 				>
 					<Image
 						style={{ objectFit: "contain" }}
@@ -78,7 +81,7 @@ export const Sidebar: FC<SidebarProps> = ({
 				<UserProfile session={session} sidebarState={sidebarState} />
 			</motion.div>
 			<motion.div
-				className={"cursor-pointer mr-[10px]"}
+				className={"cursor-pointer mr-[10px] rounded-[406px]"}
 				initial={{ color: "#5a14de" }}
 				whileHover={{ scale: 1.05, color: "#761beb" }}
 				whileTap={{ scale: 0.95 }}
@@ -87,7 +90,7 @@ export const Sidebar: FC<SidebarProps> = ({
 				{sidebarState === "collapsed" ? (
 					<PlusIcon
 						onClick={() => setSidebarState("expanded")}
-						className={"w-[36px] h-[36px]"}
+						className={"w-[36px] h-[36px] focus:outline-none"}
 					/>
 				) : (
 					<MinusIcon

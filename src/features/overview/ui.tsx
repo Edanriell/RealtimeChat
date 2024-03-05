@@ -63,7 +63,7 @@ export const Overview: FC<OverviewProps> = ({
 			transition: { type: "linear" },
 		},
 		collapsed: {
-			width: "75px",
+			width: "60px",
 			transition: { type: "linear" },
 		},
 	};

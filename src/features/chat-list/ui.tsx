@@ -94,7 +94,7 @@ export const ChatList: FC<ChatListProps> = ({
 			transition: { type: "linear" },
 		},
 		collapsed: {
-			width: "75px",
+			width: "60px",
 			transition: { type: "linear" },
 		},
 	};
@@ -103,8 +103,8 @@ export const ChatList: FC<ChatListProps> = ({
 		<>
 			{friends.length > 0 ? (
 				<div className={"flex flex-col items-center gap-y-[10px] "}>
-					<p className={"text-md font-medium leading-6 text-black"}>
-						Your chats
+					<p className={"text-md font-medium leading-6 text-black text-center"}>
+						{sidebarState === "expanded" ? "Your chats" : "Chats"}
 					</p>
 					<nav>
 						<ul

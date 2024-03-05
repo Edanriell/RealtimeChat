@@ -40,7 +40,7 @@ export const Sidebar: FC<SidebarProps> = ({
 	const MinusIcon = Icon["Minus"];
 
 	return (
-		<div className={"flex flex-row items-center gap-x-[20px]"}>
+		<div className={"flex flex-row items-center gap-x-[10px]"}>
 			<motion.div
 				initial={"collapsed"}
 				variants={sidebarVariants}
@@ -77,19 +77,25 @@ export const Sidebar: FC<SidebarProps> = ({
 				/>
 				<UserProfile session={session} sidebarState={sidebarState} />
 			</motion.div>
-			<div>
+			<motion.div
+				className={"cursor-pointer mr-[10px]"}
+				initial={{ color: "#5a14de" }}
+				whileHover={{ scale: 1.05, color: "#761beb" }}
+				whileTap={{ scale: 0.95 }}
+				transition={{ type: "spring", stiffness: 400, damping: 10 }}
+			>
 				{sidebarState === "collapsed" ? (
 					<PlusIcon
 						onClick={() => setSidebarState("expanded")}
-						className={"text-slate-400 w-[36px] h-[36px] mr-[30px]"}
+						className={"w-[36px] h-[36px]"}
 					/>
 				) : (
 					<MinusIcon
 						onClick={() => setSidebarState("collapsed")}
-						className={"text-slate-400 w-[36px] h-[36px] mr-[25px]"}
+						className={"w-[36px] h-[36px]"}
 					/>
 				)}
-			</div>
+			</motion.div>
 		</div>
 	);
 };

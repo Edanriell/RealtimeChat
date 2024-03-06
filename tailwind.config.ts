@@ -27,6 +27,8 @@ const config: Config = {
 					"radial-gradient(at center top, #482196, #1B0D48);",
 				"gradient-radial-purple-darker":
 					"radial-gradient(circle farthest-side at top center, #482196, #1B0D48);",
+				"gradient-purple":
+					"linear-gradient(to right top, #761beb, #8d55f4, #a57ffb, #bda7fe, #d8cdff, #d7ccfe, #d5cafe, #d4c9fd, #b6a1f9, #9878f2, #7a4ee9, #5a14de);",
 			},
 			boxShadow: {
 				soft: "rgba(0, 0, 0, 0.1) 0px 10px 50px",

@@ -83,7 +83,8 @@ export const Sidebar: FC<SidebarProps> = ({
 			<motion.div
 				className={
 					"cursor-pointer mr-[10px] rounded-[406px] " +
-					"focus:outline-none focus:ring-2 focus:ring-[#761beb] focus:ring-offset-2"
+					"focus:outline-none focus:ring-2 focus:ring-[#761beb] focus:ring-offset-2 " +
+					"z-20 hidden md:block"
 				}
 				initial={{ color: "#5a14de" }}
 				whileHover={{ scale: 1.05, color: "#761beb" }}

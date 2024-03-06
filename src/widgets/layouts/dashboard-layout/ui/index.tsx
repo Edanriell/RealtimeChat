@@ -6,8 +6,6 @@ import { FC, ReactNode } from "react";
 import { sessionModel } from "@/entities/session";
 import { friendModel } from "@/entities/friend";
 
-// Widget
-// import MobileChatLayout from "@/components/MobileChatLayout";
 import { Sidebar } from "@/widgets/sidebar";
 
 import { GradientCircles } from "./GradientCircles";
@@ -30,16 +28,8 @@ export const DashboardLayout: FC<DashboardLayoutProps> = async ({
 	const unseenRequest = await unseenFriendsRequests(session.user.id);
 
 	return (
-		<div className={"w-full flex h-screen z-0 gradient-background"}>
+		<div className={"w-full flex h-screen z-0 gradient-background bg-gradient-purple"}>
 			<GradientCircles interactiveCircle={true} animatedCircles={false} />
-			<div className={"md:hidden"}>
-				{/* <MobileChatLayout
-					friends={friends}
-					session={session}
-					sidebarOptions={sidebarOptions}
-					unseenRequestCount={unseenRequest}
-				/> */}
-			</div>
 			<Sidebar
 				friends={friends}
 				session={session}
@@ -51,5 +41,3 @@ export const DashboardLayout: FC<DashboardLayoutProps> = async ({
 		</div>
 	);
 };
-
-// bg-slate-50

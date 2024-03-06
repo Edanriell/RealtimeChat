@@ -33,16 +33,17 @@ export const SignOut: FC<SignOutProps> = ({ sidebarState }) => {
 	const animatedButtonVariants = {
 		expanded: {
 			width: "180px",
-			transition: { type: "linear" },
+			transition: { type: "linear", duration: 0.2 },
 		},
 		collapsed: {
 			width: "60px",
-			transition: { type: "linear" },
+			transition: { type: "linear", duration: 0.2 },
 		},
 	};
 
 	return (
 		<motion.div
+			initial={"collapsed"}
 			variants={animatedButtonVariants}
 			animate={sidebarState === "expanded" ? "expanded" : "collapsed"}
 		>

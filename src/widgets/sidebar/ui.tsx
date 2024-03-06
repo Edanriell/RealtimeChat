@@ -28,11 +28,11 @@ export const Sidebar: FC<SidebarProps> = ({
 	const sidebarVariants = {
 		collapsed: {
 			width: 100,
-			transition: { type: "linear" },
+			transition: { type: "linear", duration: 0.2 },
 		},
 		expanded: {
 			width: 320,
-			transition: { type: "linear" },
+			transition: { type: "linear", duration: 0.2 },
 		},
 	};
 
@@ -81,7 +81,10 @@ export const Sidebar: FC<SidebarProps> = ({
 				<UserProfile session={session} sidebarState={sidebarState} />
 			</motion.div>
 			<motion.div
-				className={"cursor-pointer mr-[10px] rounded-[406px]"}
+				className={
+					"cursor-pointer mr-[10px] rounded-[406px] " +
+					"focus:outline-none focus:ring-2 focus:ring-[#761beb] focus:ring-offset-2"
+				}
 				initial={{ color: "#5a14de" }}
 				whileHover={{ scale: 1.05, color: "#761beb" }}
 				whileTap={{ scale: 0.95 }}

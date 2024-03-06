@@ -16,11 +16,11 @@ export const UserProfile: FC<UserProfileProps> = ({
 	const animatedUserProfileVariants = {
 		expanded: {
 			width: "180px",
-			transition: { type: "linear" },
+			transition: { type: "linear", duration: 0.2 },
 		},
 		collapsed: {
 			width: "60px",
-			transition: { type: "linear" },
+			transition: { type: "linear", duration: 0.2 },
 		},
 	};
 
@@ -31,6 +31,7 @@ export const UserProfile: FC<UserProfileProps> = ({
 			}
 		>
 			<motion.div
+				initial={"collapsed"}
 				variants={animatedUserProfileVariants}
 				animate={sidebarState === "expanded" ? "expanded" : "collapsed"}
 				className={

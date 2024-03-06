@@ -91,11 +91,11 @@ export const ChatList: FC<ChatListProps> = ({
 	const animatedButtonVariants = {
 		expanded: {
 			width: "180px",
-			transition: { type: "linear" },
+			transition: { type: "linear", duration: 0.2 },
 		},
 		collapsed: {
 			width: "60px",
-			transition: { type: "linear" },
+			transition: { type: "linear", duration: 0.2 },
 		},
 	};
 

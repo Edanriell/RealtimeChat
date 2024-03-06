@@ -132,8 +132,8 @@ export const Button = {
 				<div
 					ref={buttonScope}
 					className={
-						"pointer-events-none absolute left-[-10%] top-[100%] " +
-						"w-[200px] h-[160px] bg-[#761beb] rounded-[100%] z-10 " +
+						"pointer-events-none absolute left-[0] top-[100%] " +
+						"w-[inherit] h-[160px] bg-[#761beb] rounded-[inherit] z-10 " +
 						"select-none"
 					}
 				></div>

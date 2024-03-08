@@ -92,12 +92,12 @@ export const ChatList: FC<ChatListProps> = ({
 		displayed: {
 			opacity: 1,
 			scale: 1,
-			transition: { type: "linear", duration: 0.2 },
+			// transition: { type: "linear", duration: 0.2 },
 		},
 		hidden: {
 			opacity: 0,
 			scale: 0,
-			transition: { type: "linear", duration: 0.2 },
+			// transition: { type: "linear", duration: 0.2 },
 		},
 	};
 
@@ -105,12 +105,12 @@ export const ChatList: FC<ChatListProps> = ({
 		displayed: {
 			opacity: 1,
 			scale: 1,
-			transition: { type: "linear", duration: 0.2 },
+			// transition: { type: "linear", duration: 0.2 },
 		},
 		hidden: {
 			opacity: 0,
 			scale: 0,
-			transition: { type: "linear", duration: 0.2 },
+			// transition: { type: "linear", duration: 0.2 },
 		},
 	};
 
@@ -138,7 +138,14 @@ export const ChatList: FC<ChatListProps> = ({
 
 								if (sidebarState === "expanded") {
 									return (
-										<li key={friend.id}>
+										<motion.li
+											initial={"hidden"}
+											variants={animatedNormalButtonVariants}
+											animate={
+												sidebarState === "expanded" ? "displayed" : "hidden"
+											}
+											key={friend.id}
+										>
 											<a
 												href={`/dashboard/chat/${chatHrefConstructor(
 													sessionId,
@@ -149,16 +156,7 @@ export const ChatList: FC<ChatListProps> = ({
 													"flex items-center gap-x-3 p-2 " + "select-none "
 												}
 											>
-												<motion.div
-													initial={"hidden"}
-													variants={animatedNormalButtonVariants}
-													animate={
-														sidebarState === "expanded"
-															? "displayed"
-															: "hidden"
-													}
-													className={"w-[180px]"}
-												>
+												<div className={"w-[180px]"}>
 													<AnimatedButton
 														variant={"animated"}
 														type="button"
@@ -187,14 +185,20 @@ export const ChatList: FC<ChatListProps> = ({
 															) : null}
 														</div>
 													</AnimatedButton>
-												</motion.div>
+												</div>
 											</a>
-										</li>
+										</motion.li>
 									);
 								} else {
 									return (
 										<li key={friend.id}>
-											<a
+											<motion.a
+												// key={`${friend + friend.id + index + "small"}`}
+												initial={"displayed"}
+												variants={animatedSmallButtonVariants}
+												animate={
+													sidebarState === "expanded" ? "hidden" : "displayed"
+												}
 												href={`/dashboard/chat/${chatHrefConstructor(
 													sessionId,
 													friend.id,
@@ -204,16 +208,7 @@ export const ChatList: FC<ChatListProps> = ({
 													"flex items-center gap-x-3 p-2 " + "select-none "
 												}
 											>
-												<motion.div
-													initial={"displayed"}
-													variants={animatedSmallButtonVariants}
-													animate={
-														sidebarState === "expanded"
-															? "hidden"
-															: "displayed"
-													}
-													className={"w-[60px]"}
-												>
+												<div className={"w-[60px]"}>
 													<AnimatedButton
 														variant={"animated"}
 														type="button"
@@ -242,8 +237,8 @@ export const ChatList: FC<ChatListProps> = ({
 															) : null}
 														</div>
 													</AnimatedButton>
-												</motion.div>
-											</a>
+												</div>
+											</motion.a>
 										</li>
 									);
 								}

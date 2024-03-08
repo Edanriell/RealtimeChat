@@ -88,13 +88,28 @@ export const ChatList: FC<ChatListProps> = ({
 
 	const AnimatedButton = Button["Animated"];
 
-	const animatedButtonVariants = {
-		expanded: {
-			width: "180px",
+	const animatedSmallButtonVariants = {
+		displayed: {
+			opacity: 1,
+			scale: 1,
 			transition: { type: "linear", duration: 0.2 },
 		},
-		collapsed: {
-			width: "60px",
+		hidden: {
+			opacity: 0,
+			scale: 0,
+			transition: { type: "linear", duration: 0.2 },
+		},
+	};
+
+	const animatedNormalButtonVariants = {
+		displayed: {
+			opacity: 1,
+			scale: 1,
+			transition: { type: "linear", duration: 0.2 },
+		},
+		hidden: {
+			opacity: 0,
+			scale: 0,
 			transition: { type: "linear", duration: 0.2 },
 		},
 	};
@@ -121,67 +136,117 @@ export const ChatList: FC<ChatListProps> = ({
 									},
 								).length;
 
-								return (
-									<li key={friend.id}>
-										<a
-											href={`/dashboard/chat/${chatHrefConstructor(
-												sessionId,
-												friend.id,
-											)}`}
-											tabIndex={1}
-											className={
-												"flex items-center gap-x-3 p-2 " + "select-none "
-											}
-										>
-											<motion.div
-												initial={"collapsed"}
-												variants={animatedButtonVariants}
-												animate={
-													sidebarState === "expanded"
-														? "expanded"
-														: "collapsed"
+								if (sidebarState === "expanded") {
+									return (
+										<li key={friend.id}>
+											<a
+												href={`/dashboard/chat/${chatHrefConstructor(
+													sessionId,
+													friend.id,
+												)}`}
+												tabIndex={1}
+												className={
+													"flex items-center gap-x-3 p-2 " + "select-none "
 												}
 											>
-												<AnimatedButton
-													variant={"animated"}
-													type="button"
-													className={"w-[100%] h-[40px]"}
+												<motion.div
+													initial={"hidden"}
+													variants={animatedNormalButtonVariants}
+													animate={
+														sidebarState === "expanded"
+															? "displayed"
+															: "hidden"
+													}
+													className={"w-[180px]"}
 												>
-													<div
-														className={
-															"flex flex-row items-center justify-center"
-														}
+													<AnimatedButton
+														variant={"animated"}
+														type="button"
+														className={"w-[100%] h-[40px]"}
 													>
-														{sidebarState === "expanded" ? (
+														<div
+															className={
+																"flex flex-row items-center justify-center"
+															}
+														>
 															<p
 																className={"truncate relative text-white z-20"}
 															>
 																{friend.name}
 															</p>
-														) : (
+															{unseenMessagesCount > 0 ? (
+																<div
+																	className={
+																		"bg-slate-50 font-medium text-xs text-black w-4 h-4 " +
+																		"rounded-full flex justify-center items-center z-20 " +
+																		"ml-[4px]"
+																	}
+																>
+																	{unseenMessagesCount}
+																</div>
+															) : null}
+														</div>
+													</AnimatedButton>
+												</motion.div>
+											</a>
+										</li>
+									);
+								} else {
+									return (
+										<li key={friend.id}>
+											<a
+												href={`/dashboard/chat/${chatHrefConstructor(
+													sessionId,
+													friend.id,
+												)}`}
+												tabIndex={1}
+												className={
+													"flex items-center gap-x-3 p-2 " + "select-none "
+												}
+											>
+												<motion.div
+													initial={"displayed"}
+													variants={animatedSmallButtonVariants}
+													animate={
+														sidebarState === "expanded"
+															? "hidden"
+															: "displayed"
+													}
+													className={"w-[60px]"}
+												>
+													<AnimatedButton
+														variant={"animated"}
+														type="button"
+														className={"w-[100%] h-[40px]"}
+													>
+														<div
+															className={
+																"flex flex-row items-center justify-center"
+															}
+														>
 															<p
 																className={"truncate relative text-white z-20"}
 															>
 																{getFriendInitialLetters(friend.name)}
 															</p>
-														)}
-														{unseenMessagesCount > 0 ? (
-															<div
-																className={
-																	"bg-slate-50 font-medium text-xs text-black w-4 h-4 " +
-																	"rounded-full flex justify-center items-center z-20 " +
-																	"ml-[4px]"
-																}
-															>
-																{unseenMessagesCount}
-															</div>
-														) : null}
-													</div>
-												</AnimatedButton>
-											</motion.div>
-										</a>
-									</li>
-								);
+															{unseenMessagesCount > 0 ? (
+																<div
+																	className={
+																		"bg-slate-50 font-medium text-xs text-black w-4 h-4 " +
+																		"rounded-full flex justify-center items-center z-20 " +
+																		"ml-[4px]"
+																	}
+																>
+																	{unseenMessagesCount}
+																</div>
+															) : null}
+														</div>
+													</AnimatedButton>
+												</motion.div>
+											</a>
+										</li>
+									);
+								}
 							})}
 						</ul>
 					</nav>

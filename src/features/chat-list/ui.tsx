@@ -3,7 +3,7 @@
 import { FC, useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 
 import { messageModel } from "@/entities/message";
 
@@ -92,12 +92,12 @@ export const ChatList: FC<ChatListProps> = ({
 		displayed: {
 			opacity: 1,
 			scale: 1,
-			// transition: { type: "linear", duration: 0.2 },
+			transition: { duration: 0.25 },
 		},
 		hidden: {
 			opacity: 0,
-			scale: 0,
-			// transition: { type: "linear", duration: 0.2 },
+			scale: 0.4,
+			transition: { duration: 0.25 },
 		},
 	};
 
@@ -105,13 +105,131 @@ export const ChatList: FC<ChatListProps> = ({
 		displayed: {
 			opacity: 1,
 			scale: 1,
-			// transition: { type: "linear", duration: 0.2 },
+			transition: { duration: 0.25 },
 		},
 		hidden: {
 			opacity: 0,
-			scale: 0,
-			// transition: { type: "linear", duration: 0.2 },
+			scale: 0.4,
+			transition: { duration: 0.25 },
 		},
+	};
+
+	const NormalButtons = () => {
+		return (
+			<>
+				{activeChats.sort().map((friend) => {
+					const unseenMessagesCount = unseenMessages.filter(
+						(unseenMsg) => unseenMsg.senderId === friend.id,
+					).length;
+
+					return (
+						<li key={friend.id + "normal"}>
+							<a
+								href={`/dashboard/chat/${chatHrefConstructor(
+									sessionId,
+									friend.id,
+								)}`}
+								tabIndex={1}
+								className={"flex items-center gap-x-3 p-2 select-none "}
+							>
+								<motion.div
+									key={`${friend + "-" + friend.id + "-" + "normal"}`}
+									variants={animatedNormalButtonVariants}
+									initial={"hidden"}
+									animate={"displayed"}
+									exit={"hidden"}
+									className={"w-[60px]"}
+								>
+									<Button.Animated
+										variant={"animated"}
+										type="button"
+										className={"w-[100%] h-[40px]"}
+									>
+										<div
+											className={"flex flex-row items-center justify-center"}
+										>
+											<p className={"truncate relative text-white z-20"}>
+												{getFriendInitialLetters(friend.name)}
+											</p>
+											{unseenMessagesCount > 0 && (
+												<div
+													className={
+														"bg-slate-50 font-medium text-xs text-black w-4 h-4 " +
+														"rounded-full flex justify-center items-center z-20 " +
+														"ml-[4px]"
+													}
+												>
+													{unseenMessagesCount}
+												</div>
+											)}
+										</div>
+									</Button.Animated>
+								</motion.div>
+							</a>
+						</li>
+					);
+				})}
+			</>
+		);
+	};
+
+	const SmallButtons = () => {
+		return (
+			<>
+				{activeChats.sort().map((friend) => {
+					const unseenMessagesCount = unseenMessages.filter((unseenMsg) => {
+						return unseenMsg.senderId === friend.id;
+					}).length;
+
+					return (
+						<li key={friend.id + "small"}>
+							<a
+								href={`/dashboard/chat/${chatHrefConstructor(
+									sessionId,
+									friend.id,
+								)}`}
+								tabIndex={1}
+								className={"flex items-center gap-x-3 p-2 " + "select-none "}
+							>
+								<motion.div
+									key={`${friend + "-" + friend.id + "-" + "small"}`}
+									variants={animatedSmallButtonVariants}
+									initial={"hidden"}
+									animate={"displayed"}
+									exit={"hidden"}
+									className={"w-[180px]"}
+								>
+									<AnimatedButton
+										variant={"animated"}
+										type="button"
+										className={"w-[100%] h-[40px]"}
+									>
+										<div
+											className={"flex flex-row items-center justify-center"}
+										>
+											<p className={"truncate relative text-white z-20"}>
+												{friend.name}
+											</p>
+											{unseenMessagesCount > 0 ? (
+												<div
+													className={
+														"bg-slate-50 font-medium text-xs text-black w-4 h-4 " +
+														"rounded-full flex justify-center items-center z-20 " +
+														"ml-[4px]"
+													}
+												>
+													{unseenMessagesCount}
+												</div>
+											) : null}
+										</div>
+									</AnimatedButton>
+								</motion.div>
+							</a>
+						</li>
+					);
+				})}
+			</>
+		);
 	};
 
 	return (
@@ -129,120 +247,18 @@ export const ChatList: FC<ChatListProps> = ({
 								"overflow-y-auto -mx-2 space-y-1"
 							}
 						>
-							{activeChats.sort().map((friend) => {
-								const unseenMessagesCount = unseenMessages.filter(
-									(unseenMsg) => {
-										return unseenMsg.senderId === friend.id;
-									},
-								).length;
-
-								if (sidebarState === "expanded") {
-									return (
-										<motion.li
-											initial={"hidden"}
-											variants={animatedNormalButtonVariants}
-											animate={
-												sidebarState === "expanded" ? "displayed" : "hidden"
-											}
-											key={friend.id}
-										>
-											<a
-												href={`/dashboard/chat/${chatHrefConstructor(
-													sessionId,
-													friend.id,
-												)}`}
-												tabIndex={1}
-												className={
-													"flex items-center gap-x-3 p-2 " + "select-none "
-												}
-											>
-												<div className={"w-[180px]"}>
-													<AnimatedButton
-														variant={"animated"}
-														type="button"
-														className={"w-[100%] h-[40px]"}
-													>
-														<div
-															className={
-																"flex flex-row items-center justify-center"
-															}
-														>
-															<p
-																className={"truncate relative text-white z-20"}
-															>
-																{friend.name}
-															</p>
-															{unseenMessagesCount > 0 ? (
-																<div
-																	className={
-																		"bg-slate-50 font-medium text-xs text-black w-4 h-4 " +
-																		"rounded-full flex justify-center items-center z-20 " +
-																		"ml-[4px]"
-																	}
-																>
-																	{unseenMessagesCount}
-																</div>
-															) : null}
-														</div>
-													</AnimatedButton>
-												</div>
-											</a>
-										</motion.li>
-									);
-								} else {
-									return (
-										<li key={friend.id}>
-											<motion.a
-												// key={`${friend + friend.id + index + "small"}`}
-												initial={"displayed"}
-												variants={animatedSmallButtonVariants}
-												animate={
-													sidebarState === "expanded" ? "hidden" : "displayed"
-												}
-												href={`/dashboard/chat/${chatHrefConstructor(
-													sessionId,
-													friend.id,
-												)}`}
-												tabIndex={1}
-												className={
-													"flex items-center gap-x-3 p-2 " + "select-none "
-												}
-											>
-												<div className={"w-[60px]"}>
-													<AnimatedButton
-														variant={"animated"}
-														type="button"
-														className={"w-[100%] h-[40px]"}
-													>
-														<div
-															className={
-																"flex flex-row items-center justify-center"
-															}
-														>
-															<p
-																className={"truncate relative text-white z-20"}
-															>
-																{getFriendInitialLetters(friend.name)}
-															</p>
-															{unseenMessagesCount > 0 ? (
-																<div
-																	className={
-																		"bg-slate-50 font-medium text-xs text-black w-4 h-4 " +
-																		"rounded-full flex justify-center items-center z-20 " +
-																		"ml-[4px]"
-																	}
-																>
-																	{unseenMessagesCount}
-																</div>
-															) : null}
-														</div>
-													</AnimatedButton>
-												</div>
-											</motion.a>
-										</li>
-									);
-								}
-							})}
+							<AnimatePresence initial={false} mode="wait">
+								{sidebarState === "expanded" && (
+									<motion.div key="small-buttons">
+										<SmallButtons />
+									</motion.div>
+								)}
+								{sidebarState === "collapsed" && (
+									<motion.div key="normal-buttons">
+										<NormalButtons />
+									</motion.div>
+								)}
+							</AnimatePresence>
 						</ul>
 					</nav>
 				</div>

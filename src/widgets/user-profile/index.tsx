@@ -17,7 +17,7 @@ export const UserProfile: FC<UserProfileProps> = ({
 	return (
 		<div
 			className={
-				"mt-[auto] flex flex-col items-center justify-center gap-y-[5px]"
+				"mt-[auto] flex flex-col items-center justify-center gap-y-[8px]"
 			}
 		>
 			<AnimatePresence initial={false} mode="wait">

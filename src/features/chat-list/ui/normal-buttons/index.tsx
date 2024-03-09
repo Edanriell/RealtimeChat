@@ -43,7 +43,7 @@ export const NormalButtons: FC<NormalButtonProps> = ({
 				).length;
 
 				return (
-					<li key={friend.id + "normal"}>
+					<li className={"mb-[8px]"} key={friend.id + "normal"}>
 						<a
 							href={`/dashboard/chat/${chatHrefConstructor(
 								sessionId,

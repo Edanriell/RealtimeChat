@@ -42,7 +42,7 @@ export const SmallButtons: FC<SmallButtonProps> = ({
 				}).length;
 
 				return (
-					<li key={friend.id + "small"}>
+					<li className={"mb-[8px]"} key={friend.id + "small"}>
 						<a
 							href={`/dashboard/chat/${chatHrefConstructor(
 								sessionId,

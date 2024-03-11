@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { UserProfile } from "@/widgets/user-profile";
+import { MobileSidebar } from "@/widgets/mobile-sidebar";
 import { ChatList } from "@/features/chat-list";
 import { Overview } from "@/features/overview";
 import { Icon } from "@/shared/ui";
@@ -41,6 +42,9 @@ export const Sidebar: FC<SidebarProps> = ({
 
 	return (
 		<div className={"flex flex-row items-center gap-x-[10px]"}>
+			<div className={"md:hidden"}>
+				<MobileSidebar />
+			</div>
 			<motion.div
 				initial={"collapsed"}
 				variants={sidebarVariants}

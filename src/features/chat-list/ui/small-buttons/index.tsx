@@ -7,8 +7,9 @@ import { Message } from "@/entities/message/model";
 import { User } from "@/entities/session/model";
 import { chatHrefConstructor } from "@/shared/lib";
 import { Button } from "@/shared/ui";
+import { getFriendInitialLetters } from "@/shared/lib/functions";
 
-type SmallButtonProps = {
+type SmallButtonsProps = {
 	activeChats: User[];
 	unseenMessages: Message[];
 	sessionId: string;
@@ -16,7 +17,7 @@ type SmallButtonProps = {
 
 const AnimatedButton = Button["Animated"];
 
-const animatedSmallButtonVariants = {
+const animatedNormalButtonVariants = {
 	displayed: {
 		opacity: 1,
 		scale: 1,
@@ -29,7 +30,7 @@ const animatedSmallButtonVariants = {
 	},
 };
 
-export const SmallButtons: FC<SmallButtonProps> = ({
+export const SmallButtons: FC<SmallButtonsProps> = ({
 	activeChats,
 	unseenMessages,
 	sessionId,
@@ -37,27 +38,27 @@ export const SmallButtons: FC<SmallButtonProps> = ({
 	return (
 		<>
 			{activeChats.sort().map((friend) => {
-				const unseenMessagesCount = unseenMessages.filter((unseenMsg) => {
-					return unseenMsg.senderId === friend.id;
-				}).length;
+				const unseenMessagesCount = unseenMessages.filter(
+					(unseenMsg) => unseenMsg.senderId === friend.id,
+				).length;
 
 				return (
-					<li className={"mb-[8px]"} key={friend.id + "small"}>
+					<li className={"mb-[8px]"} key={friend.id + "normal"}>
 						<a
 							href={`/dashboard/chat/${chatHrefConstructor(
 								sessionId,
 								friend.id,
 							)}`}
 							tabIndex={1}
-							className={"flex items-center gap-x-3 p-2 " + "select-none "}
+							className={"flex items-center gap-x-3 p-2 select-none "}
 						>
 							<motion.div
-								key={`${friend + "-" + friend.id + "-" + "small"}`}
-								variants={animatedSmallButtonVariants}
+								key={`${friend + "-" + friend.id + "-" + "normal"}`}
+								variants={animatedNormalButtonVariants}
 								initial={"hidden"}
 								animate={"displayed"}
 								exit={"hidden"}
-								className={"w-[180px]"}
+								className={"w-[60px]"}
 							>
 								<AnimatedButton
 									variant={"animated"}
@@ -66,9 +67,9 @@ export const SmallButtons: FC<SmallButtonProps> = ({
 								>
 									<div className={"flex flex-row items-center justify-center"}>
 										<p className={"truncate relative text-white z-20"}>
-											{friend.name}
+											{getFriendInitialLetters(friend.name)}
 										</p>
-										{unseenMessagesCount > 0 ? (
+										{unseenMessagesCount > 0 && (
 											<div
 												className={
 													"bg-slate-50 font-medium text-xs text-black w-4 h-4 " +
@@ -78,7 +79,7 @@ export const SmallButtons: FC<SmallButtonProps> = ({
 											>
 												{unseenMessagesCount}
 											</div>
-										) : null}
+										)}
 									</div>
 								</AnimatedButton>
 							</motion.div>

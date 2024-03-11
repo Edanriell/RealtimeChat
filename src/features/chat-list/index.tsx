@@ -105,7 +105,7 @@ export const ChatList: FC<ChatListProps> = ({
 							<AnimatePresence initial={false} mode="wait">
 								{sidebarState === "expanded" && (
 									<motion.div key="small-buttons">
-										<SmallButtons
+										<NormalButtons
 											activeChats={activeChats}
 											unseenMessages={unseenMessages}
 											sessionId={sessionId}
@@ -114,7 +114,7 @@ export const ChatList: FC<ChatListProps> = ({
 								)}
 								{sidebarState === "collapsed" && (
 									<motion.div key="normal-buttons">
-										<NormalButtons
+										<SmallButtons
 											activeChats={activeChats}
 											unseenMessages={unseenMessages}
 											sessionId={sessionId}
@@ -129,6 +129,3 @@ export const ChatList: FC<ChatListProps> = ({
 		</>
 	);
 };
-
-
-// Messed uo buttons here need to fix

@@ -38,7 +38,7 @@ export const MobileSidebar = () => {
 			ref={containerRef}
 			className={"mobile-sidebar"}
 		>
-			<motion.div className="background" variants={sidebar} />
+			<motion.div className={"mobile-sidebar__background"} variants={sidebar} />
 			<Navigation />
 			<MenuToggle toggle={() => toggleOpen()} />
 		</motion.nav>

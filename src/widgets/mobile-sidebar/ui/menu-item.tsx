@@ -27,9 +27,10 @@ export const MenuItem = ({ i }) => {
 			variants={variants}
 			whileHover={{ scale: 1.1 }}
 			whileTap={{ scale: 0.95 }}
+			className={"mobile-sidebar__navigation-item"}
 		>
-			<div className="icon-placeholder" style={style} />
-			<div className="text-placeholder" style={style} />
+			<div className={"icon-placeholder"} style={style} />
+			<div className={"text-placeholder"} style={style} />
 		</motion.li>
 	);
 };

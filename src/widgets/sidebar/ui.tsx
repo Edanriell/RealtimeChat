@@ -42,7 +42,7 @@ export const Sidebar: FC<SidebarProps> = ({
 
 	return (
 		<div className={"flex flex-row items-center gap-x-[10px]"}>
-			<div className={"md:hidden"}>
+			<div className={"block md:hidden"}>
 				<MobileSidebar />
 			</div>
 			<motion.div

@@ -1,11 +1,12 @@
-import * as React from "react";
 import { useRef } from "react";
 import { motion, useCycle } from "framer-motion";
-import { useDimensions } from "./ui/use-dimensions";
-import { MenuToggle } from "./ui/menu-toggle";
+
+import { useDimensions } from "@/shared/lib";
+
+import { MobileSidebarToggleButton } from "./ui/mobile-sidebar-toggle-button";
 import { Navigation } from "./ui/navigation";
 
-const sidebar = {
+const mobileSidebarVariants = {
 	open: (height = 1000) => ({
 		clipPath: `circle(${height * 2 + 200}px at 40px 40px)`,
 		transition: {
@@ -15,7 +16,7 @@ const sidebar = {
 		},
 	}),
 	closed: {
-		clipPath: "circle(30px at 40px 40px)",
+		clipPath: "circle(30px at 40px 60px)",
 		transition: {
 			delay: 0.5,
 			type: "spring",
@@ -38,9 +39,12 @@ export const MobileSidebar = () => {
 			ref={containerRef}
 			className={"mobile-sidebar"}
 		>
-			<motion.div className={"mobile-sidebar__background"} variants={sidebar} />
+			<motion.div
+				className={"mobile-sidebar__background"}
+				variants={mobileSidebarVariants}
+			/>
 			<Navigation />
-			<MenuToggle toggle={() => toggleOpen()} />
+			<MobileSidebarToggleButton onToggle={() => toggleOpen()} />
 		</motion.nav>
 	);
 };

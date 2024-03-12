@@ -28,14 +28,22 @@ export const DashboardLayout: FC<DashboardLayoutProps> = async ({
 	const unseenRequest = await unseenFriendsRequests(session.user.id);
 
 	return (
-		<div className={"w-full flex h-screen z-0 gradient-background bg-gradient-purple"}>
+		<div
+			className={
+				"w-full flex h-screen z-0 gradient-background bg-gradient-purple"
+			}
+		>
 			<GradientCircles interactiveCircle={true} animatedCircles={false} />
 			<Sidebar
 				friends={friends}
 				session={session}
 				unseenRequest={unseenRequest}
 			/>
-			<aside className={"max-h-screen w-full mx-[20px] my-[30px]"}>
+			<aside
+				className={
+					"max-h-screen w-full mx-[20px] my-[30px] ml-[100px] md:ml-[20px]"
+				}
+			>
 				{children}
 			</aside>
 		</div>

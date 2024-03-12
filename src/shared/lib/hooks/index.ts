@@ -46,3 +46,15 @@ export function useSmoothTransform<T, U>(
 ): MotionValue<any> {
 	return useSpring(useTransform(value, transformer), springOptions);
 }
+
+export function useDimensions(ref: any) {
+	const dimensions = useRef({ width: 0, height: 0 });
+
+	useEffect(() => {
+		dimensions.current.width = ref.current.offsetWidth;
+		dimensions.current.height = ref.current.offsetHeight;
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
+	return dimensions.current;
+}

@@ -4,7 +4,7 @@ import { motion, useCycle } from "framer-motion";
 import { useDimensions } from "@/shared/lib";
 
 import { MobileSidebarToggleButton } from "./ui/mobile-sidebar-toggle-button";
-import { Navigation } from "./ui/navigation";
+import { MobileSidebarNavigation } from "./ui/mobile-sidebar-navigation";
 
 const mobileSidebarVariants = {
 	open: (height = 1000) => ({
@@ -43,7 +43,7 @@ export const MobileSidebar = () => {
 				className={"mobile-sidebar__background"}
 				variants={mobileSidebarVariants}
 			/>
-			<Navigation />
+			<MobileSidebarNavigation />
 			<MobileSidebarToggleButton onToggle={() => toggleOpen()} />
 		</motion.nav>
 	);

@@ -57,7 +57,6 @@ export const MobileSidebar: FC<MobileSidebarProps> = ({
 			/>
 			<MobileSidebarNavigation
 				session={session}
-				sessionId={sessionId}
 				friends={friends}
 				initialUnseenRequestCount={initialUnseenRequestCount}
 			/>

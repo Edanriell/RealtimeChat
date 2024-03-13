@@ -3,7 +3,7 @@ import { FC, ReactNode } from "react";
 
 type MobileSidebarNavigationItemProps = {
 	index: number;
-	children: any;
+	children: ReactNode;
 };
 
 const MobileSidebarNavigationItemVariants = {
@@ -23,21 +23,14 @@ const MobileSidebarNavigationItemVariants = {
 	},
 };
 
-const colors = ["#FF008C", "#D309E1", "#9C1AFF", "#7700FF", "#4400FF"];
-
 export const MobileSidebarNavigationItem: FC<
 	MobileSidebarNavigationItemProps
 > = ({ index, children }) => {
-	const style = { border: `2px solid ${colors[index]}` };
 	return (
 		<motion.li
 			variants={MobileSidebarNavigationItemVariants}
-			whileHover={{ scale: 1.1 }}
-			whileTap={{ scale: 0.95 }}
 			className={"mobile-sidebar__navigation-item"}
 		>
-			{/* <div className={"icon-placeholder"} style={style} />
-			<div className={"text-placeholder"} style={style} /> */}
 			{children}
 		</motion.li>
 	);

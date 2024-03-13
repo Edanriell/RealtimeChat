@@ -24,11 +24,7 @@ const MobileSidebarNavigationVariants = {
 	},
 };
 
-export const MobileSidebarNavigation: FC<MobileSidebarNavigationProps> = ({
-	session,
-	friends,
-	initialUnseenRequestCount,
-}) => {
+export const MobileSidebarNavigation: FC<MobileSidebarNavigationProps> = ({session,friends,initialUnseenRequestCount}) => {
 	const mobileSidebarComponents = [
 		{
 			Component: () => (
@@ -37,7 +33,7 @@ export const MobileSidebarNavigation: FC<MobileSidebarNavigationProps> = ({
 					className={
 						"flex shrink-0 items-center mb-[40px] rounded-[406px] " +
 						"focus:outline-none focus:ring-2 focus:ring-[#761beb] " +
-						"focus:ring-offset-2 mt-[100px]"
+						"focus:ring-offset-2"
 					}
 				>
 					<Image
@@ -70,10 +66,9 @@ export const MobileSidebarNavigation: FC<MobileSidebarNavigationProps> = ({
 		},
 		{
 			Component: () => (
-				<div className={"mt-auto"}>
-					<UserProfile session={session} sidebarState={"expanded"} />
-				</div>
+				<UserProfile session={session} sidebarState={"expanded"} />
 			),
+			classes: "mt-[auto]"
 		},
 	];
 
@@ -81,17 +76,15 @@ export const MobileSidebarNavigation: FC<MobileSidebarNavigationProps> = ({
 		<motion.ul
 			className={
 				"mobile-sidebar__navigation flex flex-col "
-				+ "items-center relative"
+				+ "items-center relative h-full"
 			}
 			variants={MobileSidebarNavigationVariants}
 		>
-			{mobileSidebarComponents.map(({ Component }, index) => (
-				<MobileSidebarNavigationItem index={index} key={index}>
+			{mobileSidebarComponents.map(({ Component, classes }, index) => (
+				<MobileSidebarNavigationItem classes={classes} key={index}>
 					<Component />
 				</MobileSidebarNavigationItem>
 			))}
 		</motion.ul>
 	);
 };
-
-// GradientCircles fix

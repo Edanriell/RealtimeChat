@@ -8,7 +8,6 @@ import { MobileSidebarNavigation } from "./ui/mobile-sidebar-navigation";
 
 type MobileSidebarProps = {
 	session: any;
-	sessionId: any;
 	friends: any;
 	initialUnseenRequestCount: any;
 };
@@ -35,7 +34,6 @@ const mobileSidebarVariants = {
 
 export const MobileSidebar: FC<MobileSidebarProps> = ({
 	session,
-	sessionId,
 	friends,
 	initialUnseenRequestCount,
 }) => {

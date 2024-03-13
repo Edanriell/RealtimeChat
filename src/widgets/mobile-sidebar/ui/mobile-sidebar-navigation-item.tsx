@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { FC, ReactNode } from "react";
 
 type MobileSidebarNavigationItemProps = {
-	index: number;
+	classes?: string;
 	children: ReactNode;
 };
 
@@ -25,11 +25,11 @@ const MobileSidebarNavigationItemVariants = {
 
 export const MobileSidebarNavigationItem: FC<
 	MobileSidebarNavigationItemProps
-> = ({ index, children }) => {
+> = ({ classes = "", children }) => {
 	return (
 		<motion.li
 			variants={MobileSidebarNavigationItemVariants}
-			className={"mobile-sidebar__navigation-item"}
+			className={classes + " " + "mobile-sidebar__navigation-item"}
 		>
 			{children}
 		</motion.li>

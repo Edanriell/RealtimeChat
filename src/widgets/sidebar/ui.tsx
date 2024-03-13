@@ -45,7 +45,6 @@ export const Sidebar: FC<SidebarProps> = ({
 			<div className={"block md:hidden"}>
 				<MobileSidebar
 					session={session}
-					sessionId={session.user.id}
 					friends={friends}
 					initialUnseenRequestCount={unseenRequest}
 				/>

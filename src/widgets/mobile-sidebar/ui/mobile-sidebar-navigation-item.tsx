@@ -1,4 +1,10 @@
 import { motion } from "framer-motion";
+import { FC, ReactNode } from "react";
+
+type MobileSidebarNavigationItemProps = {
+	index: number;
+	children: any;
+};
 
 const MobileSidebarNavigationItemVariants = {
 	open: {
@@ -19,8 +25,10 @@ const MobileSidebarNavigationItemVariants = {
 
 const colors = ["#FF008C", "#D309E1", "#9C1AFF", "#7700FF", "#4400FF"];
 
-export const MobileSidebarNavigationItem = ({ i }) => {
-	const style = { border: `2px solid ${colors[i]}` };
+export const MobileSidebarNavigationItem: FC<
+	MobileSidebarNavigationItemProps
+> = ({ index, children }) => {
+	const style = { border: `2px solid ${colors[index]}` };
 	return (
 		<motion.li
 			variants={MobileSidebarNavigationItemVariants}
@@ -28,8 +36,9 @@ export const MobileSidebarNavigationItem = ({ i }) => {
 			whileTap={{ scale: 0.95 }}
 			className={"mobile-sidebar__navigation-item"}
 		>
-			<div className={"icon-placeholder"} style={style} />
-			<div className={"text-placeholder"} style={style} />
+			{/* <div className={"icon-placeholder"} style={style} />
+			<div className={"text-placeholder"} style={style} /> */}
+			{children}
 		</motion.li>
 	);
 };

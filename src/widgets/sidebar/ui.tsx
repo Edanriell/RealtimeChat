@@ -43,7 +43,12 @@ export const Sidebar: FC<SidebarProps> = ({
 	return (
 		<div className={"flex flex-row items-center gap-x-[10px]"}>
 			<div className={"block md:hidden"}>
-				<MobileSidebar />
+				<MobileSidebar
+					session={session}
+					sessionId={session.user.id}
+					friends={friends}
+					initialUnseenRequestCount={unseenRequest}
+				/>
 			</div>
 			<motion.div
 				initial={"collapsed"}

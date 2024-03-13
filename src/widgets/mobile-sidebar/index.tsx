@@ -1,10 +1,17 @@
-import { useRef } from "react";
+import { useRef, FC } from "react";
 import { motion, useCycle } from "framer-motion";
 
 import { useDimensions } from "@/shared/lib";
 
 import { MobileSidebarToggleButton } from "./ui/mobile-sidebar-toggle-button";
 import { MobileSidebarNavigation } from "./ui/mobile-sidebar-navigation";
+
+type MobileSidebarProps = {
+	session: any;
+	sessionId: any;
+	friends: any;
+	initialUnseenRequestCount: any;
+};
 
 const mobileSidebarVariants = {
 	open: (height = 1000) => ({
@@ -26,7 +33,12 @@ const mobileSidebarVariants = {
 	},
 };
 
-export const MobileSidebar = () => {
+export const MobileSidebar: FC<MobileSidebarProps> = ({
+	session,
+	sessionId,
+	friends,
+	initialUnseenRequestCount,
+}) => {
 	const [isOpen, toggleOpen] = useCycle(false, true);
 	const containerRef = useRef(null);
 	const { height } = useDimensions(containerRef);
@@ -43,7 +55,12 @@ export const MobileSidebar = () => {
 				className={"mobile-sidebar__background"}
 				variants={mobileSidebarVariants}
 			/>
-			<MobileSidebarNavigation />
+			<MobileSidebarNavigation
+				session={session}
+				sessionId={sessionId}
+				friends={friends}
+				initialUnseenRequestCount={initialUnseenRequestCount}
+			/>
 			<MobileSidebarToggleButton onToggle={() => toggleOpen()} />
 		</motion.nav>
 	);

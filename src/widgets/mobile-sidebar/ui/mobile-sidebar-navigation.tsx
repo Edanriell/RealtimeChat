@@ -2,6 +2,7 @@ import { FC } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import classNames from "classnames";
 
 import { UserProfile } from "@/widgets/user-profile";
 import { ChatList } from "@/features/chat-list";
@@ -13,6 +14,7 @@ type MobileSidebarNavigationProps = {
 	session: any;
 	friends: any;
 	initialUnseenRequestCount: any;
+	isMobileSidebarOpen: boolean;
 };
 
 const MobileSidebarNavigationVariants = {
@@ -24,7 +26,7 @@ const MobileSidebarNavigationVariants = {
 	},
 };
 
-export const MobileSidebarNavigation: FC<MobileSidebarNavigationProps> = ({session,friends,initialUnseenRequestCount}) => {
+export const MobileSidebarNavigation: FC<MobileSidebarNavigationProps> = ({session,friends,initialUnseenRequestCount,isMobileSidebarOpen}) => {
 	const mobileSidebarComponents = [
 		{
 			Component: () => (
@@ -72,11 +74,16 @@ export const MobileSidebarNavigation: FC<MobileSidebarNavigationProps> = ({sessi
 		},
 	];
 
+	const mobileSidebarNavigationClasses = classNames({
+		"pointer-events-none": !isMobileSidebarOpen
+	})
+
 	return (
 		<motion.ul
 			className={
+				mobileSidebarNavigationClasses + " " +
 				"mobile-sidebar__navigation flex flex-col "
-				+ "items-center relative h-full"
+				+ "items-center relative h-full "
 			}
 			variants={MobileSidebarNavigationVariants}
 		>

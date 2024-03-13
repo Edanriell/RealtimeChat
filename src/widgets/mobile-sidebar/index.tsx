@@ -32,11 +32,7 @@ const mobileSidebarVariants = {
 	},
 };
 
-export const MobileSidebar: FC<MobileSidebarProps> = ({
-	session,
-	friends,
-	initialUnseenRequestCount,
-}) => {
+export const MobileSidebar: FC<MobileSidebarProps> = ({session,friends,initialUnseenRequestCount}) => {
 	const [isOpen, toggleOpen] = useCycle(false, true);
 	const containerRef = useRef(null);
 	const { height } = useDimensions(containerRef);

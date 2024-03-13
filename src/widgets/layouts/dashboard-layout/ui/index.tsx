@@ -8,7 +8,7 @@ import { friendModel } from "@/entities/friend";
 
 import { Sidebar } from "@/widgets/sidebar";
 
-import { GradientCircles } from "./GradientCircles";
+import { GradientCircles } from "./gradient-circles";
 
 type DashboardLayoutProps = {
 	children: ReactNode;
